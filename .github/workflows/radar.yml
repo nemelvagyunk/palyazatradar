@@ -40,13 +40,15 @@ jobs:
           git push
 
       - name: Issue nyitása új találatnál
-        if: steps.radar.outputs.new_count != '0' || steps.radar.outputs.first_run == 'true'
+        if: steps.radar.outputs.new_count != '0' || steps.radar.outputs.first_run == 'true' || steps.radar.outputs.baselined != '0'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           if [ "${{ steps.radar.outputs.first_run }}" = "true" ]; then
             CIM="Pályázatradar – alapállapot felvéve ($(date +%F))"
-          else
+          elif [ "${{ steps.radar.outputs.new_count }}" != "0" ]; then
             CIM="Pályázatradar – ${{ steps.radar.outputs.new_count }} új találat ($(date +%F))"
+          else
+            CIM="Pályázatradar – új forrás(ok) alapállapota felvéve ($(date +%F))"
           fi
           gh issue create --title "$CIM" --body-file report.md

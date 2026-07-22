@@ -15,6 +15,7 @@ import json
 import os
 import re
 import sys
+import xml.etree.ElementTree as ET
 from urllib.parse import urljoin, urlparse, parse_qsl, urlencode, urlunparse
 
 import requests
@@ -91,6 +92,30 @@ FORRASOK = [
         "urls": ["https://jozsefvaros.hu/palyazatok"],
         "kinek": "kft + egyesület",
     },
+    {
+        # Aggregátor: minden /p/ útvonalú link pályázat, de a címben gyakran
+        # nincs kulcsszó ("Gyurós Tibor-díj 2026") → kulcsszó-szűrés kikapcsolva,
+        # helyette az útvonal-előtag szűr. Az első 3 oldalt figyeljük (~60 tétel,
+        # legfrissebbek elöl).
+        "nev": "PAFI (Pályázatfigyelő)",
+        "urls": [
+            "https://pafi.hu/palyazatok",
+            "https://pafi.hu/palyazatok?page=2",
+            "https://pafi.hu/palyazatok?page=3",
+        ],
+        "kinek": "kft + egyesület",
+        "utvonal_elotag": "/p/",
+        "kulcsszo_nelkul": True,
+    },
+    {
+        # A palyazat.gov.hu főoldala JS-alapú (géppel olvashatatlan), de a
+        # hivatalos RSS-e statikus XML → azt olvassuk. Vegyes feed: új/módosult
+        # felhívások + karbantartási közlemények (utóbbiakat az RSS_KIZARAS szűri).
+        "nev": "Széchenyi Terv Plusz (palyazat.gov.hu RSS)",
+        "urls": ["https://www.palyazat.gov.hu/rss.xml"],
+        "kinek": "kft + egyesület",
+        "special": "rss",
+    },
 ]
 
 # A cím vagy az URL útvonala tartalmazza valamelyiket (a domain NEM számít!)
@@ -106,6 +131,10 @@ KIZARAS = [
     "impresszum", "login", "wp-login", "regisztracio", "regisztráció",
     "hirlevel-feliratkozas", "subscribepage",
 ]
+
+# Csak az RSS-forrásokra: technikai közlemények kiszűrése (a cím a
+# "palyazat.gov.hu" szót tartalmazza, így a sima kulcsszó-szűrőn átcsúszna)
+RSS_KIZARAS = ["karbantartás", "karbantartas", "üzemszünet", "uzemszunet"]
 
 UA = {
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) palyazatradar/1.0 "
@@ -144,8 +173,19 @@ def fetch(url: str) -> str | None:
         return None
 
 
-def linkek_kigyujtese(html: str, base_url: str, lista_urlek: set[str]) -> dict[str, str]:
-    """Visszaad: {normalizált_url: cím}."""
+def linkek_kigyujtese(
+    html: str,
+    base_url: str,
+    lista_urlek: set[str],
+    utvonal_elotag: str | None = None,
+    kulcsszo_kell: bool = True,
+) -> dict[str, str]:
+    """Visszaad: {normalizált_url: cím}.
+
+    utvonal_elotag: ha meg van adva, csak az ezzel kezdődő útvonalú linkek
+    számítanak (pl. pafi.hu → "/p/").
+    kulcsszo_kell: False esetén a KULCSSZAVAK-szűrés kimarad (aggregátoroknál,
+    ahol az előtag már garantálja, hogy a link pályázat)."""
     soup = BeautifulSoup(html, "html.parser")
     talalatok: dict[str, str] = {}
     for a in soup.find_all("a", href=True):
@@ -160,9 +200,11 @@ def linkek_kigyujtese(html: str, base_url: str, lista_urlek: set[str]) -> dict[s
             continue
         cim = a.get_text(" ", strip=True)
         p = urlparse(norm)
+        if utvonal_elotag and not p.path.startswith(utvonal_elotag):
+            continue
         # Kulcsszó a címben VAGY az URL útvonalában (domain nélkül!)
         kereses = (cim + " " + p.path + "?" + p.query).lower()
-        if not any(k in kereses for k in KULCSSZAVAK):
+        if kulcsszo_kell and not any(k in kereses for k in KULCSSZAVAK):
             continue
         if any(x in norm.lower() or x in cim.lower() for x in KIZARAS):
             continue
@@ -185,6 +227,33 @@ def nka_kollegiumok(html: str) -> dict[str, str]:
     for m in minta.finditer(szoveg):
         nev = re.sub(r"\s+", " ", m.group(1)).strip()
         talalatok[f"nka-kollegium:{nev}"] = f"{nev} – felhívás elérhető"
+    return talalatok
+
+
+def rss_tetelek(xml_szoveg: str) -> dict[str, str]:
+    """RSS feed tételei: {normalizált_link: cím}.
+
+    A kulcsszó-szűrés itt CSAK a címre megy (a link útvonala mindig tartalmazza
+    a 'palyazat' szót, tehát nem szelektálna), plusz az RSS_KIZARAS kiszedi a
+    karbantartási közleményeket."""
+    talalatok: dict[str, str] = {}
+    try:
+        root = ET.fromstring(xml_szoveg.encode("utf-8", "ignore"))
+    except ET.ParseError as e:
+        print(f"  ! RSS-feldolgozási hiba: {e}", file=sys.stderr)
+        return talalatok
+    for item in root.iter("item"):
+        cim = (item.findtext("title") or "").strip()
+        link = (item.findtext("link") or "").strip()
+        if not link.startswith("http") or len(cim) < 5:
+            continue
+        if not any(k in cim.lower() for k in KULCSSZAVAK):
+            continue
+        if any(x in link.lower() or x in cim.lower() for x in KIZARAS):
+            continue
+        if any(x in cim.lower() for x in RSS_KIZARAS):
+            continue
+        talalatok.setdefault(normalizal(link), cim[:200])
     return talalatok
 
 
@@ -212,6 +281,7 @@ def main() -> int:
     lista_urlek = {normalizal(u) for f_ in FORRASOK for u in f_["urls"]}
 
     ujak: list[tuple[str, str, str]] = []   # (forrás, cím, kulcs/url)
+    alapozott: list[tuple[str, int]] = []   # (forrás, tételszám) – új forrás csendes alapfelvétele
     hibas_forrasok: list[str] = []
     osszes_latott = 0
 
@@ -224,18 +294,37 @@ def main() -> int:
             if html is None:
                 continue
             sikeres = True
-            if forras.get("special") == "nka":
+            spec = forras.get("special")
+            if spec == "nka":
                 talalatok.update(nka_kollegiumok(html))
-            talalatok.update(linkek_kigyujtese(html, url, lista_urlek))
+            if spec == "rss":
+                talalatok.update(rss_tetelek(html))
+            else:
+                talalatok.update(linkek_kigyujtese(
+                    html, url, lista_urlek,
+                    utvonal_elotag=forras.get("utvonal_elotag"),
+                    kulcsszo_kell=not forras.get("kulcsszo_nelkul", False),
+                ))
         if not sikeres:
             hibas_forrasok.append(forras["nev"])
             continue
         osszes_latott += len(talalatok)
+        # Új (még alapállapot nélküli) forrás első sikeres beolvasása CSENDES:
+        # a tételek bekerülnek az állapotba, de nem jelennek meg találatként —
+        # különben pl. a PAFI ~60 tétele egyszerre árasztaná el az Issue-t.
+        alap_kulcs = f"forras-alap:{forras['nev']}"
+        forras_uj = alap_kulcs not in allapot
+        uj_tetelszam = 0
         for kulcs, cim in talalatok.items():
             if kulcs not in allapot:
                 allapot[kulcs] = MA
-                if not elso_futas:
+                uj_tetelszam += 1
+                if not elso_futas and not forras_uj:
                     ujak.append((forras["nev"], cim, kulcs))
+        if forras_uj:
+            allapot[alap_kulcs] = MA
+            if not elso_futas:
+                alapozott.append((forras["nev"], uj_tetelszam))
 
     with open(args.state, "w", encoding="utf-8") as f:
         json.dump(allapot, f, ensure_ascii=False, indent=2)
@@ -268,6 +357,11 @@ def main() -> int:
         uj_szam = 0
         sorok.append("Nincs új kiírás.")
 
+    if alapozott:
+        sorok += ["", "## Forrás-alapállapot felvéve", ""]
+        for nev, db in alapozott:
+            sorok.append(f"- {nev}: {db} tétel csendben rögzítve — mostantól csak az újakat jelezzük")
+
     if hibas_forrasok:
         sorok += ["", f"_Nem elérhető forrás(ok): {', '.join(hibas_forrasok)}_"]
 
@@ -282,6 +376,7 @@ def main() -> int:
         with open(gh_out, "a", encoding="utf-8") as f:
             f.write(f"new_count={uj_szam}\n")
             f.write(f"first_run={'true' if elso_futas else 'false'}\n")
+            f.write(f"baselined={len(alapozott)}\n")
 
     return 0
 

@@ -19,11 +19,15 @@ Issue-ról automatikusan e-mail értesítést küld (ha a repo-t figyeled / a ti
 | 8 | KKV / energetika (palyazatok.org)² | kft |
 | 9 | Budapest Főváros (civil + zöld) | egyesület |
 | 10 | Józsefváros | mindkettő |
+| 11 | PAFI (pafi.hu)³ | mindkettő |
+| 12 | Széchenyi Terv Plusz (palyazat.gov.hu RSS)⁴ | mindkettő |
 
 ¹ Az NKA oldala kollégiumonként jelzi a „(felhívás elérhető)" állapotot — ez akkor is
 találat, ha nem új URL.
 ² A palyazat.gov.hu JS-alapú, géppel nem olvasható, ezért ez az aggregátor a proxy;
 a hivatalos részletek mindig a palyazat.gov.hu-n.
+³ Aggregátor: az első 3 listaoldal, kulcsszó-szűrés nélkül (minden `/p/` link pályázat).
+⁴ A JS-es főoldal helyett a hivatalos RSS-t olvassuk; a karbantartási közleményeket szűrjük.
 
 ## Telepítés
 
@@ -35,7 +39,7 @@ a hivatalos részletek mindig a palyazat.gov.hu-n.
 
 ## Működés
 
-- `radar.py` — letölti a 10 forrást, kigyűjti a linkeket, kulcsszavakra szűr
+- `radar.py` — letölti a 12 forrást, kigyűjti a linkeket, kulcsszavakra szűr
   (pályáz/felhív/kiírás/grant/call/támogat/ösztöndíj/funding — a domain nem számít),
   normalizálja az URL-eket (utm_*, fbclid, token, hash törlése).
 - `allapot.json` — melyik tételt mikor láttuk először (a bot commitolja).
@@ -51,7 +55,8 @@ python radar.py --state allapot.json --report report.md
 
 ## Testreszabás
 
-- **Források**: `radar.py` → `FORRASOK` lista.
+- **Források**: `radar.py` → `FORRASOK` lista. Új forrás felvétele biztonságos: az első
+  sikeres beolvasás csendben csak alapállapotot vesz fel, nem árasztja el az Issue-t.
 - **Kulcsszavak / kizárások**: `KULCSSZAVAK`, `KIZARAS` konstansok.
 - **Időzítés**: `radar.yml` → `cron` sor (UTC-ben!).
 - Ha egy oldal tartósan nem elérhető, a riport végén jelzi a futás.
