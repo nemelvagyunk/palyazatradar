@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pályázatradar</title>
+<meta name="description" content="Napi pályázatfigyelő – kereshető lista a figyelt források összes találatáról.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📡</text></svg>">
+<style>
+  :root {
+    --bg: #f6f7f9; --card: #ffffff; --ink: #1a2233; --mut: #66707f;
+    --line: #e3e6ea; --acc: #1d5fbf; --acc-soft: #e8f0fb;
+    --uj-bg: #e4f4e8; --uj-ink: #1e7a3a; --regi-bg: #f1f2f4;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 24px 16px 60px; }
+  header h1 { margin: 0 0 4px; font-size: 26px; letter-spacing: -.02em; }
+  header .alcim { color: var(--mut); margin: 0 0 6px; }
+  header .stat { color: var(--mut); font-size: 13.5px; margin: 0 0 18px; }
+  header .stat b { color: var(--ink); }
+
+  .panel {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 14px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    position: sticky; top: 8px; z-index: 5; box-shadow: 0 2px 10px rgba(20,30,50,.05);
+  }
+  .panel input[type="search"] {
+    flex: 1 1 220px; padding: 9px 12px; border: 1px solid var(--line);
+    border-radius: 8px; font: inherit; background: var(--bg);
+  }
+  .panel select {
+    padding: 9px 8px; border: 1px solid var(--line); border-radius: 8px;
+    font: inherit; background: var(--bg); max-width: 260px;
+  }
+  .panel label.cb { display: inline-flex; gap: 6px; align-items: center; color: var(--mut); font-size: 13.5px; cursor: pointer; white-space: nowrap; }
+  .panel input:focus, .panel select:focus { outline: 2px solid var(--acc); outline-offset: 1px; border-color: var(--acc); }
+
+  #talalatszam { color: var(--mut); font-size: 13.5px; margin: 14px 2px 8px; }
+
+  ul.lista { list-style: none; margin: 0; padding: 0; }
+  ul.lista li {
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: 12px 14px; margin-bottom: 8px;
+  }
+  ul.lista li a.cim {
+    color: var(--ink); text-decoration: none; font-weight: 600; overflow-wrap: anywhere;
+  }
+  ul.lista li a.cim:hover { color: var(--acc); text-decoration: underline; }
+  .meta { margin-top: 5px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 12.5px; }
+  .chip { background: var(--acc-soft); color: var(--acc); border-radius: 20px; padding: 2px 9px; }
+  .chip.kinek { background: var(--regi-bg); color: var(--mut); }
+  .datum { color: var(--mut); }
+  .uj { background: var(--uj-bg); color: var(--uj-ink); border-radius: 20px; padding: 2px 9px; font-weight: 700; }
+  .nemaktiv { color: #a4642a; background: #faf0e4; border-radius: 20px; padding: 2px 9px; }
+
+  #tobb {
+    display: block; margin: 16px auto 0; padding: 10px 22px; font: inherit;
+    background: var(--acc); color: #fff; border: 0; border-radius: 8px; cursor: pointer;
+  }
+  #tobb:hover { filter: brightness(1.1); }
+  #tobb[hidden] { display: none; }
+
+  footer { margin-top: 34px; color: var(--mut); font-size: 13px; border-top: 1px solid var(--line); padding-top: 14px; }
+  footer a { color: var(--acc); }
+  .hiba { background: #fdecec; color: #a02020; padding: 14px; border-radius: 10px; }
+  @media (max-width: 560px) { .panel { position: static; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>📡 Pályázatradar</h1>
+    <p class="alcim">Napi pályázatfigyelő – közösségi-kulturális központ projekthez (kft + egyesület)</p>
+    <p class="stat" id="stat">Betöltés…</p>
+  </header>
+
+  <div class="panel">
+    <input type="search" id="kereso" placeholder="Keresés címben és linkben…" autocomplete="off">
+    <select id="forras"><option value="">Minden forrás</option></select>
+    <select id="kinek"><option value="">Kinek: mind</option></select>
+    <label class="cb"><input type="checkbox" id="aktualis"> csak most listázott</label>
+    <label class="cb"><input type="checkbox" id="csakuj"> csak új (7 nap)</label>
+  </div>
+
+  <p id="talalatszam"></p>
+  <ul class="lista" id="lista"></ul>
+  <button id="tobb" hidden>Továbbiak mutatása</button>
+
+  <footer>
+    A lista automatikusan frissül minden reggel. A KKV-s és aggregátoros találatok hivatalos
+    részletei a <a href="https://www.palyazat.gov.hu/" rel="noopener">palyazat.gov.hu</a> oldalon.
+    · <a href="https://github.com/nemelvagyunk/palyazatradar" rel="noopener">GitHub repo</a>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var NKA_URL = "https://nka.hu/kategoria/kiemelt-kategoriak/palyaztatas/kollegiumok-felhivasai/";
+  var ADAG = 300;                       // ennyi sor jelenik meg egyszerre
+  var mind = [], szurve = [], mutatva = 0, frissitve = "";
+
+  var $ = function (id) { return document.getElementById(id); };
+  var lista = $("lista"), tobb = $("tobb");
+
+  function napkulonbseg(a, b) {         // 'YYYY-MM-DD' párok különbsége napban
+    return Math.round((new Date(a) - new Date(b)) / 86400000);
+  }
+
+  function betolt() {
+    fetch("adatok.json", { cache: "no-cache" })
+      .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(function (adat) {
+        frissitve = adat.frissitve || "";
+        mind = Object.keys(adat.tetelek || {}).map(function (kulcs) {
+          var t = adat.tetelek[kulcs];
+          return {
+            kulcs: kulcs,
+            href: kulcs.indexOf("nka-kollegium:") === 0 ? NKA_URL : kulcs,
+            cim: t.cim || kulcs,
+            forras: t.forras || "?",
+            kinek: t.kinek || "?",
+            elso: t.elso || "",
+            utolso: t.utolso || "",
+            kereso: ((t.cim || "") + " " + kulcs).toLowerCase()
+          };
+        });
+        mind.sort(function (a, b) {
+          return a.elso < b.elso ? 1 : a.elso > b.elso ? -1 : a.cim.localeCompare(b.cim, "hu");
+        });
+        valasztokFeltoltese();
+        statFrissit();
+        szures();
+      })
+      .catch(function (e) {
+        $("stat").textContent = "";
+        lista.innerHTML = '<li class="hiba">Nem sikerült betölteni az adatokat (' + e.message +
+          '). Az adatfájl az első napi futás után jön létre – nézz vissza kicsit később!</li>';
+      });
+  }
+
+  function egyedi(mezo) {
+    var l = {};
+    mind.forEach(function (t) { l[t[mezo]] = true; });
+    return Object.keys(l).sort(function (a, b) { return a.localeCompare(b, "hu"); });
+  }
+
+  function valasztokFeltoltese() {
+    egyedi("forras").forEach(function (f) {
+      var o = document.createElement("option"); o.value = f; o.textContent = f;
+      $("forras").appendChild(o);
+    });
+    egyedi("kinek").forEach(function (k) {
+      var o = document.createElement("option"); o.value = k; o.textContent = "Kinek: " + k;
+      $("kinek").appendChild(o);
+    });
+  }
+
+  function statFrissit() {
+    var aktualis = mind.filter(function (t) { return t.utolso === frissitve; }).length;
+    var uj = mind.filter(function (t) { return t.elso && napkulonbseg(frissitve, t.elso) <= 7; }).length;
+    $("stat").innerHTML = "<b>" + mind.length + "</b> tétel · <b>" + aktualis +
+      "</b> most is listázott · <b>" + uj + "</b> új az elmúlt 7 napban · frissítve: " + frissitve;
+  }
+
+  function szures() {
+    var q = $("kereso").value.trim().toLowerCase(),
+        f = $("forras").value, k = $("kinek").value,
+        aktualis = $("aktualis").checked, csakuj = $("csakuj").checked;
+    szurve = mind.filter(function (t) {
+      if (q && t.kereso.indexOf(q) === -1) return false;
+      if (f && t.forras !== f) return false;
+      if (k && t.kinek !== k) return false;
+      if (aktualis && t.utolso !== frissitve) return false;
+      if (csakuj && !(t.elso && napkulonbseg(frissitve, t.elso) <= 7)) return false;
+      return true;
+    });
+    mutatva = 0;
+    lista.innerHTML = "";
+    $("talalatszam").textContent = szurve.length + " találat";
+    adagRender();
+  }
+
+  function adagRender() {
+    var frag = document.createDocumentFragment();
+    szurve.slice(mutatva, mutatva + ADAG).forEach(function (t) {
+      var li = document.createElement("li");
+      var a = document.createElement("a");
+      a.className = "cim"; a.href = t.href; a.rel = "noopener"; a.target = "_blank";
+      a.textContent = t.cim;
+      var meta = document.createElement("div");
+      meta.className = "meta";
+      if (t.elso && napkulonbseg(frissitve, t.elso) <= 7) {
+        var uj = document.createElement("span"); uj.className = "uj"; uj.textContent = "ÚJ";
+        meta.appendChild(uj);
+      }
+      var chip = document.createElement("span"); chip.className = "chip"; chip.textContent = t.forras;
+      meta.appendChild(chip);
+      var kin = document.createElement("span"); kin.className = "chip kinek"; kin.textContent = t.kinek;
+      meta.appendChild(kin);
+      var d = document.createElement("span"); d.className = "datum"; d.textContent = "észlelve: " + t.elso;
+      meta.appendChild(d);
+      if (t.utolso !== frissitve) {
+        var na = document.createElement("span"); na.className = "nemaktiv";
+        na.textContent = "már nem listázott (" + t.utolso + ")";
+        meta.appendChild(na);
+      }
+      li.appendChild(a); li.appendChild(meta); frag.appendChild(li);
+    });
+    lista.appendChild(frag);
+    mutatva += ADAG;
+    tobb.hidden = mutatva >= szurve.length;
+  }
+
+  var ido = null;
+  $("kereso").addEventListener("input", function () {
+    clearTimeout(ido); ido = setTimeout(szures, 150);
+  });
+  ["forras", "kinek", "aktualis", "csakuj"].forEach(function (id) {
+    $(id).addEventListener("change", szures);
+  });
+  tobb.addEventListener("click", adagRender);
+
+  betolt();
+})();
+</script>
+</body>
+</html>

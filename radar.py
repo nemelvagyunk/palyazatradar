@@ -276,6 +276,9 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Pályázatradar")
     ap.add_argument("--state", default="allapot.json")
     ap.add_argument("--report", default="report.md")
+    ap.add_argument("--adatok", default=os.path.join("docs", "adatok.json"),
+                    help="a weboldal adatfájlja (cím+forrás+dátumok); "
+                         "teszthez adj meg tesztfájlt, pl. teszt_adatok.json!")
     args = ap.parse_args()
 
     elso_futas = not os.path.exists(args.state)
@@ -283,6 +286,15 @@ def main() -> int:
     if not elso_futas:
         with open(args.state, encoding="utf-8") as f:
             allapot = json.load(f)
+
+    # A weboldal adatfájlja: {kulcs: {cim, forras, kinek, elso, utolso}}
+    adatok: dict = {"frissitve": MA, "tetelek": {}}
+    if os.path.exists(args.adatok):
+        try:
+            with open(args.adatok, encoding="utf-8") as f:
+                adatok["tetelek"] = json.load(f).get("tetelek", {})
+        except Exception as e:
+            print(f"  ! adatok.json nem olvasható, újrakezdem: {e}", file=sys.stderr)
 
     lista_urlek = {normalizal(u) for f_ in FORRASOK for u in f_["urls"]}
 
@@ -331,9 +343,24 @@ def main() -> int:
             allapot[alap_kulcs] = MA
             if not elso_futas:
                 alapozott.append((forras["nev"], uj_tetelszam))
+        # Weboldal-adatok frissítése (minden látott tételre, nem csak az újakra)
+        for kulcs, cim in talalatok.items():
+            t = adatok["tetelek"].setdefault(kulcs, {})
+            if not t.get("cim"):
+                t["cim"] = cim
+            t["forras"] = forras["nev"]
+            t["kinek"] = forras["kinek"]
+            t["elso"] = allapot.get(kulcs, MA)
+            t["utolso"] = MA
 
     with open(args.state, "w", encoding="utf-8") as f:
         json.dump(allapot, f, ensure_ascii=False, indent=2)
+
+    adatok_dir = os.path.dirname(args.adatok)
+    if adatok_dir:
+        os.makedirs(adatok_dir, exist_ok=True)
+    with open(args.adatok, "w", encoding="utf-8") as f:
+        json.dump(adatok, f, ensure_ascii=False, indent=1)
 
     # ---- riport ----
     sorok = [f"# Pályázatradar – {MA}", ""]

@@ -16,13 +16,15 @@ GitHub Actions futtatja naponta; új kiírásnál Issue-t nyit.
 | `radar.py` | Minden logika egyben: `FORRASOK` (13 forrás), letöltés (requests), linkkigyűjtés (BeautifulSoup), `KULCSSZAVAK`-szűrés, URL-normalizálás, NKA- és RSS-speciális kezelés, forrásonkénti csendes alapállapot-felvétel, allapot-diff, `report.md` írás, `GITHUB_OUTPUT`-ba `new_count` + `first_run` + `baselined` |
 | `.github/workflows/radar.yml` | Cron: `30 5 * * *` (UTC!) + kézi `workflow_dispatch`; jogok: `contents: write`, `issues: write`; lépések: futtatás → allapot.json commit/push → Issue nyitás `gh issue create`-tel |
 | `allapot.json` | Kulcs: normalizált URL, `nka-kollegium:<név>` vagy `forras-alap:<forrásnév>` (utóbbi: a forrás alapállapota már felvéve); érték: első észlelés dátuma. **A bot commitolja naponta** — kézzel ne szerkeszd, munka előtt mindig `git pull`! |
+| `docs/adatok.json` | A weboldal adatfájlja: `{frissitve, tetelek: {kulcs: {cim, forras, kinek, elso, utolso}}}`. **Ezt is a bot commitolja naponta.** |
+| `docs/index.html` | Publikus weboldal (GitHub Pages, main ág `/docs`): kereshető/szűrhető lista — https://nemelvagyunk.github.io/palyazatradar/ |
 | `report.md` | Futásonkénti riport, gitignore-olva |
 
 ## Fejlesztési workflow
 
 1. `git pull` (a bot naponta commitol az `allapot.json`-ba!)
 2. Módosítás a `radar.py`-ban / `radar.yml`-ben
-3. Helyi teszt: `python radar.py --state teszt_allapot.json --report teszt_report.md` — **SOHA ne az éles `allapot.json`-nal tesztelj** (elnyelné az új találatokat); a tesztfájlokat ne commitold
+3. Helyi teszt: `python radar.py --state teszt_allapot.json --report teszt_report.md --adatok teszt_adatok.json` — **SOHA ne az éles `allapot.json`-nal tesztelj** (elnyelné az új találatokat), és **a `--adatok`-ot is add meg**, különben az éles `docs/adatok.json`-t írja felül; a tesztfájlokat ne commitold
 4. Commit + push → kézi ellenőrzés: GitHub → Actions → Pályázatradar → Run workflow
 5. Push GitHub Desktopból is mehet (a "palyazatradar" repo be van állítva benne); CLI push először hitelesítést kérhet
 
@@ -39,11 +41,19 @@ GitHub Actions futtatja naponta; új kiírásnál Issue-t nyit.
 - Értesítés e-mailben csak akkor jön, ha Attila a repónál bekapcsolta: Watch → All activity.
 - A régi Cowork-os ütemezett radar ("napi-palyazat-radar") kikapcsolva; a régi állapotfájlja (`..\palyazatradar_allapot.json`, 253 tétel) a szülőmappában maradt, már nem frissül.
 
+## Weboldal (2026-07-22 óta él)
+
+- https://nemelvagyunk.github.io/palyazatradar/ — GitHub Pages, main ág `/docs` mappából, minden pushnál újraépül.
+- Egyetlen statikus `docs/index.html` (vanilla JS, függőség nélkül), a `docs/adatok.json`-t olvassa.
+- Az `adatok.json`-t a `radar.py` vezeti minden futáskor: minden LÁTOTT tételt frissít (`utolso`=ma), az `elso` az allapot.json-beli első észlelés. Cím: az első nem üres marad.
+- „ÚJ" jelölés: `elso` legfeljebb 7 nappal a `frissitve` előtt. „Már nem listázott": `utolso` < `frissitve`.
+- NKA-kulcsú (`nka-kollegium:`) tételek linkje a NKA kollégiumi felhívások oldalára mutat.
+
 ## Tervezett fejlesztési irányok (prioritás még nincs eldöntve)
 
 1. **Határidő + összeg kinyerése** — az új találatok oldalát letöltve beadási határidő / keret / jogosultak kiszedése az Issue-ba
 2. **Relevancia-pontozás** — a projektprofilra (kultúrház, koncert, közösségi tér, civil, felújítás, ifjúsági) pontozni a találatokat, relevánsak előre
-3. **GitHub Pages weboldal** — kereshető/szűrhető lista az összes találatból
+3. ~~**GitHub Pages weboldal**~~ — ✅ kész (lásd fent)
 4. **Heti összefoglaló** — hétfőnként rendezett digest a friss + közelgő határidejű pályázatokról
 
 (Volt egy korábbi, azóta törölt prototípus — sitegen + RSS + SQLite ötletekkel; az irányok újrahasznosíthatók.)

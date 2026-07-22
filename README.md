@@ -1,5 +1,8 @@
 # Pályázatradar
 
+**Weboldal: https://nemelvagyunk.github.io/palyazatradar/** — kereshető, szűrhető lista
+az összes találatból, naponta frissül.
+
 Napi pályázatfigyelő közösségi-kulturális központ projekthez (kft + egyesület struktúra).
 GitHub Actions futtatja minden reggel: letölti a forrásoldalakat, összeveti az előző
 állapottal, és **új kiírás esetén GitHub Issue-t nyit** a találatokkal. A GitHub az
@@ -43,6 +46,8 @@ az aggregátor a proxy; a hivatalos részletek mindig a palyazat.gov.hu-n.
   (pályáz/felhív/kiírás/grant/call/támogat/ösztöndíj/funding — a domain nem számít),
   normalizálja az URL-eket (utm_*, fbclid, token, hash törlése).
 - `allapot.json` — melyik tételt mikor láttuk először (a bot commitolja).
+- `docs/` — a weboldal: `index.html` + `adatok.json` (cím, forrás, első/utolsó észlelés;
+  a bot frissíti naponta, GitHub Pages szolgálja ki).
 - `report.md` — az adott futás riportja (nem kerül a repo-ba).
 - `.github/workflows/radar.yml` — napi cron (05:30 UTC), állapot-commit, Issue-nyitás.
 
