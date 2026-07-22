@@ -17,6 +17,7 @@ import json
 import os
 import re
 import sys
+import time
 import xml.etree.ElementTree as ET
 from urllib.parse import urljoin, urlparse, parse_qsl, urlencode, urlunparse
 
@@ -168,6 +169,9 @@ DUSITAS_LIMIT = 25
 # alatt ér be. 10 egymást követő letöltési hiba után leállunk (hálózati gond).
 HATTER_DUSITAS_LIMIT = 100
 HATTER_HIBA_STOP = 10
+# Udvariassági szünet a háttér-letöltések között (a palyazatok.org 415-tel
+# rate-limitel burst-nél); teszthez RADAR_SLEEP=0 környezeti változó.
+DUSITAS_SZUNET = float(os.environ.get("RADAR_SLEEP", "0.7"))
 
 # Tömeges-álriasztás védelem: ha egy MÁR ALAPOZOTT forrásnál egyszerre ennél
 # több "új" jönne ÉS ez a forrás találatainak több mint 60%-a, az
@@ -425,7 +429,9 @@ JOGOSULT_KATEGORIAK = {
         r"(vállalkoz|vallalkoz|gazdasági társaság|gazdasagi tarsasag|"
         r"\bkft\b|\bzrt\b|\bkkv\b|mikro-?\s*,?\s*kis|\bcég\w*|\bceg\w*)",
         re.IGNORECASE),
-    "onkormanyzat": re.compile(r"(önkormányzat|onkormanyzat)", re.IGNORECASE),
+    # csak többes számban: az egyes számú "a Fővárosi Önkormányzat" jellemzően
+    # a KIÍRÓ, nem a pályázó (sablon-műtermék veszély, lásd CLAUDE.md)
+    "onkormanyzat": re.compile(r"(önkormányzatok|onkormanyzatok)", re.IGNORECASE),
     "maganszemely": re.compile(
         r"(magánszemély|maganszemely|természetes személy|termeszetes szemely|"
         r"\bhallgató|\bhallgato|\bdiák\w*|\bdiak\w*)", re.IGNORECASE),
@@ -450,11 +456,17 @@ def jogosultsag_kinyerese(szoveg: str) -> list[str]:
 
 
 def tetel_dusitas(html: str) -> tuple[str | None, str | None, list[str]]:
-    """(megjelent, hatarido, palyazhat) a cikkoldal HTML-jéből."""
+    """(megjelent, hatarido, palyazhat) a cikkoldal HTML-jéből.
+
+    A menü/fejléc/lábléc kidobásra kerül, hogy az oldalsablon ismétlődő
+    szövege (pl. bgazrt.hu menüje) ne adjon hamis jogosultság-találatot."""
     soup = BeautifulSoup(html, "html.parser")
-    megjelent = megjelenes_kinyerese(soup)
+    megjelent = megjelenes_kinyerese(soup)   # meta tagek még a teljes DOM-ból
     if megjelent and megjelent > MA:
         megjelent = None  # jövőbeli "megjelenés" = félreértelmezett dátum
+    for tag in soup(["script", "style", "noscript", "header", "footer", "nav",
+                     "aside", "form"]):
+        tag.decompose()
     szoveg = soup.get_text(" ", strip=True)[:15000]
     hatarido = hatarido_kinyerese(szoveg, megjelent)
     palyazhat = jogosultsag_kinyerese(szoveg)
@@ -670,8 +682,21 @@ def main() -> int:
             if not t.get("dusitva") and k.startswith("http")]
     varo.sort(key=lambda k: adatok["tetelek"][k].get("elso") or "", reverse=True)
     varo.sort(key=lambda k: adatok["tetelek"][k].get("utolso") != MA)  # most listázottak elöl
+    # Domain-váltogatás (round-robin): egy-egy oldalt nem terhelünk sorozatban,
+    # és a dúsítás forrásonként egyenletesen halad.
+    domain_sorok: dict[str, list[str]] = {}
+    for k in varo:
+        domain_sorok.setdefault(urlparse(k).netloc, []).append(k)
+    varo = []
+    while domain_sorok:
+        for d in list(domain_sorok):
+            varo.append(domain_sorok[d].pop(0))
+            if not domain_sorok[d]:
+                del domain_sorok[d]
     hatter_szam = hatter_hiba = 0
     for kulcs in varo[:HATTER_DUSITAS_LIMIT]:
+        if hatter_szam:
+            time.sleep(DUSITAS_SZUNET)
         if hatter_hiba >= HATTER_HIBA_STOP:
             print(f"  ! Háttér-dúsítás leállítva ({hatter_hiba} egymást követő hiba)",
                   file=sys.stderr)
