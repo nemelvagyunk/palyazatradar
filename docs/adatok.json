@@ -71,20 +71,6 @@
    "elso": "2026-07-22",
    "utolso": "2026-07-22"
   },
-  "https://nka.hu/kategoria/kiemelt-kategoriak/palyaztatas/kollegiumok-felhivasai/?switch_contrast_mode=": {
-   "cim": "kollegiumok felhivasai",
-   "forras": "NKA kollégiumi felhívások",
-   "kinek": "egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://nka.hu/kategoria/kiemelt-kategoriak/palyaztatas/": {
-   "cim": "Pályáztatás",
-   "forras": "NKA kollégiumi felhívások",
-   "kinek": "egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
   "https://nka.hu/kiemelt-kategoriak/hirek/az-nka-kepzomuveszet-kollegiuma-nyilt-palyazati-felhivast-tett-kozze/": {
    "cim": "Az NKA Képzőművészet Kollégiuma nyílt pályázati felhívást tett közzé",
    "forras": "NKA kollégiumi felhívások",
@@ -113,36 +99,8 @@
    "elso": "2026-07-22",
    "utolso": "2026-07-22"
   },
-  "https://nka.hu/kategoria/kiemelt-kategoriak/palyaztatas/miniszteri-tamogatasok-palyaztatas/": {
-   "cim": "Miniszteri támogatások",
-   "forras": "NKA kollégiumi felhívások",
-   "kinek": "egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
   "https://nka.hu/kiemelt-kategoriak/palyaztatas/palyaztatas/": {
    "cim": "Pályáztatás információ",
-   "forras": "NKA kollégiumi felhívások",
-   "kinek": "egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://nka.hu/kategoria/kiemelt-kategoriak/dontesek/miniszteri-tamogatasok/": {
-   "cim": "Miniszteri támogatások",
-   "forras": "NKA kollégiumi felhívások",
-   "kinek": "egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://nka.hu/kategoria/kiemelt-kategoriak/archivum/palyazati-felhivasok/": {
-   "cim": "Pályázati felhívások",
-   "forras": "NKA kollégiumi felhívások",
-   "kinek": "egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://nka.hu/kategoria/kiemelt-kategoriak/archivum/tamogatasok/": {
-   "cim": "Támogatások",
    "forras": "NKA kollégiumi felhívások",
    "kinek": "egyesület",
    "elso": "2026-07-22",
@@ -225,13 +183,6 @@
    "elso": "2026-07-22",
    "utolso": "2026-07-22"
   },
-  "https://bgazrt.hu/tema/palyazati-dontesek/": {
-   "cim": "PÁLYÁZATI DÖNTÉSEK",
-   "forras": "NEA (Bethlen Gábor Alapkezelő)",
-   "kinek": "egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
   "https://bgazrt.hu/tamogatasok/bizottsagi-hatarozatok/": {
    "cim": "Bizottsági határozatok",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
@@ -248,13 +199,6 @@
   },
   "https://bgazrt.hu/tamogatasok/egyhazi-tamogatasok/": {
    "cim": "Egyházi támogatások – információk, sablonok",
-   "forras": "NEA (Bethlen Gábor Alapkezelő)",
-   "kinek": "egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://bgazrt.hu/tema/cimlap/tamogatasok/egyhazi-tamogatasok/": {
-   "cim": "Hírek",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
@@ -304,13 +248,6 @@
   },
   "https://bgazrt.hu/tamogatasok/nemzetisegi-tamogatasok/": {
    "cim": "Nemzetiségi támogatások – Általános információk",
-   "forras": "NEA (Bethlen Gábor Alapkezelő)",
-   "kinek": "egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://bgazrt.hu/tema/cimlap/tamogatasok/nemzetisegi-tamogatasok/": {
-   "cim": "Hírek",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
@@ -407,13 +344,6 @@
    "elso": "2026-07-22",
    "utolso": "2026-07-22"
   },
-  "https://bgazrt.hu/tema/cimlap/tamogatasok/kulhoni-tamogatasok/": {
-   "cim": "Hírek, felhívások",
-   "forras": "NEA (Bethlen Gábor Alapkezelő)",
-   "kinek": "egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
   "https://bgazrt.hu/tamogatasok/kulhoni-tamogatasok/kulhoni-tamogatasok-2025/": {
    "cim": "Külhoni támogatások 2025",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
@@ -430,13 +360,6 @@
   },
   "https://bgazrt.hu/tamogatasok/kulhoni-tamogatasok/korabbi-evek-tamogatasai/": {
    "cim": "Korábbi évek támogatásai",
-   "forras": "NEA (Bethlen Gábor Alapkezelő)",
-   "kinek": "egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://bgazrt.hu/tema/cimlap/tamogatasok/kulhoni-tamogatasok/palyazati-dontesek-kulhoni-tamogatasok/": {
-   "cim": "Pályázati döntések",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
@@ -582,13 +505,6 @@
    "elso": "2026-07-22",
    "utolso": "2026-07-22"
   },
-  "https://bgazrt.hu/tema/cimlap/tamogatasok/nemzeti-egyuttmukodesi-alap/": {
-   "cim": "Nemzeti Együttműködési Alap és civil támogatások",
-   "forras": "NEA (Bethlen Gábor Alapkezelő)",
-   "kinek": "egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
   "https://bgazrt.hu/megjelentek-a-nemzeti-egyuttmukodesi-alap-2026-evi-osszevont-es-egyszerusitett-palyazati-kiirasai/": {
    "cim": "megjelentek a nemzeti egyuttmukodesi alap 2026 evi osszevont es egyszerusitett palyazati kiirasai",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
@@ -619,13 +535,6 @@
   },
   "https://bgazrt.hu/uj-felhivasok-a-nemzeti-egyuttmukodesi-alap-kereteben-2025/": {
    "cim": "uj felhivasok a nemzeti egyuttmukodesi alap kereteben 2025",
-   "forras": "NEA (Bethlen Gábor Alapkezelő)",
-   "kinek": "egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://bgazrt.hu/tema/aktualis-palyazatok/": {
-   "cim": "AKTUÁLIS PÁLYÁZATOK",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
@@ -689,20 +598,6 @@
   },
   "https://bgazrt.hu/uj-felhivasok-a-nemzeti-egyuttmukodesi-alap-kereteben-5/": {
    "cim": "uj felhivasok a nemzeti egyuttmukodesi alap kereteben 5",
-   "forras": "NEA (Bethlen Gábor Alapkezelő)",
-   "kinek": "egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://bgazrt.hu/tamogatasok/nemzeti-egyuttmukodesi-alap/page/2/": {
-   "cim": "2",
-   "forras": "NEA (Bethlen Gábor Alapkezelő)",
-   "kinek": "egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://bgazrt.hu/tamogatasok/nemzeti-egyuttmukodesi-alap/page/3/": {
-   "cim": "3",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
@@ -829,20 +724,6 @@
   },
   "https://culture.ec.europa.eu/funding/cultureu-funding-guide": {
    "cim": "CulturEU Funding Guide",
-   "forras": "Kreatív Európa Kultúra",
-   "kinek": "egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://kultura.kreativeuropa.hu/kategoria/osztondijak": {
-   "cim": "Ösztöndíjak",
-   "forras": "Kreatív Európa Kultúra",
-   "kinek": "egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://kultura.kreativeuropa.hu/kategoria/rovat.php?rovat_id=2&action=list": {
-   "cim": "»  KULTURÁLIS CÉLÚ PÁLYÁZATOK",
    "forras": "Kreatív Európa Kultúra",
    "kinek": "egyesület",
    "elso": "2026-07-22",
@@ -1289,57 +1170,8 @@
    "elso": "2026-07-22",
    "utolso": "2026-07-22"
   },
-  "https://palyazatok.org/palyazatiras/": {
-   "cim": "Pályázatírás",
-   "forras": "Kulturális / művészeti (palyazatok.org)",
-   "kinek": "kft + egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://palyazatok.org/ginop-palyazatiras/": {
-   "cim": "Pályázatírás vállalkozásoknak",
-   "forras": "Kulturális / művészeti (palyazatok.org)",
-   "kinek": "kft + egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://palyazatok.org/mezogazdasag-videkfejlesztes-palyazatiras/": {
-   "cim": "Mezőgazdasági pályázatírás",
-   "forras": "Kulturális / művészeti (palyazatok.org)",
-   "kinek": "kft + egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://palyazatok.org/palyazatiras-civil-szervezeteknek/": {
-   "cim": "Pályázatírás civil szervezeteknek",
-   "forras": "Kulturális / művészeti (palyazatok.org)",
-   "kinek": "kft + egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://palyazatok.org/palyazatiras-onkormanyzatoknak/": {
-   "cim": "Pályázatírás önkormányzatoknak",
-   "forras": "Kulturális / művészeti (palyazatok.org)",
-   "kinek": "kft + egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://palyazatok.org/palyazatiras-maganszemelyeknek/": {
-   "cim": "Pályázatírás magánszemélyeknek",
-   "forras": "Kulturális / művészeti (palyazatok.org)",
-   "kinek": "kft + egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
   "https://palyazatok.org/palyazati-tanacsadas/": {
    "cim": "Pályázati tanácsadás",
-   "forras": "Kulturális / művészeti (palyazatok.org)",
-   "kinek": "kft + egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://palyazatok.org/specifikus-palyazatfigyeles-vagy-hirlevel/": {
-   "cim": "Specifikus pályázatfigyelés vagy hírlevél",
    "forras": "Kulturális / művészeti (palyazatok.org)",
    "kinek": "kft + egyesület",
    "elso": "2026-07-22",
@@ -1473,34 +1305,6 @@
   },
   "https://palyazatok.org/mikrovallalkozasok-fejlesztese-palyazat-a-heviz-balaton-zalai-dombhatak-leader-egyesulet-tervezesi-teruleten/": {
    "cim": "mikrovallalkozasok fejlesztese palyazat a heviz balaton zalai dombhatak leader egyesulet tervezesi teruleten",
-   "forras": "KKV / energetika (palyazatok.org)",
-   "kinek": "kft",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://palyazatok.org/kkv-palyazatok/page/2/": {
-   "cim": "2",
-   "forras": "KKV / energetika (palyazatok.org)",
-   "kinek": "kft",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://palyazatok.org/kkv-palyazatok/page/3/": {
-   "cim": "3",
-   "forras": "KKV / energetika (palyazatok.org)",
-   "kinek": "kft",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://palyazatok.org/kkv-palyazatok/page/4/": {
-   "cim": "4",
-   "forras": "KKV / energetika (palyazatok.org)",
-   "kinek": "kft",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://palyazatok.org/kkv-palyazatok/page/31/": {
-   "cim": "31",
    "forras": "KKV / energetika (palyazatok.org)",
    "kinek": "kft",
    "elso": "2026-07-22",
@@ -20987,34 +20791,6 @@
    "elso": "2026-07-22",
    "utolso": "2026-07-22"
   },
-  "https://palyazatok.org/palyazatok-civil-szervezeteknek/page/2/": {
-   "cim": "2",
-   "forras": "Civil (palyazatok.org)",
-   "kinek": "egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://palyazatok.org/palyazatok-civil-szervezeteknek/page/3/": {
-   "cim": "3",
-   "forras": "Civil (palyazatok.org)",
-   "kinek": "egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://palyazatok.org/palyazatok-civil-szervezeteknek/page/4/": {
-   "cim": "4",
-   "forras": "Civil (palyazatok.org)",
-   "kinek": "egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://palyazatok.org/palyazatok-civil-szervezeteknek/page/68/": {
-   "cim": "68",
-   "forras": "Civil (palyazatok.org)",
-   "kinek": "egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
   "https://palyazatok.org/deak-denes-osztondij-4/": {
    "cim": "deak denes osztondij 4",
    "forras": "Kulturális / művészeti (palyazatok.org)",
@@ -21127,34 +20903,6 @@
    "elso": "2026-07-22",
    "utolso": "2026-07-22"
   },
-  "https://palyazatok.org/kulturalis-palyazatok/page/2/": {
-   "cim": "2",
-   "forras": "Kulturális / művészeti (palyazatok.org)",
-   "kinek": "kft + egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://palyazatok.org/kulturalis-palyazatok/page/3/": {
-   "cim": "3",
-   "forras": "Kulturális / művészeti (palyazatok.org)",
-   "kinek": "kft + egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://palyazatok.org/kulturalis-palyazatok/page/4/": {
-   "cim": "4",
-   "forras": "Kulturális / művészeti (palyazatok.org)",
-   "kinek": "kft + egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://palyazatok.org/kulturalis-palyazatok/page/100/": {
-   "cim": "100",
-   "forras": "Kulturális / művészeti (palyazatok.org)",
-   "kinek": "kft + egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
   "https://palyazatok.org/flaszter-muveszeti-reszveteli-palyazat/": {
    "cim": "flaszter muveszeti reszveteli palyazat",
    "forras": "Kulturális / művészeti (palyazatok.org)",
@@ -21220,34 +20968,6 @@
   },
   "https://palyazatok.org/jokai-200-kepzomuveszeti-palyazat/": {
    "cim": "jokai 200 kepzomuveszeti palyazat",
-   "forras": "Kulturális / művészeti (palyazatok.org)",
-   "kinek": "kft + egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://palyazatok.org/muveszeti-palyazatok/page/2/": {
-   "cim": "2",
-   "forras": "Kulturális / művészeti (palyazatok.org)",
-   "kinek": "kft + egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://palyazatok.org/muveszeti-palyazatok/page/3/": {
-   "cim": "3",
-   "forras": "Kulturális / művészeti (palyazatok.org)",
-   "kinek": "kft + egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://palyazatok.org/muveszeti-palyazatok/page/4/": {
-   "cim": "4",
-   "forras": "Kulturális / művészeti (palyazatok.org)",
-   "kinek": "kft + egyesület",
-   "elso": "2026-07-22",
-   "utolso": "2026-07-22"
-  },
-  "https://palyazatok.org/muveszeti-palyazatok/page/106/": {
-   "cim": "106",
    "forras": "Kulturális / művészeti (palyazatok.org)",
    "kinek": "kft + egyesület",
    "elso": "2026-07-22",

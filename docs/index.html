@@ -104,6 +104,7 @@
 (function () {
   "use strict";
   var NKA_URL = "https://nka.hu/kategoria/kiemelt-kategoriak/palyaztatas/kollegiumok-felhivasai/";
+  var ALAP_DATUM = "2026-07-22";        // az indulási alapállomány napja — ez még nem "ÚJ"
   var ADAG = 300;                       // ennyi sor jelenik meg egyszerre
   var mind = [], szurve = [], mutatva = 0, frissitve = "";
 
@@ -112,6 +113,10 @@
 
   function napkulonbseg(a, b) {         // 'YYYY-MM-DD' párok különbsége napban
     return Math.round((new Date(a) - new Date(b)) / 86400000);
+  }
+
+  function ujTetel(t) {                 // ÚJ: 7 napon belüli, de nem az alapállomány
+    return t.elso && t.elso > ALAP_DATUM && napkulonbseg(frissitve, t.elso) <= 7;
   }
 
   function betolt() {
@@ -166,7 +171,7 @@
 
   function statFrissit() {
     var aktualis = mind.filter(function (t) { return t.utolso === frissitve; }).length;
-    var uj = mind.filter(function (t) { return t.elso && napkulonbseg(frissitve, t.elso) <= 7; }).length;
+    var uj = mind.filter(ujTetel).length;
     $("stat").innerHTML = "<b>" + mind.length + "</b> tétel · <b>" + aktualis +
       "</b> most is listázott · <b>" + uj + "</b> új az elmúlt 7 napban · frissítve: " + frissitve;
   }
@@ -180,7 +185,7 @@
       if (f && t.forras !== f) return false;
       if (k && t.kinek !== k) return false;
       if (aktualis && t.utolso !== frissitve) return false;
-      if (csakuj && !(t.elso && napkulonbseg(frissitve, t.elso) <= 7)) return false;
+      if (csakuj && !ujTetel(t)) return false;
       return true;
     });
     mutatva = 0;
@@ -198,7 +203,7 @@
       a.textContent = t.cim;
       var meta = document.createElement("div");
       meta.className = "meta";
-      if (t.elso && napkulonbseg(frissitve, t.elso) <= 7) {
+      if (ujTetel(t)) {
         var uj = document.createElement("span"); uj.className = "uj"; uj.textContent = "ÚJ";
         meta.appendChild(uj);
       }
