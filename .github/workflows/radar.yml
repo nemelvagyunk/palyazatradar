@@ -1,0 +1,52 @@
+name: Pályázatradar
+
+on:
+  schedule:
+    # Minden nap 05:30 UTC = 07:30 (nyári) / 06:30 (téli) budapesti idő
+    - cron: "30 5 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: palyazatradar
+  cancel-in-progress: false
+
+jobs:
+  radar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Függőségek telepítése
+        run: pip install -r requirements.txt
+
+      - name: Radar futtatása
+        id: radar
+        run: python radar.py --state allapot.json --report report.md
+
+      - name: Állapotfájl commitolása
+        run: |
+          git config user.name "palyazatradar-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add allapot.json
+          git diff --cached --quiet || git commit -m "Állapot frissítés: $(date +%F)"
+          git push
+
+      - name: Issue nyitása új találatnál
+        if: steps.radar.outputs.new_count != '0' || steps.radar.outputs.first_run == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "${{ steps.radar.outputs.first_run }}" = "true" ]; then
+            CIM="Pályázatradar – alapállapot felvéve ($(date +%F))"
+          else
+            CIM="Pályázatradar – ${{ steps.radar.outputs.new_count }} új találat ($(date +%F))"
+          fi
+          gh issue create --title "$CIM" --body-file report.md
