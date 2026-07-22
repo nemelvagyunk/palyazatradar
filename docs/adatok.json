@@ -6,86 +6,63 @@
    "forras": "Norvég Civil Alap",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "palyazhat": [
-    "civil",
-    "onkormanyzat",
-    "vallalkozas"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://palyazat.norvegcivilalap.hu/akciopalyazat-felhivas": {
    "cim": "Akciópályázat",
    "forras": "Norvég Civil Alap",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22"
+   "utolso": "2026-07-22"
   },
   "https://palyazat.norvegcivilalap.hu/lezarult-felhivasok": {
    "cim": "Lezárult felhívások",
    "forras": "Norvég Civil Alap",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22"
+   "utolso": "2026-07-22"
   },
   "https://hangfoglalo.hu/megjelenesek-koncertek/": {
    "cim": "NKA Hangfoglaló támogatott előadóinak megjelenései, koncertjei",
    "forras": "Hangfoglaló",
    "kinek": "klubtámogatás",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2026-04-08"
+   "utolso": "2026-07-22"
   },
   "https://hangfoglalo.hu/megjelentek-az-nka-hangfoglalo-palyazati-eredmenyei/": {
    "cim": "megjelentek az nka hangfoglalo palyazati eredmenyei",
    "forras": "Hangfoglaló",
    "kinek": "klubtámogatás",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2026-03-04"
+   "utolso": "2026-07-22"
   },
   "https://hangfoglalo.hu/elerhetok-az-nka-hangfoglalo-uj-nyilt-palyazati-felhivasai/": {
    "cim": "elerhetok az nka hangfoglalo uj nyilt palyazati felhivasai",
    "forras": "Hangfoglaló",
    "kinek": "klubtámogatás",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2025-12-11",
-   "hatarido": "2026-01-12"
+   "utolso": "2026-07-22"
   },
   "https://hangfoglalo.hu/nka-hangfoglalo-konnyuzene-tamogato-program-kollegium/": {
    "cim": "nka hangfoglalo konnyuzene tamogato program kollegium",
    "forras": "Hangfoglaló",
    "kinek": "klubtámogatás",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2025-09-24"
+   "utolso": "2026-07-22"
   },
   "https://hangfoglalo.hu/megjelent-az-indulo-eloadoi-palyazati-felhivas/": {
    "cim": "megjelent az indulo eloadoi palyazati felhivas",
    "forras": "Hangfoglaló",
    "kinek": "klubtámogatás",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2025-08-11",
-   "hatarido": "2025-09-03"
+   "utolso": "2026-07-22"
   },
   "https://hangfoglalo.hu/uj-palyazati-felhivasok/": {
    "cim": "uj palyazati felhivasok",
    "forras": "Hangfoglaló",
    "kinek": "klubtámogatás",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2024-10-22",
-   "hatarido": "2024-11-21"
+   "utolso": "2026-07-22"
   },
   "nka-kollegium:Állandó kollégiumok Anyanyelvi Kultúra Kollégiuma": {
    "cim": "Állandó kollégiumok Anyanyelvi Kultúra Kollégiuma – felhívás elérhető",
@@ -99,1107 +76,637 @@
    "forras": "NKA kollégiumi felhívások",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2024-10-14",
-   "hatarido": "2024-11-13"
+   "utolso": "2026-07-22"
   },
   "https://nka.hu/kiemelt-kategoriak/hirek/megjelent-a-fotomuveszet-kollegiuma-nyilt-palyazati-felhivasa/": {
    "cim": "Megjelent a Fotóművészet Kollégiuma nyílt pályázati felhívása",
    "forras": "NKA kollégiumi felhívások",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2024-10-14",
-   "hatarido": "2024-11-13"
+   "utolso": "2026-07-22"
   },
   "https://nka.hu/kiemelt-kategoriak/hirek/elindult-a-kozossegepitest-tamogato-program/": {
    "cim": "Elindult a Közösségépítést Támogató Program",
    "forras": "NKA kollégiumi felhívások",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2024-09-11",
-   "hatarido": "2025-12-23",
-   "palyazhat": [
-    "civil",
-    "maganszemely",
-    "vallalkozas"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://nka.hu/kiemelt-kategoriak/hirek/palyazati-felhivas-kepzomuveszeti-osztondij-tamogatasara-a-romai-magyar-akademia-collegium-hungaricum-roma-kozremukodesevel/": {
    "cim": "Pályázati felhívás \"Képzőművészeti ösztöndíj támogatására a Római Magyar Akadémia (Collegium Hungaricum Róma) közreműködésével\"",
    "forras": "NKA kollégiumi felhívások",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2024-09-09",
-   "hatarido": "2024-10-09"
+   "utolso": "2026-07-22"
   },
   "https://nka.hu/kiemelt-kategoriak/palyaztatas/palyaztatas/": {
    "cim": "Pályáztatás információ",
    "forras": "NKA kollégiumi felhívások",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2023-06-29",
-   "palyazhat": [
-    "vallalkozas"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://nka.hu/hangfoglalo-konnyuzene-tamogato-program-kollegiuma/": {
    "cim": "Hangfoglaló Könnyűzene Támogató Program Kollégiuma",
    "forras": "NKA kollégiumi felhívások",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2020-10-08"
+   "utolso": "2026-07-22"
   },
   "https://nka.hu/palyazati-tudnivalok/": {
    "cim": "Pályázati tudnivalók",
    "forras": "NKA kollégiumi felhívások",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2023-06-29",
-   "palyazhat": [
-    "maganszemely"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://nka.hu/palyazati-naptar-2024-ii-felev": {
    "cim": "Pályázati naptár",
    "forras": "NKA kollégiumi felhívások",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2024-05-29",
-   "hatarido": "2024-08-20"
+   "utolso": "2026-07-22"
   },
   "https://emet.gov.hu/app/uploads/2025/08/6_2024.II_.08.-NKTK-foigut.pdf": {
    "cim": "6/2024. (II.08.) NKTK főigazgatói utasítás az uniós állami támogatási szabályoknak a Kedvezményezett részére nyújtandó támogatásra történő alkalmazhatóságáról",
    "forras": "NKA kollégiumi felhívások",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22"
+   "utolso": "2026-07-22"
   },
   "https://nka.hu/eu_s_nyilatkozat_alt_palyazathoz-4/": {
    "cim": "Uniós nyilatkozat",
    "forras": "NKA kollégiumi felhívások",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22"
+   "utolso": "2026-07-22"
   },
   "https://nka.hu/kiemelt-kategoriak/palyaztatas/kollegiumok-felhivasai/kollegiumi-palyazatok/attachment/konyvtari_igazolas_minta/": {
    "cim": "Könyvtári igazolás minta kereskedelmi forgalomba kerülő kiadvány megjelentetéséhez",
    "forras": "NKA kollégiumi felhívások",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22"
+   "utolso": "2026-07-22"
   },
   "https://nka.hu/230511-206107-pr-kotelezettseg/": {
    "cim": "PR kötelezettségek a Kulturális Fesztiválok Kollégiuma felhívásához",
    "forras": "NKA kollégiumi felhívások",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22"
+   "utolso": "2026-07-22"
   },
   "https://adattar.bgazrt.hu/adattar/": {
    "cim": "Pályázati kereső",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22"
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/kapcsolat/": {
    "cim": "Kapcsolat",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2018-10-04",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/altalanos/": {
    "cim": "Általános",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2023-01-26",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/altalanos": {
    "cim": "Általános információk a pályázati rendszerről",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2023-01-26",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/bizottsagi-hatarozatok/": {
    "cim": "Bizottsági határozatok",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2019-02-13",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/altalanos/gyik/": {
    "cim": "gyik",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2023-01-26",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/egyhazi-tamogatasok/": {
    "cim": "Egyházi támogatások – információk, sablonok",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2018-10-04",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/egyhazi-tamogatasok/2026-evi-egyhazi-tamogatasok/": {
    "cim": "2026. évi egyházi támogatások",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2025-10-03",
-   "hatarido": "2025-11-21",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/egyhazi-tamogatasok/2025-evi-egyhazi-tamogatasok/": {
    "cim": "2025. évi egyházi támogatások",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2025-03-04",
-   "hatarido": "2025-06-30",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/egyhazi-tamogatasok/korabbi-evek-tamogatasai/": {
    "cim": "Korábbi évek támogatásai",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2019-02-27",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/egyhazi-tamogatasok/egyszerusitett-elszamolas-ukrajnai-szekhelyu-kedvezmenyezettek-reszere/": {
    "cim": "Egyszerűsített elszámolás – Ukrajnai székhelyű Kedvezményezettek részére",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2024-04-05",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "civil",
-    "onkormanyzat",
-    "vallalkozas"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/egyhazi-tamogatasok/altalanos-szerzodesi-feltetelek/": {
    "cim": "Általános Szerződési Feltételek és Útmutató",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2019-10-24",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/vallasturisztikai-tamogatasok/": {
    "cim": "Vallásturisztikai támogatások",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2023-08-11",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/nemzetisegi-tamogatasok/": {
    "cim": "Nemzetiségi támogatások – Általános információk",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2018-10-04",
-   "hatarido": "2019-01-15",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/nemzetisegi-tamogatasok/palyazatok-2026/": {
    "cim": "Pályázatok 2026",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2025-08-27",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/nemzetisegi-tamogatasok/palyazatok-2025/": {
    "cim": "Pályázatok 2025",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2025-01-21",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/nemzetisegi-tamogatasok/helyi-nemzetisegi-onkormanyzatok-tamogatasai/": {
    "cim": "Helyi nemzetiségi önkormányzatok támogatásai",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2019-10-01",
-   "hatarido": "2020-01-15",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/nemzetisegi-tamogatasok/helyi-nemzetisegi-onkormanyzatok-tamogatasai/mukodesi-tamogatasok/": {
    "cim": "Működési támogatások",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2019-10-01",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/nemzetisegi-tamogatasok/helyi-nemzetisegi-onkormanyzatok-tamogatasai/feladatalapu-tamogatasok/": {
    "cim": "Feladatalapú támogatások",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2021-07-08",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/nemzetisegi-tamogatasok/utmutato-es-elszamolasi-nyomtatvanyok/": {
    "cim": "Útmutató és elszámolási nyomtatványok",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2019-01-16",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/nemzetisegi-tamogatasok/helyi-nemzetisegi-onkormanyzatok-tamogatasai/jovahagyott-beszamolok-kozzetetel/": {
    "cim": "Jóváhagyott beszámolók közzététele",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2020-12-09",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/nemzetisegi-tamogatasok/nemzetisegi-egyedi-tamogatasok/": {
    "cim": "Egyedi támogatások",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2019-01-30",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/nemzetisegi-tamogatasok/nemzetisegi-egyedi-tamogatasok/nir-ben-kezelt-tamogatasok/": {
    "cim": "NIR-ben kezelt támogatások",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2021-07-09",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/nemzetisegi-tamogatasok/nemzetisegi-egyedi-tamogatasok/egyedi-tamogatasok-es-nyomtatvanyok/": {
    "cim": "Egyedi támogatások és nyomtatványok",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2021-07-09",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/nemzetisegi-tamogatasok/korabbi-evek-tamogatasai/": {
    "cim": "Korábbi évek támogatásai",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2019-01-30",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/nemzetisegi-tamogatasok/altalanos-szerzodesi-feltetelek/": {
    "cim": "Általános Szerződési Feltételek és Útmutató",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2019-10-24",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/kulhoni-tamogatasok/": {
    "cim": "Külhoni támogatások",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2018-10-02",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/kulhoni-tamogatasok/kulhoni-tamogatasok-2025/": {
    "cim": "Külhoni támogatások 2025",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2025-04-04",
-   "hatarido": "2025-08-11",
-   "palyazhat": [
-    "maganszemely",
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/kulhoni-tamogatasok/kulhoni-tamogatasok-2026/": {
    "cim": "Külhoni támogatások 2026",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2025-11-11",
-   "hatarido": "2026-04-13",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/kulhoni-tamogatasok/korabbi-evek-tamogatasai/": {
    "cim": "Korábbi évek támogatásai",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2022-04-05",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/kulhoni-tamogatasok/altalanos-palyazati-es-elszamolasi-utmutato/": {
    "cim": "Általános pályázati és elszámolási útmutató",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2019-01-29",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/kulhoni-tamogatasok/altalanos-szerzodesi-feltetelek/": {
    "cim": "Általános Szerződési Feltételek",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2018-11-26",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/hatartalanul/": {
    "cim": "Határtalanul Program",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2018-12-24",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/hatartalanul/altalanos-szerzodesi-feltetelek/": {
    "cim": "Általános Szerződési Feltételek",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2023-06-09",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/hatartalanul/palyazati-es-elszamolasi-utmutatok/": {
    "cim": "Pályázati és elszámolási útmutatók",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2023-06-07",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/wp-content/uploads/palyazati_kiirasok/hatartalanul/2020/etikai_kodex_autobuszos_utazashoz.pdf": {
    "cim": "Etikai kódex autóbuszos utazáshoz",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22"
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/hatartalanul/gyakran-ismetelt-kerdesek-2021/": {
    "cim": "GYIK 2021",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2021-06-22",
-   "hatarido": "2022-09-30",
-   "palyazhat": [
-    "onkormanyzat",
-    "vallalkozas"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/hatartalanul/gyakran-ismetelt-kerdesek-2020/": {
    "cim": "GYIK 2020",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2020-03-20",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/hatartalanul/gyik/": {
    "cim": "GYIK 2019",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2019-04-01",
-   "hatarido": "2019-09-01",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/nemzeti-egyuttmukodesi-alap/altalanos-szerzodesi-feltetelek/": {
    "cim": "Általános Szerződési Feltételek",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2019-10-24",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/szabolcs-szatmar-bereg-megye-es-karpatalja-fejlesztesi-tamogatasok/": {
    "cim": "Szabolcs-Szatmár-Bereg megye és Kárpátalja fejlesztési támogatások",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2024-01-10",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/csango-magyar-egyuttmukodesi-program-tamogatasok/": {
    "cim": "Csángó-Magyar Együttműködési Program támogatások",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2021-02-18",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/magyar-falu-program/": {
    "cim": "Magyar Falu Program Falusi Civil Alap",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2022-03-31",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/magyar-falu-program-kistelepulesi-uzletek-tamogatasa/": {
    "cim": "Magyar Falu Program Kistelepülési üzletek támogatása",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2022-08-02",
-   "hatarido": "2025-03-01",
-   "palyazhat": [
-    "onkormanyzat",
-    "vallalkozas"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/varosi-civil-alap/": {
    "cim": "Városi Civil Alap",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2021-03-19",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/allatvedo-szervezetek-tamogatasa/": {
    "cim": "Állatvédő szervezetek támogatása",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2025-05-26",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/nir-elszamolasi-videok/": {
    "cim": "NIR elszámolási videók",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2023-08-11",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/archivum/": {
    "cim": "Archívum",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2019-02-26",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tamogatasok/": {
    "cim": "Támogatások",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2018-10-19",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tajekoztatas-a-nemzeti-egyuttmukodesi-alap-2025-evi-forrasai-terhere-biztositott-tamogatasok-beszamoloinak-benyujtasanak-modjarol/": {
    "cim": "tajekoztatas a nemzeti egyuttmukodesi alap 2025 evi forrasai terhere biztositott tamogatasok beszamoloinak benyujtasanak modjarol",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2026-04-14",
-   "hatarido": "2026-08-31",
-   "palyazhat": [
-    "onkormanyzat",
-    "vallalkozas"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/megjelentek-a-nemzeti-egyuttmukodesi-alap-2026-evi-osszevont-es-egyszerusitett-palyazati-kiirasai/": {
    "cim": "megjelentek a nemzeti egyuttmukodesi alap 2026 evi osszevont es egyszerusitett palyazati kiirasai",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2025-09-01",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/uj-felhivas-a-2025-evi-nemzeti-egyuttmukodesi-alap-kereteben-nean-kp-1-2025/": {
    "cim": "uj felhivas a 2025 evi nemzeti egyuttmukodesi alap kereteben nean kp 1 2025",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2025-06-23",
-   "hatarido": "2025-06-23",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tajekoztatas-a-nemzeti-egyuttmukodesi-alap-2024-evi-forrasai-terhere-biztositott-tamogatasok-beszamoloinak-benyujtasanak-modjarol/": {
    "cim": "tajekoztatas a nemzeti egyuttmukodesi alap 2024 evi forrasai terhere biztositott tamogatasok beszamoloinak benyujtasanak modjarol",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2025-03-27",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "civil",
-    "onkormanyzat",
-    "vallalkozas"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/modosult-a-nemzeti-egyuttmukodesi-alap-2025-evi-egyszerusitett-palyazati-felhivasa/": {
    "cim": "modosult a nemzeti egyuttmukodesi alap 2025 evi egyszerusitett palyazati felhivasa",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2025-01-29",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/uj-felhivasok-a-nemzeti-egyuttmukodesi-alap-kereteben-2025/": {
    "cim": "uj felhivasok a nemzeti egyuttmukodesi alap kereteben 2025",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2024-11-12",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/uj-felhivasok-a-nemzeti-egyuttmukodesi-alap-kereteben-nean-kp-1-2024/": {
    "cim": "uj felhivasok a nemzeti egyuttmukodesi alap kereteben nean kp 1 2024",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2024-06-24",
-   "hatarido": "2024-06-24",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tajekoztatas-a-nemzeti-egyuttmukodesi-alap-2023-evi-forrasai-terhere-biztositott-tamogatasok-beszamoloinak-benyujtasanak-modjarol/": {
    "cim": "tajekoztatas a nemzeti egyuttmukodesi alap 2023 evi forrasai terhere biztositott tamogatasok beszamoloinak benyujtasanak modjarol",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2024-04-30",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat",
-    "vallalkozas"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/felhivas-a-nemzeti-egyuttmukodesi-alap-civil-jeloltallitasi-rendszereben-valo-reszvetelre-2024/": {
    "cim": "felhivas a nemzeti egyuttmukodesi alap civil jeloltallitasi rendszereben valo reszvetelre 2024",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2024-01-03",
-   "hatarido": "2024-02-02",
-   "palyazhat": [
-    "civil",
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/uj-felhivasok-a-nemzeti-egyuttmukodesi-alap-kereteben-2024/": {
    "cim": "uj felhivasok a nemzeti egyuttmukodesi alap kereteben 2024",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2023-10-02",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/uj-felhivasok-a-nemzeti-egyuttmukodesi-alap-kereteben-nean-kp-1-2023/": {
    "cim": "uj felhivasok a nemzeti egyuttmukodesi alap kereteben nean kp 1 2023",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2023-06-26",
-   "hatarido": "2023-06-26",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/tajekoztatas-a-nemzeti-egyuttmukodesi-alap-2022-evi-forrasai-terhere-biztositott-tamogatasok-beszamoloinak-benyujtasaval-kapcsolatos-valtozasokrol/": {
    "cim": "tajekoztatas a nemzeti egyuttmukodesi alap 2022 evi forrasai terhere biztositott tamogatasok beszamoloinak benyujtasaval kapcsolatos valtozasokrol",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2022-12-16",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat",
-    "vallalkozas"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/uj-felhivasok-a-nemzeti-egyuttmukodesi-alap-kereteben-6/": {
    "cim": "uj felhivasok a nemzeti egyuttmukodesi alap kereteben 6",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2022-10-03",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/felhivasok-a-nemzeti-egyuttmukodesi-alap-kereteben-2022-normativ/": {
    "cim": "felhivasok a nemzeti egyuttmukodesi alap kereteben 2022 normativ",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2022-06-27",
-   "hatarido": "2022-06-27",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/uj-felhivasok-a-nemzeti-egyuttmukodesi-alap-kereteben-5/": {
    "cim": "uj felhivasok a nemzeti egyuttmukodesi alap kereteben 5",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2021-10-04",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/dontes-a-helyi-nemzetisegi-onkormanyzatok-2026-evi-feladatalapu-tamogatasarol/": {
    "cim": "dontes a helyi nemzetisegi onkormanyzatok 2026 evi feladatalapu tamogatasarol",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2026-04-15",
-   "hatarido": "2026-04-15",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/dontes-szuletett-a-nemzetisegi-kulturalis-kezdemenyezesek-2026-evi-tamogatasarol/": {
    "cim": "dontes szuletett a nemzetisegi kulturalis kezdemenyezesek 2026 evi tamogatasarol",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2026-03-30",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/szulofoldon-magyarul-2025-felhivas/": {
    "cim": "szulofoldon magyarul 2025 felhivas",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2025-04-08",
-   "hatarido": "2025-05-08",
-   "palyazhat": [
-    "maganszemely",
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://bgazrt.hu/megjelentek-a-2026-evi-allatvedo-szervezetek-tamogatasa-cimu-palyazati-kiiras-eredmenyei/": {
    "cim": "megjelentek a 2026 evi allatvedo szervezetek tamogatasa cimu palyazati kiiras eredmenyei",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "megjelent": "2026-03-16",
-   "hatarido": "2026-04-14",
-   "palyazhat": [
-    "onkormanyzat"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://erasmusplusz.hu/erasmus_palyazattipusok_felsooktatasi_intezmenyeknek_mobilitasi_palyazatok": {
    "cim": "Felsőoktatás",
    "forras": "Erasmus+ / ESC",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22"
+   "utolso": "2026-07-22"
   },
   "https://erasmusplusz.hu/palyazati-kategoriak-a-koznevelesi-szektorban": {
    "cim": "Köznevelés",
    "forras": "Erasmus+ / ESC",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "hatarido": "2026-09-29",
-   "palyazhat": [
-    "maganszemely"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://erasmusplusz.hu/palyazati-kategoriak-a-szakkepzesi-szektorban": {
    "cim": "Szakképzés",
    "forras": "Erasmus+ / ESC",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "hatarido": "2026-02-19"
+   "utolso": "2026-07-22"
   },
   "https://erasmusplusz.hu/palyazati-kategoriak-a-felnottkori-tanulasi-szektorban": {
    "cim": "Felnőttkori tanulás",
    "forras": "Erasmus+ / ESC",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "hatarido": "2026-02-19"
+   "utolso": "2026-07-22"
   },
   "https://erasmusplusz.hu/palyazati_kategoriak_az_ifjusagi_teruleten": {
    "cim": "Ifjúság",
    "forras": "Erasmus+ / ESC",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "palyazhat": [
-    "civil",
-    "vallalkozas"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://erasmusplusz.hu/palyazati-kategoriak-a-sport-szektorban": {
    "cim": "Sport",
    "forras": "Erasmus+ / ESC",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22",
-   "hatarido": "2026-02-12",
-   "palyazhat": [
-    "civil"
-   ]
+   "utolso": "2026-07-22"
   },
   "https://erasmusplusz.hu/erasmus_palyazattipusok_felsooktatasi_intezmenyeknek_egyuttmukodesi_partnersegek": {
    "cim": "Felsőoktatás",
    "forras": "Erasmus+ / ESC",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22"
+   "utolso": "2026-07-22"
   },
   "https://www.visegradfund.org/grant-implement": {
    "cim": "Grant",
    "forras": "Visegrádi Alap",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22"
+   "utolso": "2026-07-22"
   },
   "https://www.visegradfund.org/visegrad-grants-apply": {
    "cim": "Learn more",
    "forras": "Visegrádi Alap",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22"
+   "utolso": "2026-07-22"
   },
   "https://www.visegradfund.org/visegrad-plus-grants-apply": {
    "cim": "Learn More",
    "forras": "Visegrádi Alap",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22"
+   "utolso": "2026-07-22"
   },
   "https://www.visegradfund.org/strategic-grants-apply": {
    "cim": "Learn More",
    "forras": "Visegrádi Alap",
    "kinek": "egyesület",
    "elso": "2026-07-22",
-   "utolso": "2026-07-22",
-   "dusitva": "2026-07-22"
+   "utolso": "2026-07-22"
   },
   "https://app.powerbi.com/view?r=eyJrIjoiMzMwZDBlNTAtNDY4Yi00YmExLTlmODYtMDY5ZTk0M2E0NTJiIiwidCI6ImU5MWUzMjJhLWQ0ZDMtNGVjYy04YzJjLTIyOTZjZTZjYmY0YSIsImMiOjl9": {
    "cim": "Grant Database Explore all funded projects in our database. BROWSE PROJECTS",
