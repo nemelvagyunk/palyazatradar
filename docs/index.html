@@ -84,7 +84,11 @@
   <div class="panel">
     <input type="search" id="kereso" placeholder="Keresés címben és linkben…" autocomplete="off">
     <select id="forras"><option value="">Minden forrás</option></select>
-    <select id="kinek"><option value="">Kinek: mind</option></select>
+    <select id="kinek">
+      <option value="">Kinek: mind</option>
+      <option value="civil">Civil szervezet / egyesület pályázhat</option>
+      <option value="kft">Vállalkozás (kft) pályázhat</option>
+    </select>
     <label class="cb"><input type="checkbox" id="aktualis"> csak most listázott</label>
     <label class="cb"><input type="checkbox" id="csakuj"> csak új (7 nap)</label>
   </div>
@@ -163,10 +167,14 @@
       var o = document.createElement("option"); o.value = f; o.textContent = f;
       $("forras").appendChild(o);
     });
-    egyedi("kinek").forEach(function (k) {
-      var o = document.createElement("option"); o.value = k; o.textContent = "Kinek: " + k;
-      $("kinek").appendChild(o);
-    });
+  }
+
+  // Kinek-szűrő: kategória-alapú, a vegyes címkék ("kft + egyesület",
+  // "klubtámogatás") mindkét kategóriában megjelennek.
+  function kinekOk(t, valasztott) {
+    if (!valasztott) return true;
+    if (valasztott === "kft") return /kft|klub/i.test(t.kinek);
+    return /egyes|civil|klub/i.test(t.kinek);   // "civil"
   }
 
   function statFrissit() {
@@ -183,7 +191,7 @@
     szurve = mind.filter(function (t) {
       if (q && t.kereso.indexOf(q) === -1) return false;
       if (f && t.forras !== f) return false;
-      if (k && t.kinek !== k) return false;
+      if (!kinekOk(t, k)) return false;
       if (aktualis && t.utolso !== frissitve) return false;
       if (csakuj && !ujTetel(t)) return false;
       return true;
