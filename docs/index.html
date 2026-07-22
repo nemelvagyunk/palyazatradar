@@ -55,6 +55,9 @@
   .chip.kinek { background: var(--regi-bg); color: var(--mut); }
   .datum { color: var(--mut); }
   .uj { background: var(--uj-bg); color: var(--uj-ink); border-radius: 20px; padding: 2px 9px; font-weight: 700; }
+  .hatarido { color: #7a4a12; background: #fdf3e0; border-radius: 20px; padding: 2px 9px; }
+  .hatarido.surgos { color: #a01d1d; background: #fdeaea; font-weight: 700; }
+  .hatarido.lejart { color: var(--mut); background: var(--regi-bg); text-decoration: line-through; }
   .nemaktiv { color: #a4642a; background: #faf0e4; border-radius: 20px; padding: 2px 9px; }
 
   #tobb {
@@ -126,6 +129,7 @@
             kinek: t.kinek || "?",
             elso: t.elso || "",
             utolso: t.utolso || "",
+            hatarido: t.hatarido || "",
             kereso: ((t.cim || "") + " " + kulcs).toLowerCase()
           };
         });
@@ -202,6 +206,13 @@
       meta.appendChild(chip);
       var kin = document.createElement("span"); kin.className = "chip kinek"; kin.textContent = t.kinek;
       meta.appendChild(kin);
+      if (t.hatarido) {
+        var hd = document.createElement("span");
+        var nap = napkulonbseg(t.hatarido, frissitve);   // hány nap van hátra
+        hd.className = "hatarido" + (nap < 0 ? " lejart" : nap <= 14 ? " surgos" : "");
+        hd.textContent = "határidő: " + t.hatarido;
+        meta.appendChild(hd);
+      }
       var d = document.createElement("span"); d.className = "datum"; d.textContent = "észlelve: " + t.elso;
       meta.appendChild(d);
       if (t.utolso !== frissitve) {

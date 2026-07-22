@@ -35,12 +35,13 @@ jobs:
         run: |
           git config user.name "palyazatradar-bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add allapot.json docs/adatok.json
+          git add allapot.json docs/adatok.json oldalak.json
+          git add data/pages || true
           git diff --cached --quiet || git commit -m "Állapot frissítés: $(date +%F)"
           git push
 
       - name: Issue nyitása új találatnál
-        if: steps.radar.outputs.new_count != '0' || steps.radar.outputs.first_run == 'true' || steps.radar.outputs.baselined != '0'
+        if: steps.radar.outputs.new_count != '0' || steps.radar.outputs.first_run == 'true' || steps.radar.outputs.baselined != '0' || steps.radar.outputs.changes != '0'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -48,6 +49,8 @@ jobs:
             CIM="Pályázatradar – alapállapot felvéve ($(date +%F))"
           elif [ "${{ steps.radar.outputs.new_count }}" != "0" ]; then
             CIM="Pályázatradar – ${{ steps.radar.outputs.new_count }} új találat ($(date +%F))"
+          elif [ "${{ steps.radar.outputs.changes }}" != "0" ]; then
+            CIM="Pályázatradar – változás a figyelt aloldalakon ($(date +%F))"
           else
             CIM="Pályázatradar – új forrás(ok) alapállapota felvéve ($(date +%F))"
           fi

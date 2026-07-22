@@ -11,6 +11,8 @@ Használat:
 
 import argparse
 import datetime
+import difflib
+import hashlib
 import json
 import os
 import re
@@ -133,9 +135,11 @@ KULCSSZAVAK = [
 # Kizárandó linkek (URL-ben vagy címben)
 KIZARAS = [
     "facebook", "instagram", "youtube", "tiktok", "linkedin", "mailto:",
-    "cookie", "adatved", "adatvédel", "sütik", "sutik", "bejelentkez",
+    "cookie", "adatved", "adatvédel", "adatkezel", "sütik", "sutik", "bejelentkez",
     "impresszum", "login", "wp-login", "regisztracio", "regisztráció",
-    "hirlevel-feliratkozas", "subscribepage",
+    "hirlevel", "hírlevél", "subscribepage",
+    "pályázatírás", "palyazatiras",   # szolgáltatás-hirdetések (palyazatok.org)
+    "kategoria/", "/tema/", "/page/", # lista-/kategória-/lapozó-oldalak
 ]
 
 # Csak az RSS-forrásokra: technikai közlemények kiszűrése (a cím a
@@ -149,6 +153,34 @@ UA = {
 
 TIMEOUT = 25
 MA = datetime.date.today().isoformat()
+
+# Csak az ez UTÁN meghirdetett (megjelent) kiírás számít valódi újdonságnak;
+# a korábbi megjelenésű = "most felfedezett régi tartalom" → csendes rögzítés.
+# Dátum nélküli tétel csak élő (mai vagy jövőbeli) határidővel lehet új.
+UJ_HATAR = "2026-07-20"
+
+# Futásonként legfeljebb ennyi új tétel cikkoldalát töltjük le dúsításhoz;
+# ami e fölött marad, azt kétség esetén újnak tekintjük (nem nyeljük le).
+DUSITAS_LIMIT = 25
+
+# Tömeges-álriasztás védelem: ha egy MÁR ALAPOZOTT forrásnál egyszerre ennél
+# több "új" jönne ÉS ez a forrás találatainak több mint 60%-a, az
+# oldalszerkezet-változás / archívum-előbukkanás → csendes rögzítés.
+BULK_HATAR_DB = 12
+BULK_HATAR_ARANY = 0.6
+
+# Watch-oldalak: csak VÁLTOZÁST figyelünk rajtuk (hash + diff-kivonat).
+WATCH_OLDALAK = [
+    {"nev": "BGA Városi Civil Alap",
+     "url": "https://bgazrt.hu/tamogatasok/varosi-civil-alap/"},
+    {"nev": "NKA miniszteri támogatások",
+     "url": "https://nka.hu/kategoria/kiemelt-kategoriak/palyaztatas/miniszteri-tamogatasok-palyaztatas/"},
+    {"nev": "Norvég Civil Alap főoldal",
+     "url": "https://www.norvegcivilalap.hu/"},
+    {"nev": "Józsefváros hirdetőtábla",
+     "url": "https://jozsefvaros.hu/otthon/hirdetotabla/"},
+]
+OLDAL_CACHE_DIR = "data/pages"      # a watch-oldalak szövegcache-e (diff-hez)
 
 
 # ---------------------------------------------------------------------------
@@ -214,7 +246,7 @@ def linkek_kigyujtese(
             continue
         if any(x in norm.lower() or x in cim.lower() for x in KIZARAS):
             continue
-        if len(cim) < 5:                   # üres/ikonlink → slug a cím helyett
+        if len(cim) < 12:                  # üres/ikon/"Tovább" link → slug a cím helyett
             cim = p.path.rstrip("/").rsplit("/", 1)[-1].replace("-", " ").replace("_", " ")
         # az első (általában legbeszédesebb) címet tartjuk meg
         talalatok.setdefault(norm, cim[:200])
@@ -269,6 +301,177 @@ def hatarido_a_cimben(cim: str) -> str | None:
 
 
 # ---------------------------------------------------------------------------
+# Tétel-dúsítás: megjelenési dátum + határidő a cikkoldalról
+# (a régi palyazat-radar prototípus enrich.py-ának átdolgozása)
+# ---------------------------------------------------------------------------
+
+HONAPOK = {
+    "január": 1, "januar": 1, "február": 2, "februar": 2, "március": 3,
+    "marcius": 3, "április": 4, "aprilis": 4, "május": 5, "majus": 5,
+    "június": 6, "junius": 6, "július": 7, "julius": 7, "augusztus": 8,
+    "szeptember": 9, "október": 10, "oktober": 10, "november": 11,
+    "december": 12,
+}
+HONAP_RE = "|".join(sorted(HONAPOK, key=len, reverse=True))
+
+DATUM_TELJES = re.compile(rf"(20\d{{2}})\.?\s*({HONAP_RE})\s*(\d{{1,2}})\b", re.IGNORECASE)
+DATUM_SZAMOS = re.compile(r"\b(20\d{2})[.\-](?:\s*)(\d{1,2})[.\-](?:\s*)(\d{1,2})\b")
+DATUM_HONAPNAP = re.compile(rf"\b({HONAP_RE})\s*(\d{{1,2}})\b", re.IGNORECASE)
+
+HATARIDO_KULCS = re.compile(
+    r"(határid|hatarid|pályázni|palyazni|benyújt|benyujt|beadás|beadas|"
+    r"jelentkez|éjfél|ejfel|leadás|leadas|deadline)", re.IGNORECASE)
+
+META_DATUM_SELECTOROK = (
+    ("meta[property='article:published_time']", "content"),
+    ("meta[name='article:published_time']", "content"),
+    ("meta[property='og:published_time']", "content"),
+    ("meta[itemprop='datePublished']", "content"),
+    ("time[datetime]", "datetime"),
+)
+
+
+def _iso(ev: int, ho: int, nap: int) -> str | None:
+    try:
+        return datetime.date(ev, ho, nap).isoformat()
+    except ValueError:
+        return None
+
+
+def megjelenes_kinyerese(soup: BeautifulSoup) -> str | None:
+    """A cikk megjelenési dátuma: meta tagek, majd látható magyar dátum."""
+    for sel, attr in META_DATUM_SELECTOROK:
+        el = soup.select_one(sel)
+        if el and el.get(attr):
+            m = re.match(r"(\d{4})-(\d{2})-(\d{2})", el[attr])
+            if m:
+                return _iso(int(m[1]), int(m[2]), int(m[3]))
+    szoveg = soup.get_text(" ", strip=True)[:4000]
+    m = DATUM_TELJES.search(szoveg)
+    if m:
+        return _iso(int(m[1]), HONAPOK[m[2].lower()], int(m[3]))
+    m = DATUM_SZAMOS.search(szoveg)
+    if m:
+        return _iso(int(m[1]), int(m[2]), int(m[3]))
+    return None
+
+
+def _datum_jeloltek(ablak: str, megj: datetime.date | None) -> list[tuple[int, str]]:
+    """(pozíció, ISO-dátum) párok az ablakban talált dátumokból."""
+    ki: list[tuple[int, str]] = []
+    for m in DATUM_TELJES.finditer(ablak):
+        d = _iso(int(m[1]), HONAPOK[m[2].lower()], int(m[3]))
+        if d:
+            ki.append((m.start(), d))
+    for m in DATUM_SZAMOS.finditer(ablak):
+        d = _iso(int(m[1]), int(m[2]), int(m[3]))
+        if d:
+            ki.append((m.start(), d))
+    if megj:  # év nélküli dátum ("október 22."): a megjelenés évéből következtetünk
+        lefedve = {p for p, _ in ki}
+        for m in DATUM_HONAPNAP.finditer(ablak):
+            if any(abs(m.start() - p) < 12 for p in lefedve):
+                continue  # egy évszámos dátum hónap-nap része
+            ho, nap = HONAPOK[m[1].lower()], int(m[2])
+            ev = megj.year + (1 if (ho, nap) < (megj.month, megj.day) else 0)
+            d = _iso(ev, ho, nap)
+            if d:
+                ki.append((m.start(), d))
+    return ki
+
+
+def hatarido_kinyerese(szoveg: str, megjelent: str | None) -> str | None:
+    """Határidő: a kulcsszóhoz legközelebbi dátum a ±120 karakteres környezetben;
+    a megjelenésnél korábbi dátum nem lehet határidő."""
+    megj: datetime.date | None = None
+    if megjelent:
+        try:
+            megj = datetime.date.fromisoformat(megjelent)
+        except ValueError:
+            pass
+    legjobb: tuple[int, str] | None = None  # (távolság, ISO-dátum)
+    for km in HATARIDO_KULCS.finditer(szoveg):
+        lo, hi = max(0, km.start() - 120), min(len(szoveg), km.end() + 120)
+        kulcs_poz = km.start() - lo
+        for poz, d in _datum_jeloltek(szoveg[lo:hi], megj):
+            if megj and datetime.date.fromisoformat(d) < megj:
+                continue
+            tav = abs(poz - kulcs_poz)
+            if legjobb is None or tav < legjobb[0]:
+                legjobb = (tav, d)
+    return legjobb[1] if legjobb else None
+
+
+def tetel_dusitas(html: str) -> tuple[str | None, str | None]:
+    """(megjelent, hatarido) a cikkoldal HTML-jéből."""
+    soup = BeautifulSoup(html, "html.parser")
+    megjelent = megjelenes_kinyerese(soup)
+    if megjelent and megjelent > MA:
+        megjelent = None  # jövőbeli "megjelenés" = félreértelmezett dátum
+    hatarido = hatarido_kinyerese(soup.get_text(" ", strip=True)[:15000], megjelent)
+    return megjelent, hatarido
+
+
+# ---------------------------------------------------------------------------
+# Watch-oldalak: normalizált szöveg + hash + diff-kivonat
+# (a régi prototípus changewatch.py-ának átdolgozása)
+# ---------------------------------------------------------------------------
+
+OLDAL_ZAJ_RE = re.compile(
+    r"(20\d\d\.\s*\w+\s*\d+\.|\d{4}-\d{2}-\d{2})|©.*|cookie|süti", re.I)
+
+
+def _oldal_slug(url: str) -> str:
+    return hashlib.sha256(url.encode()).hexdigest()[:16]
+
+
+def oldal_normalizalas(html: str) -> str:
+    soup = BeautifulSoup(html, "html.parser")
+    for tag in soup(["script", "style", "noscript", "header", "footer", "nav", "form"]):
+        tag.decompose()
+    sorok = []
+    for nyers in soup.get_text("\n").splitlines():
+        sor = re.sub(r"\s+", " ", nyers).strip()
+        if len(sor) < 4 or OLDAL_ZAJ_RE.fullmatch(sor):
+            continue
+        sorok.append(sor)
+    return "\n".join(sorok)[:60_000]
+
+
+def oldal_valtozas(url: str, html: str, oldal_allapot: dict, cache_dir: str) -> dict | None:
+    """Ha változott az oldal: {'url','uj_sorok','torolt_sorok'}; egyébként None.
+    Az oldal_allapot dictet helyben frissíti, a szövegcache-t lemezre írja.
+    Első látáskor (nincs korábbi hash) csendben rögzít."""
+    szoveg = oldal_normalizalas(html)
+    ujj = hashlib.sha256(szoveg.encode()).hexdigest()
+    elozo = oldal_allapot.get(url)
+    os.makedirs(cache_dir, exist_ok=True)
+    cache = os.path.join(cache_dir, f"{_oldal_slug(url)}.txt")
+
+    valtozas = None
+    if elozo and elozo.get("hash") != ujj:
+        regi = ""
+        if os.path.exists(cache):
+            with open(cache, encoding="utf-8") as f:
+                regi = f.read()
+        diff = [
+            ln for ln in difflib.unified_diff(
+                regi.splitlines(), szoveg.splitlines(), lineterm="", n=0)
+            if ln.startswith(("+", "-")) and not ln.startswith(("+++", "---"))
+        ]
+        valtozas = {
+            "url": url,
+            "uj_sorok": [ln[1:].strip() for ln in diff if ln.startswith("+")][:12],
+            "torolt_sorok": [ln[1:].strip() for ln in diff if ln.startswith("-")][:6],
+        }
+
+    oldal_allapot[url] = {"hash": ujj}
+    with open(cache, "w", encoding="utf-8") as f:
+        f.write(szoveg)
+    return valtozas
+
+
+# ---------------------------------------------------------------------------
 # Fő futás
 # ---------------------------------------------------------------------------
 
@@ -279,6 +482,10 @@ def main() -> int:
     ap.add_argument("--adatok", default=os.path.join("docs", "adatok.json"),
                     help="a weboldal adatfájlja (cím+forrás+dátumok); "
                          "teszthez adj meg tesztfájlt, pl. teszt_adatok.json!")
+    ap.add_argument("--oldalak", default="oldalak.json",
+                    help="a watch-oldalak hash-állapota; teszthez tesztfájlt adj meg!")
+    ap.add_argument("--cache", default=OLDAL_CACHE_DIR,
+                    help="a watch-oldalak szövegcache mappája")
     args = ap.parse_args()
 
     elso_futas = not os.path.exists(args.state)
@@ -296,10 +503,19 @@ def main() -> int:
         except Exception as e:
             print(f"  ! adatok.json nem olvasható, újrakezdem: {e}", file=sys.stderr)
 
+    oldal_allapot: dict = {}
+    if os.path.exists(args.oldalak):
+        try:
+            with open(args.oldalak, encoding="utf-8") as f:
+                oldal_allapot = json.load(f)
+        except Exception as e:
+            print(f"  ! oldalak.json nem olvasható, újrakezdem: {e}", file=sys.stderr)
+
     lista_urlek = {normalizal(u) for f_ in FORRASOK for u in f_["urls"]}
 
-    ujak: list[tuple[str, str, str]] = []   # (forrás, cím, kulcs/url)
+    jeloltek: list[dict] = []               # új tételek dúsítás/cutoff-döntés előtt
     alapozott: list[tuple[str, int]] = []   # (forrás, tételszám) – új forrás csendes alapfelvétele
+    tomeges: list[tuple[str, int]] = []     # (forrás, tételszám) – bulk-guard által elnyelve
     hibas_forrasok: list[str] = []
     osszes_latott = 0
 
@@ -332,17 +548,22 @@ def main() -> int:
         # különben pl. a PAFI ~60 tétele egyszerre árasztaná el az Issue-t.
         alap_kulcs = f"forras-alap:{forras['nev']}"
         forras_uj = alap_kulcs not in allapot
-        uj_tetelszam = 0
-        for kulcs, cim in talalatok.items():
-            if kulcs not in allapot:
-                allapot[kulcs] = MA
-                uj_tetelszam += 1
-                if not elso_futas and not forras_uj:
-                    ujak.append((forras["nev"], cim, kulcs))
+        friss = [(k, c) for k, c in talalatok.items() if k not in allapot]
+        for kulcs, _cim in friss:
+            allapot[kulcs] = MA
+        # Bulk-guard: már alapozott forrásnál a hirtelen tömeges "új" nem
+        # újdonság, hanem oldalszerkezet-változás / archívum-előbukkanás.
+        bulk = (not forras_uj and len(friss) > BULK_HATAR_DB
+                and talalatok and len(friss) / len(talalatok) > BULK_HATAR_ARANY)
         if forras_uj:
             allapot[alap_kulcs] = MA
             if not elso_futas:
-                alapozott.append((forras["nev"], uj_tetelszam))
+                alapozott.append((forras["nev"], len(friss)))
+        elif bulk:
+            tomeges.append((forras["nev"], len(friss)))
+        elif not elso_futas:
+            jeloltek.extend(
+                {"forras": forras["nev"], "cim": c, "kulcs": k} for k, c in friss)
         # Weboldal-adatok frissítése (minden látott tételre, nem csak az újakra)
         for kulcs, cim in talalatok.items():
             t = adatok["tetelek"].setdefault(kulcs, {})
@@ -352,6 +573,59 @@ def main() -> int:
             t["kinek"] = forras["kinek"]
             t["elso"] = allapot.get(kulcs, MA)
             t["utolso"] = MA
+
+    # ---- dúsítás + "valódi újdonság" döntés (UJ_HATAR cutoff) ----
+    ujak: list[dict] = []
+    regi_tartalom = 0
+    dusitva = 0
+    for j in jeloltek:
+        kulcs = j["kulcs"]
+        megjelent = hatarido = None
+        letoltes_ok = None                 # None: nem próbáltuk / nem URL
+        if kulcs.startswith("http") and dusitva < DUSITAS_LIMIT:
+            dusitva += 1
+            html = fetch(kulcs)
+            letoltes_ok = html is not None
+            if html:
+                try:
+                    megjelent, hatarido = tetel_dusitas(html)
+                except Exception as e:      # noqa: BLE001
+                    print(f"  ! Dúsítási hiba: {kulcs} ({e})", file=sys.stderr)
+        j["megjelent"], j["hatarido"] = megjelent, hatarido
+        t = adatok["tetelek"].get(kulcs)
+        if t is not None:
+            if megjelent:
+                t["megjelent"] = megjelent
+            if hatarido:
+                t["hatarido"] = hatarido
+        # Döntés: ha nem tudtuk megnézni az oldalt (limit/hiba/nem URL),
+        # kétség esetén ÚJ; ha megnéztük: megjelent >= UJ_HATAR, vagy
+        # dátum nélkül élő határidő kell.
+        if letoltes_ok:
+            valodi = ((megjelent and megjelent >= UJ_HATAR)
+                      or (not megjelent and hatarido and hatarido >= MA))
+        else:
+            valodi = True
+        if valodi:
+            ujak.append(j)
+        else:
+            regi_tartalom += 1
+
+    # ---- watch-oldalak: csak változásfigyelés ----
+    valtozasok: list[dict] = []
+    for w in WATCH_OLDALAK:
+        print(f"» [watch] {w['nev']}")
+        html = fetch(w["url"])
+        if html is None:
+            hibas_forrasok.append(f"{w['nev']} (watch)")
+            continue
+        ch = oldal_valtozas(w["url"], html, oldal_allapot, args.cache)
+        if ch:
+            ch["nev"] = w["nev"]
+            valtozasok.append(ch)
+
+    with open(args.oldalak, "w", encoding="utf-8") as f:
+        json.dump(oldal_allapot, f, ensure_ascii=False, indent=1)
 
     with open(args.state, "w", encoding="utf-8") as f:
         json.dump(allapot, f, ensure_ascii=False, indent=2)
@@ -374,26 +648,50 @@ def main() -> int:
         uj_szam = len(ujak)
         sorok.append(f"**{uj_szam} új találat**")
         aktualis_forras = None
-        for forras_nev, cim, kulcs in ujak:
-            if forras_nev != aktualis_forras:
-                sorok += ["", f"## {forras_nev}", ""]
-                aktualis_forras = forras_nev
-            hatarido = hatarido_a_cimben(cim)
-            extra = f" — ⚠️ **{hatarido}**" if hatarido else ""
-            if kulcs.startswith("nka-kollegium:"):
-                sorok.append(f"- **{cim}**{extra} (nka.hu → Kollégiumok felhívásai)")
+        for j in ujak:
+            if j["forras"] != aktualis_forras:
+                sorok += ["", f"## {j['forras']}", ""]
+                aktualis_forras = j["forras"]
+            resz = []
+            if j.get("hatarido"):
+                resz.append(f"⚠️ **határidő: {j['hatarido']}**")
+            elif hatarido_a_cimben(j["cim"]):
+                resz.append(f"⚠️ **{hatarido_a_cimben(j['cim'])}**")
+            if j.get("megjelent"):
+                resz.append(f"megjelent: {j['megjelent']}")
+            extra = (" — " + ", ".join(resz)) if resz else ""
+            if j["kulcs"].startswith("nka-kollegium:"):
+                sorok.append(f"- **{j['cim']}**{extra} (nka.hu → Kollégiumok felhívásai)")
             else:
-                sorok.append(f"- [{cim}]({kulcs}){extra}")
-        if any("palyazatok.org" in k for _, _, k in ujak):
+                sorok.append(f"- [{j['cim']}]({j['kulcs']}){extra}")
+        if any("palyazatok.org" in j["kulcs"] for j in ujak):
             sorok += ["", "_A KKV-találatok hivatalos részletei a palyazat.gov.hu oldalon._"]
     else:
         uj_szam = 0
         sorok.append("Nincs új kiírás.")
 
+    if valtozasok:
+        sorok += ["", "## Megváltozott figyelt aloldalak", ""]
+        for ch in valtozasok:
+            sorok.append(f"- [{ch['nev']}]({ch['url']})")
+            for s in ch.get("uj_sorok", [])[:5]:
+                sorok.append(f"  - + {s}")
+
     if alapozott:
         sorok += ["", "## Forrás-alapállapot felvéve", ""]
         for nev, db in alapozott:
             sorok.append(f"- {nev}: {db} tétel csendben rögzítve — mostantól csak az újakat jelezzük")
+
+    megjegyzesek = []
+    megjegyzesek += [f"{nev}: {db} tétel egyszerre jött volna (oldalszerkezet-változás gyanú) "
+                     "— csendben rögzítve, nem riasztunk" for nev, db in tomeges]
+    if regi_tartalom:
+        megjegyzesek.append(
+            f"{regi_tartalom} tétel {UJ_HATAR} előtti megjelenésű vagy lejárt/dátum "
+            "nélküli (régi tartalom) — csendben rögzítve, a weboldalon látható")
+    if megjegyzesek:
+        sorok += ["", "## Megjegyzések", ""]
+        sorok += [f"- {m}" for m in megjegyzesek]
 
     if hibas_forrasok:
         sorok += ["", f"_Nem elérhető forrás(ok): {', '.join(hibas_forrasok)}_"]
@@ -410,6 +708,7 @@ def main() -> int:
             f.write(f"new_count={uj_szam}\n")
             f.write(f"first_run={'true' if elso_futas else 'false'}\n")
             f.write(f"baselined={len(alapozott)}\n")
+            f.write(f"changes={len(valtozasok)}\n")
 
     return 0
 

@@ -44,10 +44,14 @@ az aggregátor a proxy; a hivatalos részletek mindig a palyazat.gov.hu-n.
 
 - `radar.py` — letölti a 13 forrást, kigyűjti a linkeket, kulcsszavakra szűr
   (pályáz/felhív/kiírás/grant/call/támogat/ösztöndíj/funding — a domain nem számít),
-  normalizálja az URL-eket (utm_*, fbclid, token, hash törlése).
+  normalizálja az URL-eket (utm_*, fbclid, token, hash törlése). Az új találatok
+  cikkoldaláról kinyeri a megjelenési dátumot és a beadási határidőt; csak a
+  2026-07-20 után megjelent kiírás számít valódi újdonságnak (a régebbi csendben
+  rögzül). Tömeges-álriasztás védelem és figyelt aloldalak (változás-diff) is van.
 - `allapot.json` — melyik tételt mikor láttuk először (a bot commitolja).
-- `docs/` — a weboldal: `index.html` + `adatok.json` (cím, forrás, első/utolsó észlelés;
-  a bot frissíti naponta, GitHub Pages szolgálja ki).
+- `docs/` — a weboldal: `index.html` + `adatok.json` (cím, forrás, első/utolsó észlelés,
+  megjelenés + határidő; a bot frissíti naponta, GitHub Pages szolgálja ki).
+- `oldalak.json` + `data/pages/` — a figyelt aloldalak változás-állapota (a bot kezeli).
 - `report.md` — az adott futás riportja (nem kerül a repo-ba).
 - `.github/workflows/radar.yml` — napi cron (05:30 UTC), állapot-commit, Issue-nyitás.
 
