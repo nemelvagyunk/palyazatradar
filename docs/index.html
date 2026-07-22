@@ -53,6 +53,7 @@
   .meta { margin-top: 5px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 12.5px; }
   .chip { background: var(--acc-soft); color: var(--acc); border-radius: 20px; padding: 2px 9px; }
   .chip.kinek { background: var(--regi-bg); color: var(--mut); }
+  .chip.pontos { background: #e9f0e4; color: #3f6b2a; }   /* tételes jogosultság */
   .datum { color: var(--mut); }
   .uj { background: var(--uj-bg); color: var(--uj-ink); border-radius: 20px; padding: 2px 9px; font-weight: 700; }
   .hatarido { color: #7a4a12; background: #fdf3e0; border-radius: 20px; padding: 2px 9px; }
@@ -139,6 +140,7 @@
             elso: t.elso || "",
             utolso: t.utolso || "",
             hatarido: t.hatarido || "",
+            palyazhat: t.palyazhat || null,
             kereso: ((t.cim || "") + " " + kulcs).toLowerCase()
           };
         });
@@ -169,13 +171,20 @@
     });
   }
 
-  // Kinek-szűrő: kategória-alapú, a vegyes címkék ("kft + egyesület",
-  // "klubtámogatás") mindkét kategóriában megjelennek.
+  // Kinek-szűrő: ha a kiírás szövegéből kiolvastuk a jogosultakat (palyazhat),
+  // az számít; különben a forrás besorolása a fallback (vegyes címkék
+  // mindkét kategóriában).
   function kinekOk(t, valasztott) {
     if (!valasztott) return true;
+    if (t.palyazhat && t.palyazhat.length) {
+      return t.palyazhat.indexOf(valasztott === "kft" ? "vallalkozas" : "civil") !== -1;
+    }
     if (valasztott === "kft") return /kft|klub/i.test(t.kinek);
     return /egyes|civil|klub/i.test(t.kinek);   // "civil"
   }
+
+  var PALYAZHAT_CIMKE = { civil: "civil/egyesület", vallalkozas: "vállalkozás",
+                          onkormanyzat: "önkormányzat", maganszemely: "magánszemély" };
 
   function statFrissit() {
     var aktualis = mind.filter(function (t) { return t.utolso === frissitve; }).length;
@@ -217,8 +226,17 @@
       }
       var chip = document.createElement("span"); chip.className = "chip"; chip.textContent = t.forras;
       meta.appendChild(chip);
-      var kin = document.createElement("span"); kin.className = "chip kinek"; kin.textContent = t.kinek;
-      meta.appendChild(kin);
+      if (t.palyazhat && t.palyazhat.length) {
+        var po = document.createElement("span"); po.className = "chip pontos";
+        po.textContent = "pályázhat: " + t.palyazhat.map(function (p) {
+          return PALYAZHAT_CIMKE[p] || p;
+        }).join(", ");
+        po.title = "A kiírás szövegéből kiolvasva";
+        meta.appendChild(po);
+      } else {
+        var kin = document.createElement("span"); kin.className = "chip kinek"; kin.textContent = t.kinek;
+        meta.appendChild(kin);
+      }
       if (t.hatarido) {
         var hd = document.createElement("span");
         var nap = napkulonbseg(t.hatarido, frissitve);   // hány nap van hátra

@@ -163,6 +163,12 @@ UJ_HATAR = "2026-07-20"
 # ami e fölött marad, azt kétség esetén újnak tekintjük (nem nyeljük le).
 DUSITAS_LIMIT = 25
 
+# Háttér-dúsítás: futásonként ennyi RÉGEBBI (még nem dúsított) tétel oldalát
+# nézzük meg jogosultság/határidő ügyben — a teljes állomány kb. egy hónap
+# alatt ér be. 10 egymást követő letöltési hiba után leállunk (hálózati gond).
+HATTER_DUSITAS_LIMIT = 100
+HATTER_HIBA_STOP = 10
+
 # Tömeges-álriasztás védelem: ha egy MÁR ALAPOZOTT forrásnál egyszerre ennél
 # több "új" jönne ÉS ez a forrás találatainak több mint 60%-a, az
 # oldalszerkezet-változás / archívum-előbukkanás → csendes rögzítés.
@@ -402,14 +408,57 @@ def hatarido_kinyerese(szoveg: str, megjelent: str | None) -> str | None:
     return legjobb[1] if legjobb else None
 
 
-def tetel_dusitas(html: str) -> tuple[str | None, str | None]:
-    """(megjelent, hatarido) a cikkoldal HTML-jéből."""
+# Jogosultság-felismerés: a "pályázók köre / pályázhat / jogosult" kontextus
+# környezetében említett szervezettípusok. Csak kontextusban keresünk, mert
+# pl. az "egyesület" szó bárhol előfordulhat (szervezetnevekben is).
+JOGOSULT_KULCS = re.compile(
+    r"(pályázók köre|palyazok kore|pályázhat|palyazhat|pályázatot nyújthat|"
+    r"jogosult|nyújthatnak be|nyujthatnak be|benyújtására|benyujtasara|"
+    r"kedvezményezett|kedvezmenyezett|célcsoport|celcsoport|"
+    r"igényelhet|igenyelhet|jelentkezhet)", re.IGNORECASE)
+
+JOGOSULT_KATEGORIAK = {
+    "civil": re.compile(
+        r"(civil szervezet|egyesület|egyesulet|alapítvány|alapitvany|"
+        r"nonprofit|non-profit|közhasznú|kozhasznu|\bNGO\b)", re.IGNORECASE),
+    "vallalkozas": re.compile(
+        r"(vállalkoz|vallalkoz|gazdasági társaság|gazdasagi tarsasag|"
+        r"\bkft\b|\bzrt\b|\bkkv\b|mikro-?\s*,?\s*kis|\bcég\w*|\bceg\w*)",
+        re.IGNORECASE),
+    "onkormanyzat": re.compile(r"(önkormányzat|onkormanyzat)", re.IGNORECASE),
+    "maganszemely": re.compile(
+        r"(magánszemély|maganszemely|természetes személy|termeszetes szemely|"
+        r"\bhallgató|\bhallgato|\bdiák\w*|\bdiak\w*)", re.IGNORECASE),
+}
+
+
+JOGOSULT_CIMKEK = {"civil": "civil/egyesület", "vallalkozas": "vállalkozás",
+                   "onkormanyzat": "önkormányzat", "maganszemely": "magánszemély"}
+
+
+def jogosultsag_kinyerese(szoveg: str) -> list[str]:
+    """A jogosultsági kulcsszavak környezetében (−80/+300 karakter) említett
+    szervezettípusok, rendezve. Üres lista = nem felismerhető."""
+    talalt: set[str] = set()
+    for km in JOGOSULT_KULCS.finditer(szoveg):
+        lo, hi = max(0, km.start() - 80), min(len(szoveg), km.end() + 300)
+        ablak = szoveg[lo:hi]
+        for nev, minta in JOGOSULT_KATEGORIAK.items():
+            if minta.search(ablak):
+                talalt.add(nev)
+    return sorted(talalt)
+
+
+def tetel_dusitas(html: str) -> tuple[str | None, str | None, list[str]]:
+    """(megjelent, hatarido, palyazhat) a cikkoldal HTML-jéből."""
     soup = BeautifulSoup(html, "html.parser")
     megjelent = megjelenes_kinyerese(soup)
     if megjelent and megjelent > MA:
         megjelent = None  # jövőbeli "megjelenés" = félreértelmezett dátum
-    hatarido = hatarido_kinyerese(soup.get_text(" ", strip=True)[:15000], megjelent)
-    return megjelent, hatarido
+    szoveg = soup.get_text(" ", strip=True)[:15000]
+    hatarido = hatarido_kinyerese(szoveg, megjelent)
+    palyazhat = jogosultsag_kinyerese(szoveg)
+    return megjelent, hatarido, palyazhat
 
 
 # ---------------------------------------------------------------------------
@@ -577,27 +626,32 @@ def main() -> int:
     # ---- dúsítás + "valódi újdonság" döntés (UJ_HATAR cutoff) ----
     ujak: list[dict] = []
     regi_tartalom = 0
-    dusitva = 0
+    dusitas_szam = 0
     for j in jeloltek:
         kulcs = j["kulcs"]
         megjelent = hatarido = None
+        palyazhat: list[str] = []
         letoltes_ok = None                 # None: nem próbáltuk / nem URL
-        if kulcs.startswith("http") and dusitva < DUSITAS_LIMIT:
-            dusitva += 1
+        if kulcs.startswith("http") and dusitas_szam < DUSITAS_LIMIT:
+            dusitas_szam += 1
             html = fetch(kulcs)
             letoltes_ok = html is not None
             if html:
                 try:
-                    megjelent, hatarido = tetel_dusitas(html)
+                    megjelent, hatarido, palyazhat = tetel_dusitas(html)
                 except Exception as e:      # noqa: BLE001
                     print(f"  ! Dúsítási hiba: {kulcs} ({e})", file=sys.stderr)
-        j["megjelent"], j["hatarido"] = megjelent, hatarido
+        j["megjelent"], j["hatarido"], j["palyazhat"] = megjelent, hatarido, palyazhat
         t = adatok["tetelek"].get(kulcs)
         if t is not None:
+            if letoltes_ok is not None:
+                t["dusitva"] = MA
             if megjelent:
                 t["megjelent"] = megjelent
             if hatarido:
                 t["hatarido"] = hatarido
+            if palyazhat:
+                t["palyazhat"] = palyazhat
         # Döntés: ha nem tudtuk megnézni az oldalt (limit/hiba/nem URL),
         # kétség esetén ÚJ; ha megnéztük: megjelent >= UJ_HATAR, vagy
         # dátum nélkül élő határidő kell.
@@ -610,6 +664,40 @@ def main() -> int:
             ujak.append(j)
         else:
             regi_tartalom += 1
+
+    # ---- háttér-dúsítás: régebbi, még nem dúsított tételek fokozatosan ----
+    varo = [k for k, t in adatok["tetelek"].items()
+            if not t.get("dusitva") and k.startswith("http")]
+    varo.sort(key=lambda k: adatok["tetelek"][k].get("elso") or "", reverse=True)
+    varo.sort(key=lambda k: adatok["tetelek"][k].get("utolso") != MA)  # most listázottak elöl
+    hatter_szam = hatter_hiba = 0
+    for kulcs in varo[:HATTER_DUSITAS_LIMIT]:
+        if hatter_hiba >= HATTER_HIBA_STOP:
+            print(f"  ! Háttér-dúsítás leállítva ({hatter_hiba} egymást követő hiba)",
+                  file=sys.stderr)
+            break
+        t = adatok["tetelek"][kulcs]
+        html = fetch(kulcs)
+        t["dusitva"] = MA
+        hatter_szam += 1
+        if html is None:
+            hatter_hiba += 1
+            continue
+        hatter_hiba = 0
+        try:
+            megjelent, hatarido, palyazhat = tetel_dusitas(html)
+        except Exception as e:              # noqa: BLE001
+            print(f"  ! Dúsítási hiba: {kulcs} ({e})", file=sys.stderr)
+            continue
+        if megjelent and "megjelent" not in t:
+            t["megjelent"] = megjelent
+        if hatarido and "hatarido" not in t:
+            t["hatarido"] = hatarido
+        if palyazhat:
+            t["palyazhat"] = palyazhat
+    if hatter_szam:
+        hatra = max(0, len(varo) - hatter_szam)
+        print(f"» Háttér-dúsítás: {hatter_szam} tétel feldolgozva, {hatra} van hátra")
 
     # ---- watch-oldalak: csak változásfigyelés ----
     valtozasok: list[dict] = []
@@ -659,6 +747,9 @@ def main() -> int:
                 resz.append(f"⚠️ **{hatarido_a_cimben(j['cim'])}**")
             if j.get("megjelent"):
                 resz.append(f"megjelent: {j['megjelent']}")
+            if j.get("palyazhat"):
+                resz.append("pályázhat: " + ", ".join(
+                    JOGOSULT_CIMKEK.get(p, p) for p in j["palyazhat"]))
             extra = (" — " + ", ".join(resz)) if resz else ""
             if j["kulcs"].startswith("nka-kollegium:"):
                 sorok.append(f"- **{j['cim']}**{extra} (nka.hu → Kollégiumok felhívásai)")
