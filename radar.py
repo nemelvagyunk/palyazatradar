@@ -108,13 +108,19 @@ FORRASOK = [
         "kulcsszo_nelkul": True,
     },
     {
-        # A palyazat.gov.hu főoldala JS-alapú (géppel olvashatatlan), de a
-        # hivatalos RSS-e statikus XML → azt olvassuk. Vegyes feed: új/módosult
-        # felhívások + karbantartási közlemények (utóbbiakat az RSS_KIZARAS szűri).
-        "nev": "Széchenyi Terv Plusz (palyazat.gov.hu RSS)",
-        "urls": ["https://www.palyazat.gov.hu/rss.xml"],
+        # A palyazat.gov.hu-t GitHub-runnerről nem lehet elérni (geo-blokk,
+        # lásd CLAUDE.md) → a palyazatok.org kategóriái a proxy ide is.
+        "nev": "Civil (palyazatok.org)",
+        "urls": ["https://palyazatok.org/palyazatok-civil-szervezeteknek/"],
+        "kinek": "egyesület",
+    },
+    {
+        "nev": "Kulturális / művészeti (palyazatok.org)",
+        "urls": [
+            "https://palyazatok.org/kulturalis-palyazatok/",
+            "https://palyazatok.org/muveszeti-palyazatok/",
+        ],
         "kinek": "kft + egyesület",
-        "special": "rss",
     },
 ]
 

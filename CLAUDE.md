@@ -13,7 +13,7 @@ GitHub Actions futtatja naponta; új kiírásnál Issue-t nyit.
 
 | Fájl | Szerep |
 |------|--------|
-| `radar.py` | Minden logika egyben: `FORRASOK` (12 forrás), letöltés (requests), linkkigyűjtés (BeautifulSoup), `KULCSSZAVAK`-szűrés, URL-normalizálás, NKA- és RSS-speciális kezelés, forrásonkénti csendes alapállapot-felvétel, allapot-diff, `report.md` írás, `GITHUB_OUTPUT`-ba `new_count` + `first_run` + `baselined` |
+| `radar.py` | Minden logika egyben: `FORRASOK` (13 forrás), letöltés (requests), linkkigyűjtés (BeautifulSoup), `KULCSSZAVAK`-szűrés, URL-normalizálás, NKA- és RSS-speciális kezelés, forrásonkénti csendes alapállapot-felvétel, allapot-diff, `report.md` írás, `GITHUB_OUTPUT`-ba `new_count` + `first_run` + `baselined` |
 | `.github/workflows/radar.yml` | Cron: `30 5 * * *` (UTC!) + kézi `workflow_dispatch`; jogok: `contents: write`, `issues: write`; lépések: futtatás → allapot.json commit/push → Issue nyitás `gh issue create`-tel |
 | `allapot.json` | Kulcs: normalizált URL, `nka-kollegium:<név>` vagy `forras-alap:<forrásnév>` (utóbbi: a forrás alapállapota már felvéve); érték: első észlelés dátuma. **A bot commitolja naponta** — kézzel ne szerkeszd, munka előtt mindig `git pull`! |
 | `report.md` | Futásonkénti riport, gitignore-olva |
@@ -30,7 +30,7 @@ GitHub Actions futtatja naponta; új kiírásnál Issue-t nyit.
 
 - **A repo publikus** — érzékeny adat (üzleti fájlok, kulcsok, tokenek) soha ne kerüljön bele.
 - **A szülőmappa ("Ovi kultúrális központ") NEM git repo, és ne is legyen az.** 2026-07-22-én incidens volt: az egész projektmappa (könyvelés, pénzügyi modell) véletlenül felment egy publikus "radar1" repóba — törölve lett, a gyökér `.git` eltávolítva. Ne ismételjük meg.
-- `palyazat.gov.hu` HTML-je JS-alapú, géppel olvashatatlan, **de a hivatalos RSS-e (`/rss.xml`) statikus XML** — 2026-07-22 óta ez külön forrás (`special: "rss"`). A feed vegyes (új/módosult felhívások + karbantartási közlemények); a karbantartásokat az `RSS_KIZARAS` szűri, a kulcsszó-szűrés RSS-nél CSAK a címre megy (a link útvonala mindig tartalmazza a "palyazat" szót). A `palyazatok.org/kkv-palyazatok/` aggregátor-proxy emellett megmaradt.
+- `palyazat.gov.hu`: a HTML JS-alapú, géppel olvashatatlan. Van hivatalos RSS-e (`/rss.xml`, statikus XML), **de az oldal geo-blokkolja a külföldi IP-ket** — GitHub-hostolt runnerről `Connection refused` (2026-07-22-én kétszer igazolva; magyar IP-ről HTTP 200). **Ne próbáld újra Actions-ből** — helyette a `palyazatok.org` kategóriák a proxy (kkv + civil + kulturális/művészeti). A `rss_tetelek()` feldolgozó + `RSS_KIZARAS` a kódban maradt (`special: "rss"`), más feedhez újrahasznosítható.
 - `pafi.hu`: aggregátor, minden `/p/` útvonalú link pályázat, de a címben gyakran nincs kulcsszó → forrás-opciók: `utvonal_elotag: "/p/"` + `kulcsszo_nelkul: True` (a kulcsszó-szűrés kikapcsolva, az előtag szűr). Az első 3 listaoldalt figyeljük (legfrissebbek elöl).
 - **Új forrás felvétele biztonságos:** az első sikeres beolvasás csendes — a tételek `allapot.json`-ba kerülnek, de nem jelennek meg találatként, és a forrás `forras-alap:<név>` markert kap. Így egy új forrás nem árasztja el az Issue-t. (Az Issue ilyenkor is nyílik, „alapállapot felvéve" címmel.)
 - `kultura.kreativeuropa.hu` iso-8859-2 kódolású — a `fetch()` kezeli, ne "javítsd ki".
