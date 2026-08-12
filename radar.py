@@ -244,9 +244,12 @@ UJ_HATAR = "2026-07-20"
 DUSITAS_LIMIT = 25
 
 # Háttér-dúsítás: futásonként ennyi RÉGEBBI (még nem dúsított) tétel oldalát
-# nézzük meg jogosultság/határidő ügyben — a teljes állomány kb. egy hónap
-# alatt ér be. 10 egymást követő letöltési hiba után leállunk (hálózati gond).
-HATTER_DUSITAS_LIMIT = 100
+# nézzük meg jogosultság/határidő ügyben. 2026-08-12-én 100-ról 300-ra emelve:
+# egy teljes nullázás után különben 2-3 futás kell, mire minden tételnek
+# meglesz a határideje (201 tételből az első menet után 103 volt kész).
+# Normál üzemben ennek nincs ára: ilyenkor alig van feldolgozatlan tétel.
+# 10 egymást követő letöltési hiba után leállunk (hálózati gond).
+HATTER_DUSITAS_LIMIT = 300
 HATTER_HIBA_STOP = 10
 # Udvariassági szünet a háttér-letöltések között (a palyazatok.org 415-tel
 # rate-limitel burst-nél); teszthez RADAR_SLEEP=0 környezeti változó.
