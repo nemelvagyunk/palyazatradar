@@ -393,6 +393,8 @@ def linkek_kigyujtese(
             continue
         if adminisztrativ(cim, norm):      # GYIK/ÁSZF/útmutató – nem kiírás
             continue
+        if eredmenyhirdetes(cim, norm):    # nyerteslista – már lezajlott
+            continue
         if len(cim) < 12:                  # üres/ikon/"Tovább" link → slug a cím helyett
             cim = p.path.rstrip("/").rsplit("/", 1)[-1].replace("-", " ").replace("_", " ")
         # az első (általában legbeszédesebb) címet tartjuk meg
@@ -474,7 +476,8 @@ def nka_tetelek(html: str, url: str) -> dict[str, str]:
             continue
         if any(x in cel.lower() or x in cim.lower() for x in KIZARAS):
             continue
-        if munkaajanlat_cim(cim, cel) or adminisztrativ(cim, cel):
+        if (munkaajanlat_cim(cim, cel) or adminisztrativ(cim, cel)
+                or eredmenyhirdetes(cim, cel)):
             continue
         if len(cim) < 12:
             cim = p.path.rstrip("/").rsplit("/", 1)[-1].replace("-", " ")
@@ -518,7 +521,8 @@ def budapest_tetelek(html: str, url: str) -> dict[str, str]:
         if not cel:
             continue
         kulcs = normalizal(urljoin(url, cel["href"]))
-        if munkaajanlat_cim(cim, kulcs) or adminisztrativ(cim, kulcs):
+        if (munkaajanlat_cim(cim, kulcs) or adminisztrativ(cim, kulcs)
+                or eredmenyhirdetes(cim, kulcs)):
             continue
         hatarido = _elso_datum(cellak[2].get_text(" ", strip=True))
         megjelent = _elso_datum(cellak[3].get_text(" ", strip=True))
@@ -568,7 +572,8 @@ def palyazatok_org_tetelek(html: str, base_url: str) -> dict[str, str]:
             cim = urlparse(norm).path.rstrip("/").rsplit("/", 1)[-1].replace("-", " ")
         if any(x in norm.lower() or x in cim.lower() for x in KIZARAS):
             continue
-        if munkaajanlat_cim(cim, norm) or adminisztrativ(cim, norm):
+        if (munkaajanlat_cim(cim, norm) or adminisztrativ(cim, norm)
+                or eredmenyhirdetes(cim, norm)):
             continue
         talalatok.setdefault(norm, cim[:200])
     return talalatok
@@ -1022,6 +1027,23 @@ ADMIN_UTVONAL = (
 )
 
 
+# Eredményhirdetés = egy már lezajlott pályázat kimenete, nem pályázni való.
+# A CÍM és az URL-slug alapján is felismerjük; a slug ékezet nélküli, ezért
+# minden mintának van ékezetmentes párja is.
+EREDMENY_JEL = re.compile(
+    r"(eredményhirdet|eredmenyhirdet|eredményei\b|eredmenyei\b|"
+    r"eredmények\b|eredmenyek\b|-eredmenyei|-eredmenyek|"
+    r"\bnyertes|döntés született|dontes szuletett|"
+    r"támogatottjai|tamogatottjai|díjazottjai|dijazottjai|"
+    r"lezárult a[z]?\s.{0,40}?(felhívás|pályázat|kiírás)|"
+    r"lezarult a[z]?\s.{0,40}?(felhivas|palyazat|kiiras))", re.IGNORECASE)
+
+
+def eredmenyhirdetes(cim: str, url: str = "") -> bool:
+    """Eredményhirdetés / nyerteslista-e (nem pályázni való kiírás)."""
+    return bool(EREDMENY_JEL.search(f"{cim or ''} {urlparse(url).path}"))
+
+
 def adminisztrativ(cim: str, url: str = "") -> bool:
     """Segédoldal-e (GYIK, ÁSZF, útmutató, „Kapcsolat"), nem pedig kiírás."""
     if ADMIN_CIM.match((cim or "").strip()):
@@ -1313,6 +1335,16 @@ def main() -> int:
                 adatok["tetelek"] = json.load(f).get("tetelek", {})
         except Exception as e:
             print(f"  ! adatok.json nem olvasható, újrakezdem: {e}", file=sys.stderr)
+
+    # Eredményhirdetések takarítása a MEGLÉVŐ állományból is: a gyűjtésnél
+    # már kiesnek, de ami korábban bekerült, azt is ki kell vinni.
+    eredmeny_takaritva = 0
+    for _k in [k for k, t in adatok["tetelek"].items()
+               if eredmenyhirdetes(t.get("cim", ""), k)]:
+        adatok["tetelek"].pop(_k, None)
+        eredmeny_takaritva += 1
+    if eredmeny_takaritva:
+        print(f"» {eredmeny_takaritva} eredményhirdetés kitakarítva az állományból")
 
     oldal_allapot: dict = {}
     if os.path.exists(args.oldalak):
@@ -1666,6 +1698,10 @@ def main() -> int:
         megjegyzesek.append(
             f"{munka_szurve} álláshirdetés kiszűrve (nem pályázat) — a weboldalra "
             "sem kerül fel, és többé nem foglalkozunk vele")
+    if eredmeny_takaritva:
+        megjegyzesek.append(
+            f"{eredmeny_takaritva} eredményhirdetés / nyerteslista eltávolítva "
+            "(nem pályázni való kiírás)")
     if magan_szurve:
         megjegyzesek.append(
             f"{magan_szurve} kiírásra kizárólag magánszemély pályázhat — "
