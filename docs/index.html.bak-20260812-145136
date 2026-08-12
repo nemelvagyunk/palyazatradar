@@ -37,13 +37,6 @@
     font: inherit; background: var(--bg); max-width: 260px;
   }
   .panel label.cb { display: inline-flex; gap: 6px; align-items: center; color: var(--mut); font-size: 13.5px; cursor: pointer; white-space: nowrap; }
-  .hd-szuro {
-    flex: 1 1 100%; margin: 0; border: 1px solid var(--line); border-radius: 8px;
-    padding: 6px 12px 9px; display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center;
-  }
-  .hd-szuro legend { color: var(--mut); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; padding: 0 4px; }
-  .hd-szuro label.cb { font-size: 13.5px; }
-  .hd-szuro input:focus-visible { outline: 2px solid var(--acc); outline-offset: 1px; }
   .panel input:focus, .panel select:focus { outline: 2px solid var(--acc); outline-offset: 1px; border-color: var(--acc); }
 
   #talalatszam { color: var(--mut); font-size: 13.5px; margin: 14px 2px 8px; }
@@ -99,12 +92,6 @@
     </select>
     <label class="cb"><input type="checkbox" id="aktualis"> csak most listázott</label>
     <label class="cb"><input type="checkbox" id="csakuj"> csak új (7 nap)</label>
-    <fieldset class="hd-szuro">
-      <legend>Határidő</legend>
-      <label class="cb"><input type="checkbox" id="hd-ervenyes" checked> még él a pályázat</label>
-      <label class="cb"><input type="checkbox" id="hd-nincs" checked> nem tudni a határidőt</label>
-      <label class="cb"><input type="checkbox" id="hd-lejart" checked> lejárt</label>
-    </fieldset>
   </div>
 
   <p id="talalatszam"></p>
@@ -135,18 +122,6 @@
 
   function ujTetel(t) {                 // ÚJ: 7 napon belüli, de nem az alapállomány
     return t.elso && t.elso > ALAP_DATUM && napkulonbseg(frissitve, t.elso) <= 7;
-  }
-
-  function maDatum() {                  // mai nap 'YYYY-MM-DD' formában (helyi idő szerint)
-    var d = new Date(), p = function (n) { return (n < 10 ? "0" : "") + n; };
-    return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate());
-  }
-  var MA = maDatum();
-
-  // "nincs" | "lejart" | "ervenyes"
-  function hataridoAllapot(t) {
-    if (!t.hatarido) return "nincs";
-    return napkulonbseg(t.hatarido, MA) < 0 ? "lejart" : "ervenyes";
   }
 
   function betolt() {
@@ -221,17 +196,11 @@
   function szures() {
     var q = $("kereso").value.trim().toLowerCase(),
         f = $("forras").value, k = $("kinek").value,
-        aktualis = $("aktualis").checked, csakuj = $("csakuj").checked,
-        hd = {
-          ervenyes: $("hd-ervenyes").checked,
-          nincs: $("hd-nincs").checked,
-          lejart: $("hd-lejart").checked
-        };
+        aktualis = $("aktualis").checked, csakuj = $("csakuj").checked;
     szurve = mind.filter(function (t) {
       if (q && t.kereso.indexOf(q) === -1) return false;
       if (f && t.forras !== f) return false;
       if (!kinekOk(t, k)) return false;
-      if (!hd[hataridoAllapot(t)]) return false;
       if (aktualis && t.utolso !== frissitve) return false;
       if (csakuj && !ujTetel(t)) return false;
       return true;
@@ -270,7 +239,7 @@
       }
       if (t.hatarido) {
         var hd = document.createElement("span");
-        var nap = napkulonbseg(t.hatarido, MA);   // hány nap van hátra
+        var nap = napkulonbseg(t.hatarido, frissitve);   // hány nap van hátra
         hd.className = "hatarido" + (nap < 0 ? " lejart" : nap <= 14 ? " surgos" : "");
         hd.textContent = "határidő: " + t.hatarido;
         meta.appendChild(hd);
@@ -293,8 +262,7 @@
   $("kereso").addEventListener("input", function () {
     clearTimeout(ido); ido = setTimeout(szures, 150);
   });
-  ["forras", "kinek", "aktualis", "csakuj",
-   "hd-ervenyes", "hd-nincs", "hd-lejart"].forEach(function (id) {
+  ["forras", "kinek", "aktualis", "csakuj"].forEach(function (id) {
     $(id).addEventListener("change", szures);
   });
   tobb.addEventListener("click", adagRender);
