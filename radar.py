@@ -109,18 +109,6 @@ FORRASOK = [
         "csak_gyoker": True,
     },
     {
-        # 2026-08-12: a hírfolyam is (a beadási határidőket ott hirdetik meg).
-        # Útvonal-szabály nem kell: a hírek /erasmus_hirek/<slug> alatt vannak,
-        # a menü „Pályázati lehetőségek" linkjei pedig épp a másik forrás-URL-re
-        # mutatnak, amit a lista_urlek amúgy is kizár.
-        "nev": "Erasmus+ / ESC",
-        "urls": [
-            "https://erasmusplusz.hu/palyazati-lehetosegek-az-erasmus-programban",
-            "https://erasmusplusz.hu/erasmus_hirek",
-        ],
-        "kinek": "egyesület",
-    },
-    {
         "nev": "Visegrádi Alap",
         "urls": [
             "https://www.visegradfund.org/grants",
@@ -210,6 +198,12 @@ FORRASOK = [
         "kulcsszo_nelkul": True,
     },
 ]
+
+# Megszűnt/kivezetett források: a tételeik minden futáskor kikerülnek az
+# adatok.json-ból. 2026-08-12: az Erasmus+ / ESC — a teljes állományában
+# egyetlen, a projekthez (közösségi-kulturális központ) releváns kiírás sem
+# volt, csak intézményi mobilitási hírek.
+MEGSZUNT_FORRASOK = {"Erasmus+ / ESC"}
 
 # A cím vagy az URL útvonala tartalmazza valamelyiket (a domain NEM számít!)
 KULCSSZAVAK = [
@@ -1336,6 +1330,17 @@ def main() -> int:
         except Exception as e:
             print(f"  ! adatok.json nem olvasható, újrakezdem: {e}", file=sys.stderr)
 
+    # Megszűnt források tételeinek kivezetése (a forrás már nincs a
+    # FORRASOK-ban, a tételei különben örökre bent ragadnának „már nem
+    # listázott" jelöléssel).
+    forras_takaritva = 0
+    for _k in [k for k, t in adatok["tetelek"].items()
+               if t.get("forras") in MEGSZUNT_FORRASOK]:
+        adatok["tetelek"].pop(_k, None)
+        forras_takaritva += 1
+    if forras_takaritva:
+        print(f"» {forras_takaritva} tétel megszűnt forrásból kivezetve")
+
     # Eredményhirdetések takarítása a MEGLÉVŐ állományból is: a gyűjtésnél
     # már kiesnek, de ami korábban bekerült, azt is ki kell vinni.
     eredmeny_takaritva = 0
@@ -1698,6 +1703,10 @@ def main() -> int:
         megjegyzesek.append(
             f"{munka_szurve} álláshirdetés kiszűrve (nem pályázat) — a weboldalra "
             "sem kerül fel, és többé nem foglalkozunk vele")
+    if forras_takaritva:
+        megjegyzesek.append(
+            f"{forras_takaritva} tétel kivezetve megszűnt forrásból "
+            f"({', '.join(sorted(MEGSZUNT_FORRASOK))})")
     if eredmeny_takaritva:
         megjegyzesek.append(
             f"{eredmeny_takaritva} eredményhirdetés / nyerteslista eltávolítva "
