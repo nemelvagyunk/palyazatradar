@@ -62,9 +62,17 @@
     color: var(--ink); text-decoration: none; font-weight: 600; overflow-wrap: anywhere;
   }
   ul.lista li a.cim:hover { color: var(--acc); text-decoration: underline; }
-  .meta { margin-top: 5px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 12.5px; }
+  /* Rácsos elrendezés, hogy az azonos mezők a sorok között egymás alá
+     essenek. Szűk kijelzőn visszaesik sima tördelésre. */
+  .meta {
+    margin-top: 5px; display: grid; align-items: center; font-size: 12.5px;
+    grid-template-columns: minmax(0, 230px) 132px 178px 150px; gap: 6px;
+  }
+  .meta > * { justify-self: start; }
+  @media (max-width: 720px) {
+    .meta { display: flex; flex-wrap: wrap; }
+  }
   .chip { background: var(--acc-soft); color: var(--acc); border-radius: 20px; padding: 2px 9px; }
-  .chip.kinek { background: var(--regi-bg); color: var(--mut); }
   .chip.pontos { background: #e9f0e4; color: #3f6b2a; }   /* tételes jogosultság */
   .chip.kat { background: #f3e9fa; color: #6b3a8f; }      /* kategória */
   .datum { color: var(--mut); }
@@ -98,6 +106,12 @@
   <div class="panel">
     <input type="search" id="kereso" placeholder="Keresés címben és linkben…" autocomplete="off">
     <select id="forras"><option value="">Minden forrás</option></select>
+    <select id="rendezes">
+      <option value="elso">Rendezés: észlelve (új elöl)</option>
+      <option value="megjelent">Rendezés: kiírás ideje (új elöl)</option>
+      <option value="hatarido">Rendezés: határidő (közeli elöl)</option>
+      <option value="cim">Rendezés: cím (A–Z)</option>
+    </select>
     <select id="kiiras">
       <option value="">Kiírás ideje: mindegy</option>
       <option value="7">Utolsó héten</option>
@@ -113,7 +127,7 @@
       <legend>Határidő</legend>
       <label class="cb"><input type="checkbox" id="hd-ervenyes" checked> még él a pályázat</label>
       <label class="cb"><input type="checkbox" id="hd-nincs" checked> nem tudni a határidőt</label>
-      <label class="cb"><input type="checkbox" id="hd-lejart" checked> lejárt</label>
+      <label class="cb"><input type="checkbox" id="hd-lejart"> lejárt</label>
     </fieldset>
   </div>
 
@@ -237,9 +251,6 @@
     return be;
   }
 
-  var PALYAZHAT_CIMKE = { civil: "civil/egyesület", vallalkozas: "vállalkozás",
-                          onkormanyzat: "önkormányzat", maganszemely: "magánszemély" };
-
   function statFrissit() {
     var aktualis = mind.filter(function (t) { return t.utolso === frissitve; }).length;
     var uj = mind.filter(ujTetel).length;
@@ -256,6 +267,21 @@
     var nap = napkulonbseg(frissitve, t.megjelent);
     if (valasztott === "regebben") return nap > 366;
     return nap <= parseInt(valasztott, 10);
+  }
+
+  // Rendezés. Az adat nélküli tételek MINDIG a lista végére kerülnek,
+  // különben az üres mező elöl tolná össze a hasznos találatokat.
+  function rendez(tomb, mod) {
+    var csokkeno = (mod === "elso" || mod === "megjelent");
+    tomb.sort(function (a, b) {
+      if (mod === "cim") return a.cim.localeCompare(b.cim, "hu");
+      var x = a[mod] || "", y = b[mod] || "";
+      if (!x && !y) return a.cim.localeCompare(b.cim, "hu");
+      if (!x) return 1;
+      if (!y) return -1;
+      if (x === y) return a.cim.localeCompare(b.cim, "hu");
+      return csokkeno ? (x < y ? 1 : -1) : (x < y ? -1 : 1);
+    });
   }
 
   function szures() {
@@ -275,6 +301,7 @@
       if (ki && !kiirasOk(t, ki)) return false;
       return true;
     });
+    rendez(szurve, $("rendezes").value);
     mutatva = 0;
     lista.innerHTML = "";
     $("talalatszam").textContent = szurve.length + " találat";
@@ -290,43 +317,30 @@
       a.textContent = t.cim;
       var meta = document.createElement("div");
       meta.className = "meta";
-      if (ujTetel(t)) {
-        var uj = document.createElement("span"); uj.className = "uj"; uj.textContent = "ÚJ";
-        meta.appendChild(uj);
-      }
-      var chip = document.createElement("span"); chip.className = "chip"; chip.textContent = t.forras;
+      // A meta-sor pontosan négy dolgot mutat, ebben a sorrendben:
+      // forrás · kiírva · határidő · észlelve. A dátumok csak akkor
+      // jelennek meg, ha ismerjük őket (a kiírás dátumát nem mindig
+      // sikerül kiolvasni). A kategória a szűrőben van, nem a soron.
+      var chip = document.createElement("span");
+      chip.className = "chip"; chip.textContent = t.forras;
       meta.appendChild(chip);
-      t.kategoriak.forEach(function (k) {
-        if (k === "Egyéb") return;              // az "Egyéb" nem mond semmit
-        var kc = document.createElement("span");
-        kc.className = "chip kat"; kc.textContent = k;
-        meta.appendChild(kc);
-      });
-      if (t.palyazhat && t.palyazhat.length) {
-        var po = document.createElement("span"); po.className = "chip pontos";
-        po.textContent = "pályázhat: " + t.palyazhat.map(function (p) {
-          return PALYAZHAT_CIMKE[p] || p;
-        }).join(", ");
-        po.title = "A kiírás szövegéből kiolvasva";
-        meta.appendChild(po);
-      } else {
-        var kin = document.createElement("span"); kin.className = "chip kinek"; kin.textContent = t.kinek;
-        meta.appendChild(kin);
-      }
+      var ki = document.createElement("span");
+      ki.className = "datum";
+      ki.textContent = "kiírva: " + (t.megjelent || "–");
+      meta.appendChild(ki);
+      var hd = document.createElement("span");
       if (t.hatarido) {
-        var hd = document.createElement("span");
         var nap = napkulonbseg(t.hatarido, MA);   // hány nap van hátra
         hd.className = "hatarido" + (nap < 0 ? " lejart" : nap <= 14 ? " surgos" : "");
         hd.textContent = "határidő: " + t.hatarido;
-        meta.appendChild(hd);
+      } else {
+        hd.className = "datum";
+        hd.textContent = "határidő: –";
       }
-      var d = document.createElement("span"); d.className = "datum"; d.textContent = "észlelve: " + t.elso;
+      meta.appendChild(hd);
+      var d = document.createElement("span");
+      d.className = "datum"; d.textContent = "észlelve: " + t.elso;
       meta.appendChild(d);
-      if (t.utolso !== frissitve) {
-        var na = document.createElement("span"); na.className = "nemaktiv";
-        na.textContent = "már nem listázott (" + t.utolso + ")";
-        meta.appendChild(na);
-      }
       li.appendChild(a); li.appendChild(meta); frag.appendChild(li);
     });
     lista.appendChild(frag);
@@ -338,7 +352,7 @@
   $("kereso").addEventListener("input", function () {
     clearTimeout(ido); ido = setTimeout(szures, 150);
   });
-  ["forras", "kiiras",
+  ["forras", "kiiras", "rendezes",
    "hd-ervenyes", "hd-nincs", "hd-lejart"].forEach(function (id) {
     $(id).addEventListener("change", szures);
   });
