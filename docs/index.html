@@ -98,8 +98,14 @@
   <div class="panel">
     <input type="search" id="kereso" placeholder="Keresés címben és linkben…" autocomplete="off">
     <select id="forras"><option value="">Minden forrás</option></select>
-    <label class="cb"><input type="checkbox" id="aktualis"> csak most listázott</label>
-    <label class="cb"><input type="checkbox" id="csakuj"> csak új (7 nap)</label>
+    <select id="kiiras">
+      <option value="">Kiírás ideje: mindegy</option>
+      <option value="7">Utolsó héten</option>
+      <option value="31">Utolsó 1 hónapban</option>
+      <option value="92">Utolsó 3 hónapban</option>
+      <option value="366">Utóbbi 1 évben</option>
+      <option value="regebben">Régebben</option>
+    </select>
     <fieldset class="hd-szuro" id="kat-szuro">
       <legend>Kategória <button type="button" id="kat-mind">mind</button><button type="button" id="kat-semmi">egyik se</button></legend>
     </fieldset>
@@ -172,6 +178,7 @@
             elso: t.elso || "",
             utolso: t.utolso || "",
             hatarido: t.hatarido || "",
+            megjelent: t.megjelent || "",
             palyazhat: t.palyazhat || null,
             kategoriak: t.kategoriak || [],
             kereso: ((t.cim || "") + " " + kulcs).toLowerCase()
@@ -240,10 +247,21 @@
       "</b> most is listázott · <b>" + uj + "</b> új az elmúlt 7 napban · frissítve: " + frissitve;
   }
 
+  // Kiírás ideje: a megjelenés dátuma alapján. Aminél ezt nem sikerült
+  // kiolvasni, az csak a "mindegy" nézetben látszik — az észlelés dátuma
+  // (elso) félrevezető lenne, mert az csak azt mutatja, mi mikor került a
+  // radar látókörébe, nem azt, hogy a kiírás mikor jelent meg.
+  function kiirasOk(t, valasztott) {
+    if (!t.megjelent) return false;
+    var nap = napkulonbseg(frissitve, t.megjelent);
+    if (valasztott === "regebben") return nap > 366;
+    return nap <= parseInt(valasztott, 10);
+  }
+
   function szures() {
     var q = $("kereso").value.trim().toLowerCase(),
         f = $("forras").value, kat = kivalasztottKategoriak(),
-        aktualis = $("aktualis").checked, csakuj = $("csakuj").checked,
+        ki = $("kiiras").value,
         hd = {
           ervenyes: $("hd-ervenyes").checked,
           nincs: $("hd-nincs").checked,
@@ -254,8 +272,7 @@
       if (f && t.forras !== f) return false;
       if (!t.kategoriak.some(function (k) { return kat[k]; })) return false;
       if (!hd[hataridoAllapot(t)]) return false;
-      if (aktualis && t.utolso !== frissitve) return false;
-      if (csakuj && !ujTetel(t)) return false;
+      if (ki && !kiirasOk(t, ki)) return false;
       return true;
     });
     mutatva = 0;
@@ -321,7 +338,7 @@
   $("kereso").addEventListener("input", function () {
     clearTimeout(ido); ido = setTimeout(szures, 150);
   });
-  ["forras", "aktualis", "csakuj",
+  ["forras", "kiiras",
    "hd-ervenyes", "hd-nincs", "hd-lejart"].forEach(function (id) {
     $(id).addEventListener("change", szures);
   });
