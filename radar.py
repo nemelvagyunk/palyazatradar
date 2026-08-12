@@ -389,6 +389,8 @@ def linkek_kigyujtese(
             continue
         if eredmenyhirdetes(cim, norm):    # nyerteslista – már lezajlott
             continue
+        if regi_kiiras(cim):               # 2025-ös vagy korábbi
+            continue
         if len(cim) < 12:                  # üres/ikon/"Tovább" link → slug a cím helyett
             cim = p.path.rstrip("/").rsplit("/", 1)[-1].replace("-", " ").replace("_", " ")
         # az első (általában legbeszédesebb) címet tartjuk meg
@@ -471,7 +473,7 @@ def nka_tetelek(html: str, url: str) -> dict[str, str]:
         if any(x in cel.lower() or x in cim.lower() for x in KIZARAS):
             continue
         if (munkaajanlat_cim(cim, cel) or adminisztrativ(cim, cel)
-                or eredmenyhirdetes(cim, cel)):
+                or eredmenyhirdetes(cim, cel) or regi_kiiras(cim)):
             continue
         if len(cim) < 12:
             cim = p.path.rstrip("/").rsplit("/", 1)[-1].replace("-", " ")
@@ -520,6 +522,8 @@ def budapest_tetelek(html: str, url: str) -> dict[str, str]:
             continue
         hatarido = _elso_datum(cellak[2].get_text(" ", strip=True))
         megjelent = _elso_datum(cellak[3].get_text(" ", strip=True))
+        if regi_kiiras(cim, hatarido, megjelent):   # 2025-ös vagy korábbi
+            continue
         if hatarido:
             LISTA_HATARIDOK[kulcs] = hatarido
         if megjelent:
@@ -567,7 +571,7 @@ def palyazatok_org_tetelek(html: str, base_url: str) -> dict[str, str]:
         if any(x in norm.lower() or x in cim.lower() for x in KIZARAS):
             continue
         if (munkaajanlat_cim(cim, norm) or adminisztrativ(cim, norm)
-                or eredmenyhirdetes(cim, norm)):
+                or eredmenyhirdetes(cim, norm) or regi_kiiras(cim)):
             continue
         talalatok.setdefault(norm, cim[:200])
     return talalatok
@@ -699,6 +703,8 @@ def jozsefvaros_tetelek(html: str, base_url: str) -> dict[str, str]:
             if m:
                 hatarido = _iso(int(m[1]), HONAPOK[m[2].lower()], int(m[3]))
         if hatarido and hatarido < also_hatar:      # régen lejárt archívum
+            continue
+        if regi_kiiras("", hatarido):               # 2025-ös vagy korábbi
             continue
         norm = normalizal(urljoin(base_url, a["href"]))
         if any(x in norm.lower() or x in cim.lower() for x in KIZARAS):
@@ -1033,6 +1039,27 @@ EREDMENY_JEL = re.compile(
     r"lezarult a[z]?\s.{0,40}?(felhivas|palyazat|kiiras))", re.IGNORECASE)
 
 
+# 2025-ös vagy korábbi kiírás nem érdekel. A DÁTUM erősebb, mint a cím: ha
+# ismerjük a határidőt (vagy a megjelenést), az dönt — így egy 2025-ben indult,
+# de 2026-ban lejáró program bent marad. Dátum híján a címben szereplő évszám
+# számít, de csak ha MINDEN évszám 2026 előtti („Bursa Hungarica 2025/2026"
+# tehát marad).
+REGI_HATAR = "2026-01-01"
+REGI_PREFIX = "regi-kiiras:"
+EVSZAM_CIMBEN = re.compile(r"\b(19\d{2}|20\d{2})\b")
+
+
+def regi_kiiras(cim: str, hatarido: str | None = None,
+                megjelent: str | None = None) -> bool:
+    """2025-ös vagy korábbi kiírás-e."""
+    if hatarido:
+        return hatarido < REGI_HATAR
+    if megjelent:
+        return megjelent < REGI_HATAR
+    evek = [int(e) for e in EVSZAM_CIMBEN.findall(cim or "")]
+    return bool(evek) and max(evek) < 2026
+
+
 def eredmenyhirdetes(cim: str, url: str = "") -> bool:
     """Eredményhirdetés / nyerteslista-e (nem pályázni való kiírás)."""
     return bool(EREDMENY_JEL.search(f"{cim or ''} {urlparse(url).path}"))
@@ -1341,6 +1368,16 @@ def main() -> int:
     if forras_takaritva:
         print(f"» {forras_takaritva} tétel megszűnt forrásból kivezetve")
 
+    # 2025-ös vagy korábbi kiírások kivezetése a MEGLÉVŐ állományból
+    regi_takaritva = 0
+    for _k in [k for k, t in adatok["tetelek"].items()
+               if regi_kiiras(t.get("cim", ""), t.get("hatarido"),
+                              t.get("megjelent"))]:
+        adatok["tetelek"].pop(_k, None)
+        regi_takaritva += 1
+    if regi_takaritva:
+        print(f"» {regi_takaritva} db 2025-ös vagy korábbi kiírás kivezetve")
+
     # Eredményhirdetések takarítása a MEGLÉVŐ állományból is: a gyűjtésnél
     # már kiesnek, de ami korábban bekerült, azt is ki kell vinni.
     eredmeny_takaritva = 0
@@ -1374,6 +1411,8 @@ def main() -> int:
     csak_maganok = {k[len(CSAK_MAGAN_PREFIX):] for k in allapot
                     if k.startswith(CSAK_MAGAN_PREFIX)}
     magan_szurve = 0
+    regiek = {k[len(REGI_PREFIX):] for k in allapot if k.startswith(REGI_PREFIX)}
+    regi_szurve = 0
     ellenorzendo = {f["nev"] for f in FORRASOK if f.get("tartalom_ellenorzes")}
 
     jeloltek: list[dict] = []               # új tételek dúsítás/cutoff-döntés előtt
@@ -1418,7 +1457,7 @@ def main() -> int:
         # Korábban felismert álláshirdetések kiejtése (se találat, se weboldal)
         talalatok = {k: c for k, c in talalatok.items()
                      if k not in munkaajanlatok and k not in nem_palyazatok
-                     and k not in csak_maganok}
+                     and k not in csak_maganok and k not in regiek}
         osszes_latott += len(talalatok)
         # Új (még alapállapot nélküli) forrás első sikeres beolvasása CSENDES:
         # a tételek bekerülnek az állapotba, de nem jelennek meg találatként —
@@ -1521,6 +1560,13 @@ def main() -> int:
                         nem_palyazat_szurve += 1
                         print(f"  – nem pályázati hír: {j['cim'][:60]}")
                         continue
+                    if regi_kiiras(j["cim"], hatarido, megjelent):
+                        allapot[REGI_PREFIX + kulcs] = MA
+                        regiek.add(kulcs)
+                        adatok["tetelek"].pop(kulcs, None)
+                        regi_szurve += 1
+                        print(f"  – 2025-ös vagy korábbi: {j['cim'][:56]}")
+                        continue
                     if csak_maganszemely(palyazhat):
                         allapot[CSAK_MAGAN_PREFIX + kulcs] = MA
                         csak_maganok.add(kulcs)
@@ -1591,6 +1637,14 @@ def main() -> int:
             megjelent, hatarido, palyazhat, munka = tetel_dusitas(html)
         except Exception as e:              # noqa: BLE001
             print(f"  ! Dúsítási hiba: {kulcs} ({e})", file=sys.stderr)
+            continue
+        if regi_kiiras(t.get("cim", ""), hatarido or t.get("hatarido"),
+                       megjelent or t.get("megjelent")):
+            allapot[REGI_PREFIX + kulcs] = MA
+            regiek.add(kulcs)
+            adatok["tetelek"].pop(kulcs, None)
+            regi_szurve += 1
+            print(f"  – 2025-ös vagy korábbi: {(t.get('cim') or kulcs)[:56]}")
             continue
         if csak_maganszemely(palyazhat):    # csak magánszemély pályázhat
             allapot[CSAK_MAGAN_PREFIX + kulcs] = MA
@@ -1703,6 +1757,10 @@ def main() -> int:
         megjegyzesek.append(
             f"{munka_szurve} álláshirdetés kiszűrve (nem pályázat) — a weboldalra "
             "sem kerül fel, és többé nem foglalkozunk vele")
+    if regi_takaritva or regi_szurve:
+        megjegyzesek.append(
+            f"{regi_takaritva + regi_szurve} db 2025-ös vagy korábbi kiírás "
+            "eltávolítva / be sem került")
     if forras_takaritva:
         megjegyzesek.append(
             f"{forras_takaritva} tétel kivezetve megszűnt forrásból "
