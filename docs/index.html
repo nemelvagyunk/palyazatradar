@@ -42,6 +42,11 @@
     padding: 6px 12px 9px; display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center;
   }
   .hd-szuro legend { color: var(--mut); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; padding: 0 4px; }
+  .hd-szuro legend button {
+    font: inherit; text-transform: none; letter-spacing: 0; margin-left: 6px;
+    background: none; border: 0; color: var(--acc); cursor: pointer; padding: 0 2px;
+  }
+  .hd-szuro legend button:hover { text-decoration: underline; }
   .hd-szuro label.cb { font-size: 13.5px; }
   .hd-szuro input:focus-visible { outline: 2px solid var(--acc); outline-offset: 1px; }
   .panel input:focus, .panel select:focus { outline: 2px solid var(--acc); outline-offset: 1px; border-color: var(--acc); }
@@ -93,9 +98,11 @@
   <div class="panel">
     <input type="search" id="kereso" placeholder="Keresés címben és linkben…" autocomplete="off">
     <select id="forras"><option value="">Minden forrás</option></select>
-    <select id="kategoria"><option value="">Kategória: mind</option></select>
     <label class="cb"><input type="checkbox" id="aktualis"> csak most listázott</label>
     <label class="cb"><input type="checkbox" id="csakuj"> csak új (7 nap)</label>
+    <fieldset class="hd-szuro" id="kat-szuro">
+      <legend>Kategória <button type="button" id="kat-mind">mind</button><button type="button" id="kat-semmi">egyik se</button></legend>
+    </fieldset>
     <fieldset class="hd-szuro">
       <legend>Határidő</legend>
       <label class="cb"><input type="checkbox" id="hd-ervenyes" checked> még él a pályázat</label>
@@ -119,7 +126,10 @@
 (function () {
   "use strict";
   var NKA_URL = "https://nka.hu/kategoria/kiemelt-kategoriak/palyaztatas/kollegiumok-felhivasai/";
-  var ALAP_DATUM = "2026-07-22";        // az indulási alapállomány napja — ez még nem "ÚJ"
+  // Az indulási alapállomány napja — ami ekkor került be, az nem "ÚJ".
+  // 2026-08-12: teljes nullázás + új első futás, ezért erre a napra állítva
+  // (különben az egész alapállomány ÚJ-ként villogna a listán).
+  var ALAP_DATUM = "2026-08-12";
   var ADAG = 300;                       // ennyi sor jelenik meg egyszerre
   var mind = [], szurve = [], mutatva = 0, frissitve = "";
 
@@ -199,10 +209,22 @@
       if (b === "Egyéb") return -1;
       return a.localeCompare(b, "hu");
     }).forEach(function (k) {
-      var o = document.createElement("option");
-      o.value = k; o.textContent = k + " (" + kat[k] + ")";
-      $("kategoria").appendChild(o);
+      var l = document.createElement("label"); l.className = "cb";
+      var cb = document.createElement("input");
+      cb.type = "checkbox"; cb.checked = true; cb.value = k;
+      cb.addEventListener("change", szures);
+      l.appendChild(cb);
+      l.appendChild(document.createTextNode(" " + k + " (" + kat[k] + ")"));
+      $("kat-szuro").appendChild(l);
     });
+  }
+
+  function kivalasztottKategoriak() {
+    var be = {};
+    $("kat-szuro").querySelectorAll("input[type=checkbox]").forEach(function (cb) {
+      if (cb.checked) be[cb.value] = true;
+    });
+    return be;
   }
 
   var PALYAZHAT_CIMKE = { civil: "civil/egyesület", vallalkozas: "vállalkozás",
@@ -217,7 +239,7 @@
 
   function szures() {
     var q = $("kereso").value.trim().toLowerCase(),
-        f = $("forras").value, kat = $("kategoria").value,
+        f = $("forras").value, kat = kivalasztottKategoriak(),
         aktualis = $("aktualis").checked, csakuj = $("csakuj").checked,
         hd = {
           ervenyes: $("hd-ervenyes").checked,
@@ -227,7 +249,7 @@
     szurve = mind.filter(function (t) {
       if (q && t.kereso.indexOf(q) === -1) return false;
       if (f && t.forras !== f) return false;
-      if (kat && t.kategoriak.indexOf(kat) === -1) return false;
+      if (!t.kategoriak.some(function (k) { return kat[k]; })) return false;
       if (!hd[hataridoAllapot(t)]) return false;
       if (aktualis && t.utolso !== frissitve) return false;
       if (csakuj && !ujTetel(t)) return false;
@@ -296,10 +318,18 @@
   $("kereso").addEventListener("input", function () {
     clearTimeout(ido); ido = setTimeout(szures, 150);
   });
-  ["forras", "kategoria", "aktualis", "csakuj",
+  ["forras", "aktualis", "csakuj",
    "hd-ervenyes", "hd-nincs", "hd-lejart"].forEach(function (id) {
     $(id).addEventListener("change", szures);
   });
+  function katMind(be) {
+    $("kat-szuro").querySelectorAll("input[type=checkbox]").forEach(function (cb) {
+      cb.checked = be;
+    });
+    szures();
+  }
+  $("kat-mind").addEventListener("click", function () { katMind(true); });
+  $("kat-semmi").addEventListener("click", function () { katMind(false); });
   tobb.addEventListener("click", adagRender);
 
   betolt();

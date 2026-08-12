@@ -391,6 +391,8 @@ def linkek_kigyujtese(
             continue
         if munkaajanlat_cim(cim, norm):    # álláshirdetés, nem pályázat
             continue
+        if adminisztrativ(cim, norm):      # GYIK/ÁSZF/útmutató – nem kiírás
+            continue
         if len(cim) < 12:                  # üres/ikon/"Tovább" link → slug a cím helyett
             cim = p.path.rstrip("/").rsplit("/", 1)[-1].replace("-", " ").replace("_", " ")
         # az első (általában legbeszédesebb) címet tartjuk meg
@@ -472,7 +474,7 @@ def nka_tetelek(html: str, url: str) -> dict[str, str]:
             continue
         if any(x in cel.lower() or x in cim.lower() for x in KIZARAS):
             continue
-        if munkaajanlat_cim(cim, cel):
+        if munkaajanlat_cim(cim, cel) or adminisztrativ(cim, cel):
             continue
         if len(cim) < 12:
             cim = p.path.rstrip("/").rsplit("/", 1)[-1].replace("-", " ")
@@ -516,7 +518,7 @@ def budapest_tetelek(html: str, url: str) -> dict[str, str]:
         if not cel:
             continue
         kulcs = normalizal(urljoin(url, cel["href"]))
-        if munkaajanlat_cim(cim, kulcs):
+        if munkaajanlat_cim(cim, kulcs) or adminisztrativ(cim, kulcs):
             continue
         hatarido = _elso_datum(cellak[2].get_text(" ", strip=True))
         megjelent = _elso_datum(cellak[3].get_text(" ", strip=True))
@@ -566,7 +568,7 @@ def palyazatok_org_tetelek(html: str, base_url: str) -> dict[str, str]:
             cim = urlparse(norm).path.rstrip("/").rsplit("/", 1)[-1].replace("-", " ")
         if any(x in norm.lower() or x in cim.lower() for x in KIZARAS):
             continue
-        if munkaajanlat_cim(cim, norm):
+        if munkaajanlat_cim(cim, norm) or adminisztrativ(cim, norm):
             continue
         talalatok.setdefault(norm, cim[:200])
     return talalatok
@@ -975,6 +977,58 @@ def jogosultsag_kinyerese(szoveg: str) -> list[str]:
 # különben a bgazrt.hu menüjében lévő "Álláshirdetés" minden oldalt megfogna.
 MUNKA_PREFIX = "munkaajanlat:"      # allapot.json-beli tiltólista-kulcs előtag
 
+# ---------------------------------------------------------------------------
+# Adminisztratív / navigációs oldalak kiszűrése
+# ---------------------------------------------------------------------------
+# A kiírók oldalain rengeteg a segédoldal: GYIK, ÁSZF, útmutató, nyomtatvány,
+# „Pályázati naptár", „Kapcsolat". Ezek átmennek a kulcsszó-szűrésen (van
+# bennük „pályázat"), de nem kiírások. A cím EGÉSZÉRE illesztünk (^…$), hogy
+# egy valódi felhívás címében szereplő „útmutató" szó ne akassza ki.
+ADMIN_CIM = re.compile(
+    r"^\W*(?:"
+    r"gyik(?:\s*\d{4})?|gyakran ismételt kérdések(?:\s*\d{4})?|"
+    r"gyakran ismetelt kerdesek(?:\s*\d{4})?|"
+    r"pályázati tudnivalók|palyazati tudnivalok|pályáztatás információ|"
+    r"palyaztatas informacio|pályázati naptár|palyazati naptar|"
+    r"pályázati kereső|palyazati kereso|kapcsolat|impresszum|oldaltérkép|"
+    r"oldalterkep|munkatársak|munkatarsak|technikai ajánlás|technikai ajanlas|"
+    r"adatkezelési tájékoztatók?|adatkezelesi tajekoztatok?|"
+    r"általános|altalanos|általános információk.*|altalanos informaciok.*|"
+    r"általános szerződési feltételek.*|altalanos szerzodesi feltetelek.*|"
+    r"archívum|archivum|korábbi évek támogatásai|korabbi evek tamogatasai|"
+    r"bizottsági határozatok|bizottsagi hatarozatok|támogatások|tamogatasok|"
+    r"dokumentumtár|dokumentumtar|kiadványok|kiadvanyok|rendezvények|"
+    r"rendezvenyek|disszemináció|disszeminacio|hírek|hirek|közlemények|"
+    r"kozlemenyek|döntések|dontesek|szervezet|felsőoktatás|felsooktatas|"
+    r"köznevelés|kozneveles|szakképzés|szakkepzes|ifjúság|ifjusag|sport|"
+    r"felnőttkori tanulás|felnottkori tanulas|"
+    r"pályázati és elszámolási útmutatók?|palyazati es elszamolasi utmutatok?|"
+    r"útmutató és elszámolási nyomtatványok|utmutato es elszamolasi nyomtatvanyok|"
+    r"jóváhagyott beszámolók közzététele|jovahagyott beszamolok kozzetetele|"
+    r"nir elszámolási videók|nir elszamolasi videok|uniós nyilatkozat|"
+    r"unios nyilatkozat|etikai kódex.*|etikai kodex.*|"
+    r"könyvtári igazolás minta.*|konyvtari igazolas minta.*|"
+    r"pr kötelezettségek.*|pr kotelezettsegek.*|"
+    r"lezárult felhívások|lezarult felhivasok|pályázati kiírások|"
+    r"palyazati kiirasok|pályázatok \d{4}|palyazatok \d{4}|"
+    r"\d{4}\.? évi egyházi támogatások|\d{4}\.? evi egyhazi tamogatasok"
+    r")\W*$", re.IGNORECASE)
+
+# Útvonal-részletek, amik szintén segédoldalra mutatnak
+ADMIN_UTVONAL = (
+    "/gyik", "/kapcsolat", "/oldalterkep", "/munkatarsak", "/dokumentumtar",
+    "/altalanos", "/archivum", "/bizottsagi-hatarozatok", "/nyomtatvany",
+    "/utmutato", "/technikai-ajanlas", "/korabbi-evek-tamogatasai",
+)
+
+
+def adminisztrativ(cim: str, url: str = "") -> bool:
+    """Segédoldal-e (GYIK, ÁSZF, útmutató, „Kapcsolat"), nem pedig kiírás."""
+    if ADMIN_CIM.match((cim or "").strip()):
+        return True
+    ut = urlparse(url).path.lower().rstrip("/")
+    return any(ut.endswith(x) for x in ADMIN_UTVONAL)
+
 # Sablonos linkszövegek: ilyenkor a cím máshonnan (aria-label, title, alt) jön.
 GENERIKUS_LINKSZOVEG = re.compile(
     r"^\s*\(?\s*(új ablakban nyílik meg|uj ablakban nyilik meg|tovább\w*|"
@@ -1000,6 +1054,15 @@ PALYAZAT_JEL_GYENGE = (
     "pályázat benyújt", "palyazat benyujt", "felhívás", "felhivas",
 )
 NEM_PALYAZAT_PREFIX = "nem-palyazat:"   # tiltólista: megnéztük, nem kiírás
+# Tiltólista: a kiírásra KIZÁRÓLAG magánszemély pályázhat — nekünk (kft +
+# egyesület) használhatatlan. Csak akkor ejtjük ki, ha a jogosultság-felismerés
+# talált is valamit ÉS az egyedül a magánszemély; ha bizonytalan (üres lista),
+# a tétel marad.
+CSAK_MAGAN_PREFIX = "csak-maganszemely:"
+
+
+def csak_maganszemely(palyazhat: list[str]) -> bool:
+    return palyazhat == ["maganszemely"]
 
 
 def palyazat_e_szoveg(szoveg: str) -> bool:
@@ -1081,6 +1144,36 @@ KATEGORIAK: dict[str, re.Pattern] = {
         r"kozossegi ter|könnyűzene|konnyuzene|\brock\b|\bjazz\b|\btechno\b|"
         r"\bhouse\b|\bpopzene|hanglemez|hangfelvétel|hangfelvetel|\bdalszerz|"
         r"élőzene|elozene|\bzenekari\b)", re.IGNORECASE),
+    "Ifjúság / oktatás": re.compile(
+        r"(ifjúság|ifjusag|\bfiatal|\bdiák|\bdiak\b|iskola|óvod|ovod|"
+        r"oktatás|oktatas|köznevelés|kozneveles|pedagóg|pedagog|\btanár|"
+        r"\btanar\b|tanuló|tanulo|tehetséggondoz|tehetseggondoz|ösztöndíj|"
+        r"osztondij|hallgató|hallgato|\bgyermek|\bgyerek|szakképzés|"
+        r"szakkepzes|felsőoktat|felsooktat)", re.IGNORECASE),
+    "Zöld / környezet": re.compile(
+        r"(\bzöld|\bzold\b|környezet|kornyezet|\bklíma|\bklima\b|megújuló|"
+        r"megujulo|napelem|energiahatékony|energiahatekony|fenntarthat|"
+        r"hulladék|hulladek|komposzt|\bkert\b|kertész|kertesz|fásít|fasit|"
+        r"biodiverzit|természetvédelem|termeszetvedelem|\besővíz|\besoviz\b|"
+        r"vízgazdálkodás|vizgazdalkodas|zöldfelület|zoldfelulet|"
+        r"energiatárol|energiatarol)", re.IGNORECASE),
+    "Film / fotó": re.compile(
+        r"(\bfilm|videó|\bvideo\b|\bfotó|\bfoto\b|fényképész|fenykepesz|"
+        r"\bmozi\b|dokumentumfilm|animáci|animaci|rövidfilm|rovidfilm|"
+        r"operatőr|\boperator\b|forgatókönyv|forgatokonyv)", re.IGNORECASE),
+    "Képzőművészet": re.compile(
+        r"(képzőművész|kepzomuvesz|festészet|festeszet|festmény|festmeny|"
+        r"szobrász|szobrasz|\bgrafik|illusztrá|illusztra|kiállítás|kiallitas|"
+        r"galéria|galeria|művésztelep|muvesztelep|alkotótábor|alkototabor|"
+        r"kortárs művészet|kortars muveszet|vizuális művészet|"
+        r"vizualis muveszet|köztéri műalkotás|kozteri mualkotas)",
+        re.IGNORECASE),
+    "Irodalom": re.compile(
+        r"(irodalom|irodalmi|könyv(?!el)|konyv(?!el)|\bkötet|\bkotet\b|"
+        r"\bvers\b|\bversek|verseskötet|verseskotet|novella|\bregény|"
+        r"\bregeny\b|\bpróza|\bproza\b|műfordít|mufordit|\bíró\b|\bköltő|"
+        r"\bkolto\b|könyvkiadó|konyvkiado|olvasáskultúra|olvasaskultura)",
+        re.IGNORECASE),
     "Vállalkozás": re.compile(
         r"(vállalkoz|vallalkoz|\bkkv\b|kis- és középvállal|kis- es kozepvallal|"
         r"mikrovállalkoz|mikrovallalkoz|\bhitel\b|hitelprogram|hitelkonstrukció|"
@@ -1241,6 +1334,9 @@ def main() -> int:
     nem_palyazatok = {k[len(NEM_PALYAZAT_PREFIX):] for k in allapot
                       if k.startswith(NEM_PALYAZAT_PREFIX)}
     nem_palyazat_szurve = 0
+    csak_maganok = {k[len(CSAK_MAGAN_PREFIX):] for k in allapot
+                    if k.startswith(CSAK_MAGAN_PREFIX)}
+    magan_szurve = 0
     ellenorzendo = {f["nev"] for f in FORRASOK if f.get("tartalom_ellenorzes")}
 
     jeloltek: list[dict] = []               # új tételek dúsítás/cutoff-döntés előtt
@@ -1284,7 +1380,8 @@ def main() -> int:
             continue
         # Korábban felismert álláshirdetések kiejtése (se találat, se weboldal)
         talalatok = {k: c for k, c in talalatok.items()
-                     if k not in munkaajanlatok and k not in nem_palyazatok}
+                     if k not in munkaajanlatok and k not in nem_palyazatok
+                     and k not in csak_maganok}
         osszes_latott += len(talalatok)
         # Új (még alapállapot nélküli) forrás első sikeres beolvasása CSENDES:
         # a tételek bekerülnek az állapotba, de nem jelennek meg találatként —
@@ -1387,6 +1484,13 @@ def main() -> int:
                         nem_palyazat_szurve += 1
                         print(f"  – nem pályázati hír: {j['cim'][:60]}")
                         continue
+                    if csak_maganszemely(palyazhat):
+                        allapot[CSAK_MAGAN_PREFIX + kulcs] = MA
+                        csak_maganok.add(kulcs)
+                        adatok["tetelek"].pop(kulcs, None)
+                        magan_szurve += 1
+                        print(f"  – csak magánszemély pályázhat: {j['cim'][:52]}")
+                        continue
                     kategoriak = kategoriak_kinyerese(f"{j['cim']} {szoveg}")
         j["megjelent"], j["hatarido"], j["palyazhat"] = megjelent, hatarido, palyazhat
         t = adatok["tetelek"].get(kulcs)
@@ -1450,6 +1554,13 @@ def main() -> int:
             megjelent, hatarido, palyazhat, munka = tetel_dusitas(html)
         except Exception as e:              # noqa: BLE001
             print(f"  ! Dúsítási hiba: {kulcs} ({e})", file=sys.stderr)
+            continue
+        if csak_maganszemely(palyazhat):    # csak magánszemély pályázhat
+            allapot[CSAK_MAGAN_PREFIX + kulcs] = MA
+            csak_maganok.add(kulcs)
+            adatok["tetelek"].pop(kulcs, None)
+            magan_szurve += 1
+            print(f"  – csak magánszemély pályázhat: {(t.get('cim') or kulcs)[:52]}")
             continue
         if munka:                           # utólag felismert álláshirdetés
             allapot[MUNKA_PREFIX + kulcs] = MA
@@ -1555,6 +1666,10 @@ def main() -> int:
         megjegyzesek.append(
             f"{munka_szurve} álláshirdetés kiszűrve (nem pályázat) — a weboldalra "
             "sem kerül fel, és többé nem foglalkozunk vele")
+    if magan_szurve:
+        megjegyzesek.append(
+            f"{magan_szurve} kiírásra kizárólag magánszemély pályázhat — "
+            "kiszűrve, többé nem nézzük")
     if nem_palyazat_szurve:
         megjegyzesek.append(
             f"{nem_palyazat_szurve} hír a cikk szövege alapján mégsem pályázati "
