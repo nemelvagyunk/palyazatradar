@@ -110,8 +110,8 @@
     <input type="search" id="kereso" placeholder="Keresés címben és linkben…" autocomplete="off">
     <select id="forras"><option value="">Minden forrás</option></select>
     <select id="rendezes">
+      <option value="megjelent" selected>Rendezés: kiírás ideje (új elöl)</option>
       <option value="elso">Rendezés: észlelve (új elöl)</option>
-      <option value="megjelent">Rendezés: kiírás ideje (új elöl)</option>
       <option value="hatarido">Rendezés: határidő (közeli elöl)</option>
       <option value="cim">Rendezés: cím (A–Z)</option>
     </select>
@@ -233,7 +233,7 @@
     }).forEach(function (f) {
       var o = document.createElement("option");
       o.value = f;
-      o.textContent = (AGGREGATOROK[f] ? "" : "🔹 ") + f + " (" + db[f] + ")";
+      o.textContent = f + (AGGREGATOROK[f] ? "" : " ⭐") + " (" + db[f] + ")";
       $("forras").appendChild(o);
     });
     var kat = {};
