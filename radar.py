@@ -168,6 +168,9 @@ FORRASOK = [
         # azt a budapest_tetelek() táblázat-parsere viszi.
         "utvonal_elotag": {"budapest.hu": "/hirek/20"},
         "kulcsszo_nelkul": True,
+        # A hírfolyam tele van külső hivatkozással (enbudapestem.hu, kozadat.hu);
+        # csak a budapest.hu saját cikkei kellenek.
+        "csak_sajat_domain": True,
         "tartalom_ellenorzes": True,
         "special": "budapest",
     },
@@ -350,11 +353,17 @@ def linkek_kigyujtese(
         # Sok oldalon a link szövege sablonos („(új ablakban nyílik meg)",
         # „Tovább", „Bővebben"), a valódi cím pedig az aria-label/title
         # attribútumban vagy a kép alt-jában van (pl. budapest.hu/hirek).
-        if len(cim) < 15 or GENERIKUS_LINKSZOVEG.match(cim):
+        aria = cim_tisztitas((a.get("aria-label") or "").strip())
+        # A budapest.hu kártyáin a link szövege a rovatcímkével kezdődik
+        # („HÍREK Pályázati felhívás: …"), az aria-label viszont tiszta —
+        # ha az aria benne van a linkszövegben, az a valódi cím.
+        if aria and not GENERIKUS_LINKSZOVEG.match(aria) and aria in cim:
+            cim = aria
+        elif len(cim) < 15 or GENERIKUS_LINKSZOVEG.match(cim):
             kep = a.find("img")
             for jelolt in (a.get("aria-label"), a.get("title"),
                            kep.get("alt") if kep else None):
-                jelolt = (jelolt or "").strip()
+                jelolt = cim_tisztitas((jelolt or "").strip())
                 if len(jelolt) > len(cim) and not GENERIKUS_LINKSZOVEG.match(jelolt):
                     cim = jelolt
                     break
@@ -373,7 +382,8 @@ def linkek_kigyujtese(
             if len(reszek) != 1 or "-" not in reszek[0]:
                 continue
         elotag = utvonal_elotag
-        if isinstance(utvonal_elotag, dict):
+        dict_elotag = isinstance(utvonal_elotag, dict)
+        if dict_elotag:
             # PONTOS hoszt-egyezés (a www. előtag megengedve). Nem elég a
             # végződés-vizsgálat: a „budapest.hu" kulcs különben ráülne az
             # einfoszab.budapest.hu-ra is, aminek más a szerkezete.
@@ -382,7 +392,12 @@ def linkek_kigyujtese(
         if elotag is not None:
             if not p.path.startswith(elotag):
                 continue
-        elif kulcsszo_kell and not any(k in kereses for k in KULCSSZAVAK):
+        # Hoszt-térképnél a szabály NÉLKÜLI hosztra mindig kell kulcsszó, akkor
+        # is, ha a forrásnál kulcsszo_nelkul van: az csak arra vonatkozik, ahol
+        # az útvonal-előtag garantál. E nélkül a budapest.hu/hirek oldalán a
+        # külső hivatkozások (enbudapestem.hu, kozadat.hu) mind bejöttek.
+        elif (kulcsszo_kell or dict_elotag) and not any(
+                k in kereses for k in KULCSSZAVAK):
             continue
         if any(x in norm.lower() or x in cim.lower() for x in KIZARAS):
             continue
@@ -485,6 +500,28 @@ def nka_tetelek(html: str, url: str) -> dict[str, str]:
 
 
 EINFOSZAB_HOSZT = "einfoszab.budapest.hu"
+# A budapest.hu/hirek oldalon van egy külön, szerkesztett „Pályázatok" blokk.
+# Ami ott van, az biztosan kiírás — ezeket kivesszük a „tényleg pályázat-e"
+# szövegvizsgálat alól, nehogy egy szűkszavú cikk miatt elveszítsük őket.
+BIZTOS_PALYAZAT: set[str] = set()
+
+
+def budapest_palyazat_szekcio(html: str, url: str) -> None:
+    """A „Pályázatok" fejléc alatti blokk linkjeit biztos kiírásnak jelöli."""
+    soup = BeautifulSoup(html, "html.parser")
+    fejlec = next((h for h in soup.find_all(["h1", "h2", "h3"])
+                   if h.get_text(" ", strip=True).strip().lower() == "pályázatok"), None)
+    if fejlec is None:
+        return
+    blokk = fejlec
+    for _ in range(6):
+        blokk = blokk.parent
+        if blokk is None:
+            return
+        if len(blokk.find_all("a", href=True)) >= 3:
+            break
+    for a in blokk.find_all("a", href=True):
+        BIZTOS_PALYAZAT.add(normalizal(urljoin(url, a["href"])))
 
 
 def budapest_tetelek(html: str, url: str) -> dict[str, str]:
@@ -1148,6 +1185,24 @@ MUNKA_SZOVEG_JELEK = (
 MUNKA_JEL_KELL = 2                  # ennyi erős jel kell a szövegben
 
 
+# Az aria-label gyakran akadálymentesítési toldalékkal végződik
+# („…, megnyitás új lapon", „(új ablakban nyílik meg)") – ez nem a cím része.
+LINK_TOLDALEK = re.compile(
+    r"\s*[,;–-]?\s*\(?\s*(megnyitás[a]? új lapon|megnyitas[a]? uj lapon|"
+    r"új ablakban nyílik meg|uj ablakban nyilik meg|új lapon nyílik meg|"
+    r"uj lapon nyilik meg|megnyitás új ablakban|megnyitas uj ablakban)"
+    r"\s*\)?\s*$", re.IGNORECASE)
+
+
+def cim_tisztitas(cim: str) -> str:
+    """Sablonos akadálymentesítési toldalék levágása a cím végéről."""
+    elozo = None
+    while cim != elozo:                 # többszörös toldalék is előfordul
+        elozo = cim
+        cim = LINK_TOLDALEK.sub("", cim).strip()
+    return cim
+
+
 def munkaajanlat_cim(cim: str, url: str = "") -> bool:
     """Munkaajánlat-e pusztán a cím/URL alapján (olcsó előszűrés)."""
     return bool(MUNKA_CIM_RE.search(f"{cim} {urlparse(url).path}"))
@@ -1230,9 +1285,17 @@ KATEGORIAK: dict[str, re.Pattern] = {
 KATEGORIA_EGYEB = "Egyéb"
 
 
-def kategoriak_kinyerese(szoveg: str) -> list[str]:
-    """A kiírásra illő kategóriák. Ha egyik minta sem talál: [„Egyéb"]."""
-    talalt = [nev for nev, minta in KATEGORIAK.items() if minta.search(szoveg)]
+def kategoriak_kinyerese(cim: str, szoveg: str = "") -> list[str]:
+    """A kiírásra illő kategóriák. Ha egyik minta sem talál: [„Egyéb"].
+
+    A kategória akkor jár, ha a minta a CÍMBEN szerepel, vagy a szövegben
+    legalább kétszer. Egyetlen mellékes említés nem elég: a teljes oldalszöveg
+    (kivált egy gyűjtőoldalé) különben minden kategóriát bejelöl — egy
+    enbudapestem.hu kategórialap így kapott egyszerre nyolcat."""
+    talalt = []
+    for nev, minta in KATEGORIAK.items():
+        if minta.search(cim or "") or len(minta.findall(szoveg or "")) >= 2:
+            talalt.append(nev)
     return talalt or [KATEGORIA_EGYEB]
 
 
@@ -1446,6 +1509,15 @@ def main() -> int:
                 talalatok.update(palyazatok_org_tetelek(html, url))
             elif spec == "budapest" and urlparse(url).netloc == EINFOSZAB_HOSZT:
                 talalatok.update(budapest_tetelek(html, url))
+            elif spec == "budapest":
+                budapest_palyazat_szekcio(html, url)   # csak megjelöl
+                talalatok.update(linkek_kigyujtese(
+                    html, url, lista_urlek,
+                    utvonal_elotag=forras.get("utvonal_elotag"),
+                    kulcsszo_kell=not forras.get("kulcsszo_nelkul", False),
+                    csak_gyoker=forras.get("csak_gyoker", False),
+                    csak_sajat_domain=forras.get("csak_sajat_domain", False),
+                ))
             else:
                 talalatok.update(linkek_kigyujtese(
                     html, url, lista_urlek,
@@ -1516,7 +1588,8 @@ def main() -> int:
                     if pal:
                         t["palyazhat"] = pal
                     t["kategoriak"] = kategoriak_kinyerese(
-                        f"{t.get('cim', '')} {oldal_szovege(LISTA_LEAD.get(kulcs, ''))}")
+                        t.get("cim", ""),
+                        oldal_szovege(LISTA_LEAD.get(kulcs, "")))
 
     # ---- dúsítás + "valódi újdonság" döntés (UJ_HATAR cutoff) ----
     ujak: list[dict] = []
@@ -1556,6 +1629,7 @@ def main() -> int:
                     # Hírfolyam-forrásoknál a cím nem árulkodó: a cikk
                     # szövegéből döntjük el, tényleg kiírásról szól-e.
                     if (j["forras"] in ellenorzendo
+                            and kulcs not in BIZTOS_PALYAZAT
                             and not palyazat_e_szoveg(szoveg)):
                         allapot[NEM_PALYAZAT_PREFIX + kulcs] = MA
                         nem_palyazatok.add(kulcs)
@@ -1577,7 +1651,7 @@ def main() -> int:
                         magan_szurve += 1
                         print(f"  – csak magánszemély pályázhat: {j['cim'][:52]}")
                         continue
-                    kategoriak = kategoriak_kinyerese(f"{j['cim']} {szoveg}")
+                    kategoriak = kategoriak_kinyerese(j["cim"], szoveg)
         j["megjelent"], j["hatarido"], j["palyazhat"] = megjelent, hatarido, palyazhat
         t = adatok["tetelek"].get(kulcs)
         if t is not None:
@@ -1663,14 +1737,26 @@ def main() -> int:
             munka_szurve += 1
             print(f"  – munkaajánlat kiszűrve: {(t.get('cim') or kulcs)[:60]}")
             continue
+        # „Tényleg pályázat-e?" — ELSŐ FUTÁSKOR minden tétel csendben alapozódik,
+        # tehát az előtér-dúsítás ki sem fut; e nélkül a hírfolyam-források
+        # (budapest.hu/hirek) sima hírei bent maradnának.
+        if (t.get("forras") in ellenorzendo
+                and kulcs not in BIZTOS_PALYAZAT
+                and not palyazat_e_szoveg(oldal_szovege(html))):
+            allapot[NEM_PALYAZAT_PREFIX + kulcs] = MA
+            nem_palyazatok.add(kulcs)
+            adatok["tetelek"].pop(kulcs, None)
+            nem_palyazat_szurve += 1
+            print(f"  – nem pályázati hír: {(t.get('cim') or kulcs)[:60]}")
+            continue
         if megjelent and "megjelent" not in t:
             t["megjelent"] = megjelent
         if hatarido and "hatarido" not in t:
             t["hatarido"] = hatarido
         if palyazhat:
             t["palyazhat"] = palyazhat
-        t["kategoriak"] = kategoriak_kinyerese(
-            f"{t.get('cim', '')} {oldal_szovege(html)}")
+        t["kategoriak"] = kategoriak_kinyerese(t.get("cim", ""),
+                                               oldal_szovege(html))
     if hatter_szam:
         hatra = max(0, len(varo) - hatter_szam)
         print(f"» Háttér-dúsítás: {hatter_szam} tétel feldolgozva, {hatra} van hátra")
