@@ -66,9 +66,10 @@
      essenek. Szűk kijelzőn visszaesik sima tördelésre. */
   .meta {
     margin-top: 5px; display: grid; align-items: center; font-size: 12.5px;
-    grid-template-columns: minmax(0, 230px) 132px 178px 150px; gap: 6px;
+    grid-template-columns: minmax(0, 215px) 152px 180px 148px; gap: 6px;
   }
-  .meta > * { justify-self: start; }
+  .meta > * { justify-self: start; white-space: nowrap; }
+  .meta > .chip { overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
   @media (max-width: 720px) {
     .meta { display: flex; flex-wrap: wrap; }
   }
@@ -76,6 +77,8 @@
   .chip.pontos { background: #e9f0e4; color: #3f6b2a; }   /* tételes jogosultság */
   .chip.kat { background: #f3e9fa; color: #6b3a8f; }      /* kategória */
   .datum { color: var(--mut); }
+  .kiirva { background: var(--uj-bg); color: var(--uj-ink); border-radius: 20px; padding: 2px 9px; }
+  .kiirva.ures { background: var(--regi-bg); color: var(--mut); }
   .uj { background: var(--uj-bg); color: var(--uj-ink); border-radius: 20px; padding: 2px 9px; font-weight: 700; }
   .hatarido { color: #7a4a12; background: #fdf3e0; border-radius: 20px; padding: 2px 9px; }
   .hatarido.surgos { color: #a01d1d; background: #fdeaea; font-weight: 700; }
@@ -218,6 +221,10 @@
     return Object.keys(l).sort(function (a, b) { return a.localeCompare(b, "hu"); });
   }
 
+  // Az aggregátor oldalak (mások kiírásait gyűjtik újra) nem kapnak jelölést,
+  // a saját kiírást közzétevő források igen.
+  var AGGREGATOROK = { "PAFI (Pályázatfigyelő)": true, "palyazatok.org": true };
+
   function valasztokFeltoltese() {
     var db = {};
     mind.forEach(function (t) { db[t.forras] = (db[t.forras] || 0) + 1; });
@@ -225,7 +232,8 @@
       return db[b] - db[a] || a.localeCompare(b, "hu");
     }).forEach(function (f) {
       var o = document.createElement("option");
-      o.value = f; o.textContent = f + " (" + db[f] + ")";
+      o.value = f;
+      o.textContent = (AGGREGATOROK[f] ? "" : "🔹 ") + f + " (" + db[f] + ")";
       $("forras").appendChild(o);
     });
     var kat = {};
@@ -325,7 +333,7 @@
       chip.className = "chip"; chip.textContent = t.forras;
       meta.appendChild(chip);
       var ki = document.createElement("span");
-      ki.className = "datum";
+      ki.className = "kiirva" + (t.megjelent ? "" : " ures");
       ki.textContent = "kiírva: " + (t.megjelent || "–");
       meta.appendChild(ki);
       var hd = document.createElement("span");

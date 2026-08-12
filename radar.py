@@ -100,7 +100,7 @@ FORRASOK = [
         # csak_gyoker: a valódi cikkek egy szegmensű, kötőjeles slugon ülnek
         # (/megjelent-a-varosi-civil-alap-2026-evi-palyazati-kiirasa/), míg az
         # ÁSZF/GYIK/útmutató-navigáció /tamogatasok/… alatt — az kiesik.
-        "nev": "Bethlen Gábor Alapkezelő (NEA, Városi Civil Alap)",
+        "nev": "Bethlen Gábor Alapkezelő",
         "urls": [
             "https://bgazrt.hu/tamogatasok/nemzeti-egyuttmukodesi-alap/",
             "https://bgazrt.hu/tamogatasok/varosi-civil-alap/",
