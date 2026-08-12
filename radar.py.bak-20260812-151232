@@ -91,15 +91,9 @@ FORRASOK = [
         "kinek": "egyesület",
     },
     {
-        # A régi /palyazatok listaoldal a teljes hirdetőtáblát adta vissza
-        # (2681 tétel: állásajánlatok, garázsbérlet, ingatlan) → 2026-08-12-én
-        # lecserélve erre a szűkebb kategóriára. Saját parser: a listáról
-        # jön a cím és a határidő is (lásd jozsefvaros_tetelek()).
         "nev": "Józsefváros",
-        "urls": ["https://jozsefvaros.hu/otthon/hirdetotabla/palyazatok/"
-                 "palyazatok-szervezeteknek-tarsashazaknak-maganszemelyeknek/"],
+        "urls": ["https://jozsefvaros.hu/palyazatok"],
         "kinek": "kft + egyesület",
-        "special": "jozsefvaros",
     },
     {
         # Aggregátor: minden /p/ útvonalú link pályázat, de a címben gyakran
@@ -178,11 +172,6 @@ HATTER_HIBA_STOP = 10
 # Udvariassági szünet a háttér-letöltések között (a palyazatok.org 415-tel
 # rate-limitel burst-nél); teszthez RADAR_SLEEP=0 környezeti változó.
 DUSITAS_SZUNET = float(os.environ.get("RADAR_SLEEP", "0.7"))
-
-# Józsefváros: a hirdetőtábla listaoldala 2014-ig visszamenő teljes archívum,
-# ezért csak az élő és a legfeljebb ennyi napja lejárt kiírásokat vesszük be.
-JOZSEFVAROS_VISSZA_NAP = 90
-JOZSEFVAROS_UTVONAL = "/otthon/hirdetotabla/palyazat/"
 
 # Tömeges-álriasztás védelem: ha egy MÁR ALAPOZOTT forrásnál egyszerre ennél
 # több "új" jönne ÉS ez a forrás találatainak több mint 60%-a, az
@@ -313,53 +302,6 @@ def rss_tetelek(xml_szoveg: str) -> dict[str, str]:
         if any(x in cim.lower() for x in RSS_KIZARAS):
             continue
         talalatok.setdefault(normalizal(link), cim[:200])
-    return talalatok
-
-
-# A józsefvárosi hirdetőtábla listaoldaláról a címet ÉS a határidőt is
-# kiolvassuk; ide gyűjtjük, hogy a main() az adatok.json-ba írhassa.
-LISTA_HATARIDOK: dict[str, str] = {}
-
-
-def jozsefvaros_tetelek(html: str, base_url: str) -> dict[str, str]:
-    """A józsefvárosi hirdetőtábla accordion-listája: {normalizált_url: cím}.
-
-    Minden `div.accordion-item` fejlécében a `.s_title` három közvetlen
-    gyerekeleme: [sorszám, határidő, cím]; a testében a „További részletek"
-    link mutat a kiírás oldalára. Így a címet és a határidőt is megkapjuk a
-    listáról — nem kell hozzá tétel-dúsítás.
-
-    Az oldal 2014-ig visszamenő TELJES archívum (~780 tétel), ezért a
-    JOZSEFVAROS_VISSZA_NAP-nál régebben lejárt tételeket eldobjuk. Határidő
-    nélküli („folyamatos") tétel mindig bekerül."""
-    soup = BeautifulSoup(html, "html.parser")
-    also_hatar = (datetime.date.today()
-                  - datetime.timedelta(days=JOZSEFVAROS_VISSZA_NAP)).isoformat()
-    talalatok: dict[str, str] = {}
-    for item in soup.select("div.accordion-item"):
-        a = item.select_one(f'a[href*="{JOZSEFVAROS_UTVONAL}"]')
-        if not a or not a.get("href"):
-            continue
-        st = item.select_one(".s_title")
-        mezok = ([d.get_text(" ", strip=True) for d in st.find_all(recursive=False)]
-                 if st else [])
-        cim = mezok[2] if len(mezok) > 2 else ""
-        hatarido = None
-        if len(mezok) > 1:
-            m = DATUM_TELJES.search(mezok[1])
-            if m:
-                hatarido = _iso(int(m[1]), HONAPOK[m[2].lower()], int(m[3]))
-        if hatarido and hatarido < also_hatar:      # régen lejárt archívum
-            continue
-        norm = normalizal(urljoin(base_url, a["href"]))
-        if any(x in norm.lower() or x in cim.lower() for x in KIZARAS):
-            continue
-        if not cim:                                  # üres fejléc → slug a címből
-            cim = (urlparse(norm).path.rstrip("/").rsplit("/", 1)[-1]
-                   .replace("-", " ").replace("_", " "))
-        if hatarido:
-            LISTA_HATARIDOK[norm] = hatarido
-        talalatok.setdefault(norm, cim[:200])
     return talalatok
 
 
@@ -652,8 +594,6 @@ def main() -> int:
                 talalatok.update(nka_kollegiumok(html))
             if spec == "rss":
                 talalatok.update(rss_tetelek(html))
-            elif spec == "jozsefvaros":
-                talalatok.update(jozsefvaros_tetelek(html, url))
             else:
                 talalatok.update(linkek_kigyujtese(
                     html, url, lista_urlek,
@@ -694,10 +634,6 @@ def main() -> int:
             t["kinek"] = forras["kinek"]
             t["elso"] = allapot.get(kulcs, MA)
             t["utolso"] = MA
-            # Ha a listaoldal maga közölte a határidőt (Józsefváros), az a
-            # mérvadó — pontosabb, mint amit a cikkoldalról kaparnánk össze.
-            if kulcs in LISTA_HATARIDOK:
-                t["hatarido"] = LISTA_HATARIDOK[kulcs]
 
     # ---- dúsítás + "valódi újdonság" döntés (UJ_HATAR cutoff) ----
     ujak: list[dict] = []
