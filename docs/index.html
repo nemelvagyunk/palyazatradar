@@ -198,16 +198,19 @@
   }
 
   function valasztokFeltoltese() {
-    egyedi("forras").forEach(function (f) {
-      var o = document.createElement("option"); o.value = f; o.textContent = f;
+    var db = {};
+    mind.forEach(function (t) { db[t.forras] = (db[t.forras] || 0) + 1; });
+    Object.keys(db).sort(function (a, b) {          // darabszám szerint csökkenő
+      return db[b] - db[a] || a.localeCompare(b, "hu");
+    }).forEach(function (f) {
+      var o = document.createElement("option");
+      o.value = f; o.textContent = f + " (" + db[f] + ")";
       $("forras").appendChild(o);
     });
     var kat = {};
     mind.forEach(function (t) { t.kategoriak.forEach(function (k) { kat[k] = (kat[k] || 0) + 1; }); });
-    Object.keys(kat).sort(function (a, b) {
-      if (a === "Egyéb") return 1;          // az "Egyéb" mindig a lista végén
-      if (b === "Egyéb") return -1;
-      return a.localeCompare(b, "hu");
+    Object.keys(kat).sort(function (a, b) {      // darabszám szerint csökkenő
+      return kat[b] - kat[a] || a.localeCompare(b, "hu");
     }).forEach(function (k) {
       var l = document.createElement("label"); l.className = "cb";
       var cb = document.createElement("input");
