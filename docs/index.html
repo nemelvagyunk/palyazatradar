@@ -61,6 +61,7 @@
   .chip { background: var(--acc-soft); color: var(--acc); border-radius: 20px; padding: 2px 9px; }
   .chip.kinek { background: var(--regi-bg); color: var(--mut); }
   .chip.pontos { background: #e9f0e4; color: #3f6b2a; }   /* tételes jogosultság */
+  .chip.kat { background: #f3e9fa; color: #6b3a8f; }      /* kategória */
   .datum { color: var(--mut); }
   .uj { background: var(--uj-bg); color: var(--uj-ink); border-radius: 20px; padding: 2px 9px; font-weight: 700; }
   .hatarido { color: #7a4a12; background: #fdf3e0; border-radius: 20px; padding: 2px 9px; }
@@ -97,6 +98,7 @@
       <option value="civil">Civil szervezet / egyesület pályázhat</option>
       <option value="kft">Vállalkozás (kft) pályázhat</option>
     </select>
+    <select id="kategoria"><option value="">Kategória: mind</option></select>
     <label class="cb"><input type="checkbox" id="aktualis"> csak most listázott</label>
     <label class="cb"><input type="checkbox" id="csakuj"> csak új (7 nap)</label>
     <fieldset class="hd-szuro">
@@ -166,6 +168,7 @@
             utolso: t.utolso || "",
             hatarido: t.hatarido || "",
             palyazhat: t.palyazhat || null,
+            kategoriak: t.kategoriak || [],
             kereso: ((t.cim || "") + " " + kulcs).toLowerCase()
           };
         });
@@ -194,6 +197,17 @@
       var o = document.createElement("option"); o.value = f; o.textContent = f;
       $("forras").appendChild(o);
     });
+    var kat = {};
+    mind.forEach(function (t) { t.kategoriak.forEach(function (k) { kat[k] = (kat[k] || 0) + 1; }); });
+    Object.keys(kat).sort(function (a, b) {
+      if (a === "Egyéb") return 1;          // az "Egyéb" mindig a lista végén
+      if (b === "Egyéb") return -1;
+      return a.localeCompare(b, "hu");
+    }).forEach(function (k) {
+      var o = document.createElement("option");
+      o.value = k; o.textContent = k + " (" + kat[k] + ")";
+      $("kategoria").appendChild(o);
+    });
   }
 
   // Kinek-szűrő: ha a kiírás szövegéből kiolvastuk a jogosultakat (palyazhat),
@@ -220,7 +234,7 @@
 
   function szures() {
     var q = $("kereso").value.trim().toLowerCase(),
-        f = $("forras").value, k = $("kinek").value,
+        f = $("forras").value, k = $("kinek").value, kat = $("kategoria").value,
         aktualis = $("aktualis").checked, csakuj = $("csakuj").checked,
         hd = {
           ervenyes: $("hd-ervenyes").checked,
@@ -231,6 +245,7 @@
       if (q && t.kereso.indexOf(q) === -1) return false;
       if (f && t.forras !== f) return false;
       if (!kinekOk(t, k)) return false;
+      if (kat && t.kategoriak.indexOf(kat) === -1) return false;
       if (!hd[hataridoAllapot(t)]) return false;
       if (aktualis && t.utolso !== frissitve) return false;
       if (csakuj && !ujTetel(t)) return false;
@@ -257,6 +272,12 @@
       }
       var chip = document.createElement("span"); chip.className = "chip"; chip.textContent = t.forras;
       meta.appendChild(chip);
+      t.kategoriak.forEach(function (k) {
+        if (k === "Egyéb") return;              // az "Egyéb" nem mond semmit
+        var kc = document.createElement("span");
+        kc.className = "chip kat"; kc.textContent = k;
+        meta.appendChild(kc);
+      });
       if (t.palyazhat && t.palyazhat.length) {
         var po = document.createElement("span"); po.className = "chip pontos";
         po.textContent = "pályázhat: " + t.palyazhat.map(function (p) {
@@ -293,7 +314,7 @@
   $("kereso").addEventListener("input", function () {
     clearTimeout(ido); ido = setTimeout(szures, 150);
   });
-  ["forras", "kinek", "aktualis", "csakuj",
+  ["forras", "kinek", "kategoria", "aktualis", "csakuj",
    "hd-ervenyes", "hd-nincs", "hd-lejart"].forEach(function (id) {
     $(id).addEventListener("change", szures);
   });

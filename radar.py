@@ -40,9 +40,25 @@ KOZLEMENY_LINK = "https://www.palyazat.gov.hu/kozlemenyek/"
 
 FORRASOK = [
     {
+        # A palyazat.norvegcivilalap.hu főoldala helyett (2026-08-12) a hivatalos
+        # felhívás-lista. Drupal-lista: <li><article class="node--type-call">
+        # <h3><a href="/hu/civil-society-fund-hungary/calls/<slug>">…</a></h3>,
+        # a kártyán a státusz is ott van („Nyitott" / „Lezárt").
+        # Az útvonal-előtag már garantálja, hogy felhívás → kulcsszó-szűrés ki.
         "nev": "Norvég Civil Alap",
-        "urls": ["https://palyazat.norvegcivilalap.hu/"],
+        "urls": [
+            "https://eeagrants.org/hu/civil-society-fund-hungary/calls",
+            "https://eeagrants.org/hu/civil-society-fund-hungary/news",
+            "https://palyazat.norvegcivilalap.hu/",
+        ],
         "kinek": "egyesület",
+        # Csak az eeagrants-oldalakra van útvonal-szabály (a felhívás- és a
+        # híraloldalak útvonala egyértelmű); a pályázati portál linkjeire
+        # marad a kulcsszó-szűrés, ott nincs ilyen tiszta útvonal.
+        "utvonal_elotag": {"eeagrants.org": (
+            "/hu/civil-society-fund-hungary/calls/",
+            "/hu/civil-society-fund-hungary/news/",
+        )},
     },
     {
         "nev": "Hangfoglaló",
@@ -53,22 +69,55 @@ FORRASOK = [
         "kinek": "klubtámogatás",
     },
     {
-        # Speciális kezelés: kollégiumonként "(felhívás elérhető)" jelzés
+        # 2026-08-12: a gyűjtő listaoldal helyett a hírkategória (csak a
+        # pályázati hírek) + a 10 kollégiumi aloldal külön-külön. Saját
+        # parser mindkét oldaltípusra, lásd nka_tetelek().
         "nev": "NKA kollégiumi felhívások",
         "urls": [
-            "https://nka.hu/kategoria/kiemelt-kategoriak/palyaztatas/kollegiumok-felhivasai/"
+            "https://nka.hu/kategoria/kiemelt-kategoriak/hirek/",
+        ] + [
+            "https://nka.hu/kiemelt-kategoriak/palyaztatas/kollegiumok-felhivasai/"
+            f"{k}/" for k in (
+                "anyanyelvi-kultura-kollegiuma",
+                "eloado-muveszetek-kollegiuma",
+                "epitett-orokseg-kollegiuma",
+                "hagyomany-es-ismeretatadas-kollegiuma",
+                "kozossegi-programok-es-fesztivalok-kollegiuma",
+                "kozgyujtemenyek-kollegiuma-2",
+                "vizualis-muveszetek-kollegiuma-2",
+                "halmos-bela-program-kollegium",
+                "hangfoglalo-konnyuzene-tamogato-program-kollegiuma",
+                "kiemelt-kulturalis-programok-ideiglenes-kollegiuma",
+            )
         ],
         "kinek": "egyesület",
         "special": "nka",
     },
     {
-        "nev": "NEA (Bethlen Gábor Alapkezelő)",
-        "urls": ["https://bgazrt.hu/tamogatasok/nemzeti-egyuttmukodesi-alap/"],
+        # 2026-08-12: két alapoldal, semmi más. A hírek a fő tartalomban ÉS a
+        # jobb oldali „AKTUÁLIS" dobozban (sidebar-right) is megjelennek —
+        # ugyanabban a HTML-ben vannak, ezért külön kezelés nélkül bejönnek.
+        # csak_gyoker: a valódi cikkek egy szegmensű, kötőjeles slugon ülnek
+        # (/megjelent-a-varosi-civil-alap-2026-evi-palyazati-kiirasa/), míg az
+        # ÁSZF/GYIK/útmutató-navigáció /tamogatasok/… alatt — az kiesik.
+        "nev": "Bethlen Gábor Alapkezelő (NEA, Városi Civil Alap)",
+        "urls": [
+            "https://bgazrt.hu/tamogatasok/nemzeti-egyuttmukodesi-alap/",
+            "https://bgazrt.hu/tamogatasok/varosi-civil-alap/",
+        ],
         "kinek": "egyesület",
+        "csak_gyoker": True,
     },
     {
+        # 2026-08-12: a hírfolyam is (a beadási határidőket ott hirdetik meg).
+        # Útvonal-szabály nem kell: a hírek /erasmus_hirek/<slug> alatt vannak,
+        # a menü „Pályázati lehetőségek" linkjei pedig épp a másik forrás-URL-re
+        # mutatnak, amit a lista_urlek amúgy is kizár.
         "nev": "Erasmus+ / ESC",
-        "urls": ["https://erasmusplusz.hu/palyazati-lehetosegek-az-erasmus-programban"],
+        "urls": [
+            "https://erasmusplusz.hu/palyazati-lehetosegek-az-erasmus-programban",
+            "https://erasmusplusz.hu/erasmus_hirek",
+        ],
         "kinek": "egyesület",
     },
     {
@@ -80,17 +129,28 @@ FORRASOK = [
         "kinek": "egyesület",
     },
     {
-        # iso-8859-2 kódolású oldal – a fetch() kezeli
+        # iso-8859-2 kódolású oldal – a fetch() kezeli.
+        # 2026-08-12: a 45 tételből 42 rendben volt (jó cím, kiolvasott
+        # határidő), a 3 zavaró mind KÜLSŐ hivatkozás volt (ec.europa.eu
+        # árfolyamtábla, CulturEU útmutató) → elég a saját domainre szűrni.
+        # Szándékosan nem útvonal-előtaggal (/palyazatok/), mert az élő
+        # oldalt most nem tudtam ellenőrizni, és az némán elnyelné az esetleg
+        # más útvonalon megjelenő kiírásokat is.
         "nev": "Kreatív Európa Kultúra",
         "urls": ["https://kultura.kreativeuropa.hu/kategoria/palyazatok"],
         "kinek": "egyesület",
+        "csak_sajat_domain": True,
     },
     {
-        # A palyazat.gov.hu JS-alapú, géppel nem olvasható – ez az aggregátor a proxy.
-        # A hivatalos részletek mindig a palyazat.gov.hu-n!
-        "nev": "KKV / energetika (palyazatok.org)",
-        "urls": ["https://palyazatok.org/kkv-palyazatok/"],
-        "kinek": "kft",
+        # A palyazat.gov.hu JS-alapú, géppel nem olvasható – ez az aggregátor a
+        # proxy. A hivatalos részletek mindig a palyazat.gov.hu-n!
+        # 2026-08-12: a korábbi három külön palyazatok.org-forrás (KKV/energetika,
+        # Civil, Kulturális/művészeti) EGYBE olvasztva — ugyanaz az oldal, ugyanaz
+        # a szerkezet, csak más kategória-aloldalak. A „kinek" ezért vegyes.
+        "nev": "palyazatok.org",
+        "urls": ["https://palyazatok.org/"],
+        "kinek": "kft + egyesület",
+        "special": "palyazatok_org",
     },
     {
         # A /kozlemenyek oldal Next.js-es (a lista nincs a nyers HTML-ben),
@@ -104,12 +164,24 @@ FORRASOK = [
         "special": "kozlemeny",
     },
     {
+        # 2026-08-12: a hírfolyam. A cikkek /hirek/ÉÉÉÉ/HH/NN/<slug> alatt
+        # vannak; a link szövege sablonos („(új ablakban nyílik meg)"), a
+        # valódi cím az aria-label-ben — ezt a linkek_kigyujtese kezeli.
+        # tartalom_ellenorzes: a hírek nagy része NEM pályázat, és a címből
+        # ez nem mindig derül ki, ezért a cikk szövegét is megnézzük.
         "nev": "Budapest Főváros",
         "urls": [
-            "https://budapest.hu/nyitott-budapest/civil-szervezeteknek",
-            "https://budapest.hu/zold-budapest/zold-palyazatok",
+            "https://budapest.hu/hirek",
+            "https://einfoszab.budapest.hu/applicationForm"
+            "?key=palyazat-tamogatas-view&type=7",
         ],
         "kinek": "egyesület",
+        # PONTOS hoszt-kulcs: az einfoszab.budapest.hu-ra ez NEM vonatkozik,
+        # azt a budapest_tetelek() táblázat-parsere viszi.
+        "utvonal_elotag": {"budapest.hu": "/hirek/20"},
+        "kulcsszo_nelkul": True,
+        "tartalom_ellenorzes": True,
+        "special": "budapest",
     },
     {
         # A régi /palyazatok listaoldal a teljes hirdetőtáblát adta vissza
@@ -137,21 +209,6 @@ FORRASOK = [
         "utvonal_elotag": "/p/",
         "kulcsszo_nelkul": True,
     },
-    {
-        # A palyazat.gov.hu-t GitHub-runnerről nem lehet elérni (geo-blokk,
-        # lásd CLAUDE.md) → a palyazatok.org kategóriái a proxy ide is.
-        "nev": "Civil (palyazatok.org)",
-        "urls": ["https://palyazatok.org/palyazatok-civil-szervezeteknek/"],
-        "kinek": "egyesület",
-    },
-    {
-        "nev": "Kulturális / művészeti (palyazatok.org)",
-        "urls": [
-            "https://palyazatok.org/kulturalis-palyazatok/",
-            "https://palyazatok.org/muveszeti-palyazatok/",
-        ],
-        "kinek": "kft + egyesület",
-    },
 ]
 
 # A cím vagy az URL útvonala tartalmazza valamelyiket (a domain NEM számít!)
@@ -168,6 +225,7 @@ KIZARAS = [
     "hirlevel", "hírlevél", "subscribepage",
     "pályázatírás", "palyazatiras",   # szolgáltatás-hirdetések (palyazatok.org)
     "kategoria/", "/tema/", "/page/", # lista-/kategória-/lapozó-oldalak
+    "lezarult-felhivas", "lezárult felhívás",   # archívum-gyűjtőoldalak
 ]
 
 # Csak az RSS-forrásokra: technikai közlemények kiszűrése (a cím a
@@ -216,8 +274,8 @@ BULK_HATAR_ARANY = 0.6
 
 # Watch-oldalak: csak VÁLTOZÁST figyelünk rajtuk (hash + diff-kivonat).
 WATCH_OLDALAK = [
-    {"nev": "BGA Városi Civil Alap",
-     "url": "https://bgazrt.hu/tamogatasok/varosi-civil-alap/"},
+    # A Városi Civil Alap 2026-08-12 óta rendes forrás (lásd FORRASOK),
+    # a változásfigyelés ott már fölösleges lenne.
     {"nev": "NKA miniszteri támogatások",
      "url": "https://nka.hu/kategoria/kiemelt-kategoriak/palyaztatas/miniszteri-tamogatasok-palyaztatas/"},
     {"nev": "Norvég Civil Alap főoldal",
@@ -262,13 +320,23 @@ def linkek_kigyujtese(
     lista_urlek: set[str],
     utvonal_elotag: str | None = None,
     kulcsszo_kell: bool = True,
+    csak_gyoker: bool = False,
+    csak_sajat_domain: bool = False,
 ) -> dict[str, str]:
     """Visszaad: {normalizált_url: cím}.
 
     utvonal_elotag: ha meg van adva, csak az ezzel kezdődő útvonalú linkek
     számítanak (pl. pafi.hu → "/p/").
     kulcsszo_kell: False esetén a KULCSSZAVAK-szűrés kimarad (aggregátoroknál,
-    ahol az előtag már garantálja, hogy a link pályázat)."""
+    ahol az előtag már garantálja, hogy a link pályázat).
+    csak_gyoker: csak az EGY szegmensű, kötőjeles útvonalú linkek (pl. a
+    bgazrt.hu-n /megjelent-a-varosi-civil-alap-2026-evi-palyazati-kiirasa/).
+    Így a menü- és aloldal-navigáció (/tamogatasok/altalanos/gyik/) és a
+    szekció-nyitólapok (/tamogatasok/, /adattar/ – egyszavas slug) kiesnek.
+    csak_sajat_domain: csak a listaoldallal AZONOS hoszton lévő linkek. Erre
+    ott van szükség, ahol a kiírások rendben vannak, csak külső hivatkozások
+    (útmutatók, árfolyamtáblák) szivárognak be — pl. a kreativeuropa.hu-n az
+    ec.europa.eu-s segédanyagok."""
     soup = BeautifulSoup(html, "html.parser")
     talalatok: dict[str, str] = {}
     for a in soup.find_all("a", href=True):
@@ -282,12 +350,42 @@ def linkek_kigyujtese(
         if norm in lista_urlek:            # maga a listaoldal nem találat
             continue
         cim = a.get_text(" ", strip=True)
+        # Sok oldalon a link szövege sablonos („(új ablakban nyílik meg)",
+        # „Tovább", „Bővebben"), a valódi cím pedig az aria-label/title
+        # attribútumban vagy a kép alt-jában van (pl. budapest.hu/hirek).
+        if len(cim) < 15 or GENERIKUS_LINKSZOVEG.match(cim):
+            kep = a.find("img")
+            for jelolt in (a.get("aria-label"), a.get("title"),
+                           kep.get("alt") if kep else None):
+                jelolt = (jelolt or "").strip()
+                if len(jelolt) > len(cim) and not GENERIKUS_LINKSZOVEG.match(jelolt):
+                    cim = jelolt
+                    break
         p = urlparse(norm)
-        if utvonal_elotag and not p.path.startswith(utvonal_elotag):
-            continue
         # Kulcsszó a címben VAGY az URL útvonalában (domain nélkül!)
         kereses = (cim + " " + p.path + "?" + p.query).lower()
-        if kulcsszo_kell and not any(k in kereses for k in KULCSSZAVAK):
+        # Útvonal-előtag: sztring → minden linkre érvényes; dict → hosztonként
+        # ({"eeagrants.org": "/…/calls/"}), ha a forrás több oldalt figyel és
+        # csak az egyiken van jól elkülönülő útvonal. Ahol VAN előtag-szabály,
+        # ott az dönt (a kulcsszó-szűrés kimarad, mert az útvonal már garantál);
+        # ahol nincs, ott marad a kulcsszavas szűrés.
+        if csak_sajat_domain and p.netloc != urlparse(base_url).netloc:
+            continue
+        if csak_gyoker:
+            reszek = [x for x in p.path.split("/") if x]
+            if len(reszek) != 1 or "-" not in reszek[0]:
+                continue
+        elotag = utvonal_elotag
+        if isinstance(utvonal_elotag, dict):
+            # PONTOS hoszt-egyezés (a www. előtag megengedve). Nem elég a
+            # végződés-vizsgálat: a „budapest.hu" kulcs különben ráülne az
+            # einfoszab.budapest.hu-ra is, aminek más a szerkezete.
+            elotag = next((v for h, v in utvonal_elotag.items()
+                           if p.netloc in (h, "www." + h)), None)
+        if elotag is not None:
+            if not p.path.startswith(elotag):
+                continue
+        elif kulcsszo_kell and not any(k in kereses for k in KULCSSZAVAK):
             continue
         if any(x in norm.lower() or x in cim.lower() for x in KIZARAS):
             continue
@@ -296,6 +394,180 @@ def linkek_kigyujtese(
         if len(cim) < 12:                  # üres/ikon/"Tovább" link → slug a cím helyett
             cim = p.path.rstrip("/").rsplit("/", 1)[-1].replace("-", " ").replace("_", " ")
         # az első (általában legbeszédesebb) címet tartjuk meg
+        talalatok.setdefault(norm, cim[:200])
+    return talalatok
+
+
+NKA_HIREK_UTVONAL = "/kiemelt-kategoriak/hirek/"
+NKA_FELHIVAS_UTVONAL = "/kollegiumok-felhivasai/"
+NKA_NINCS_FELHIVAS = re.compile(
+    r"jelenleg\s+nincs\s+el[éeÉE]rhet[őoÖO]\s+p[áaÁA]ly[áaÁA]zati\s+felh[íiÍI]v[áaÁA]s",
+    re.IGNORECASE)
+
+
+def _nka_kanonikus(url: str) -> str:
+    """A kollégiumi aloldalon lévő RELATÍV felhívás-link feloldva
+    .../kollegiumok-felhivasai/<kollégium>/<felhívás> alakot ad, de az oldal
+    a .../kollegiumok-felhivasai/<felhívás> címre irányít át. Egységesítjük,
+    hogy ugyanaz a felhívás ne kerüljön be kétszer, más kulccsal."""
+    p = urlparse(url)
+    reszek = [x for x in p.path.split("/") if x]
+    try:
+        i = reszek.index("kollegiumok-felhivasai")
+    except ValueError:
+        return url
+    if len(reszek) - i == 3:                      # kollégium + felhívás
+        reszek.pop(i + 1)
+        return urlunparse((p.scheme, p.netloc, "/" + "/".join(reszek) + "/",
+                           "", p.query, ""))
+    return url
+
+
+def nka_tetelek(html: str, url: str) -> dict[str, str]:
+    """NKA: kétféle oldal, a bejövő URL dönti el, melyik.
+
+    1. Kollégiumi aloldal (…/kollegiumok-felhivasai/<kollégium>/): a felhívás
+       magán az oldalon van. Ha ott a „Jelenleg nincs elérhető pályázati
+       felhívás." mondat, nincs találat. Különben a tartalmi blokkból
+       kiszedjük a felhívás-oldalra mutató linke(ke)t, a cím pedig
+       „<Kollégium> – <a blokk első érdemi félkövér sora>".
+    2. Hírkategória (…/kategoria/kiemelt-kategoriak/hirek/): sok a nem
+       pályázati hír (kitüntetés, nekrológ, kiállítás), ezért itt ÚTVONAL
+       (/kiemelt-kategoriak/hirek/) ÉS kulcsszó is kell — a 24 hírből így
+       marad a 3 pályázati."""
+    soup = BeautifulSoup(html, "html.parser")
+    talalatok: dict[str, str] = {}
+
+    if NKA_FELHIVAS_UTVONAL in urlparse(url).path:
+        blokk = soup.select_one(".single-post__content") or soup.find("main")
+        if blokk is None or NKA_NINCS_FELHIVAS.search(blokk.get_text(" ", strip=True)):
+            return talalatok
+        cimtag = soup.find("title")
+        kollegium = cimtag.get_text(" ", strip=True).split(" - ")[0].strip() if cimtag else ""
+        if not kollegium:
+            kollegium = (urlparse(url).path.rstrip("/").rsplit("/", 1)[-1]
+                         .replace("-", " ").title())
+        felhivas_cim = next(
+            (sz for sz in (s.get_text(" ", strip=True) for s in blokk.find_all("strong"))
+             if len(sz) >= 8), "")
+        cim = f"{kollegium} – {felhivas_cim}" if felhivas_cim else f"{kollegium} – felhívás elérhető"
+        sajat = normalizal(url)
+        for a in blokk.find_all("a", href=True):
+            cel = _nka_kanonikus(normalizal(urljoin(url, a["href"])))
+            if (NKA_FELHIVAS_UTVONAL in urlparse(cel).path
+                    and cel != sajat and not cel.lower().endswith(".pdf")):
+                talalatok.setdefault(cel, cim[:200])
+        if not talalatok:                 # nincs külön felhívás-oldal → maga a lap
+            talalatok[sajat] = cim[:200]
+        return talalatok
+
+    for a in soup.find_all("a", href=True):
+        cel = normalizal(urljoin(url, a["href"]))
+        p = urlparse(cel)
+        if not p.path.startswith(NKA_HIREK_UTVONAL):
+            continue
+        cim = a.get_text(" ", strip=True)
+        kereses = (cim + " " + p.path).lower()
+        if not any(k in kereses for k in KULCSSZAVAK):
+            continue
+        if any(x in cel.lower() or x in cim.lower() for x in KIZARAS):
+            continue
+        if munkaajanlat_cim(cim, cel):
+            continue
+        if len(cim) < 12:
+            cim = p.path.rstrip("/").rsplit("/", 1)[-1].replace("-", " ")
+        talalatok.setdefault(cel, cim[:200])
+    return talalatok
+
+
+EINFOSZAB_HOSZT = "einfoszab.budapest.hu"
+
+
+def budapest_tetelek(html: str, url: str) -> dict[str, str]:
+    """Budapest Főváros: kétféle oldal, a hoszt dönti el, melyik.
+
+    1. einfoszab.budapest.hu — közzétételi TÁBLÁZAT (#tblData) az alábbi
+       oszlopokkal: pályázati kiírás címe | benyújtás helye | benyújtás
+       határideje | közzététel dátuma | Részletek. Vagyis a címet, a
+       határidőt ÉS a megjelenést is készen kapjuk, dúsítás nélkül.
+       Kulcsnak a „Részletek" sorazonosítós linkje kell: a „benyújtás helye"
+       több sornál ugyanarra a gyűjtőoldalra mutat, az ütközne.
+    2. budapest.hu/hirek — sima hírfolyam, a linkek_kigyujtese viszi
+       (útvonal-előtag + aria-label-ből vett cím), a „tényleg pályázat-e"
+       vizsgálat pedig a cikk szövegén fut le a dúsításkor."""
+    if urlparse(url).netloc != EINFOSZAB_HOSZT:
+        return {}
+    soup = BeautifulSoup(html, "html.parser")
+    tabla = soup.find("table", id="tblData") or soup.find("table")
+    if tabla is None:
+        print("  ! einfoszab: nincs meg a táblázat", file=sys.stderr)
+        return {}
+    talalatok: dict[str, str] = {}
+    for sor in tabla.select("tbody tr"):
+        cellak = sor.find_all("td")
+        if len(cellak) < 4:
+            continue
+        cim = cellak[0].get_text(" ", strip=True)
+        if not cim:
+            continue
+        reszletek = cellak[-1].find("a", href=True)
+        hely = cellak[1].find("a", href=True)
+        cel = reszletek or hely
+        if not cel:
+            continue
+        kulcs = normalizal(urljoin(url, cel["href"]))
+        if munkaajanlat_cim(cim, kulcs):
+            continue
+        hatarido = _elso_datum(cellak[2].get_text(" ", strip=True))
+        megjelent = _elso_datum(cellak[3].get_text(" ", strip=True))
+        if hatarido:
+            LISTA_HATARIDOK[kulcs] = hatarido
+        if megjelent:
+            LISTA_MEGJELENES[kulcs] = megjelent
+        talalatok.setdefault(kulcs, cim[:200])
+    return talalatok
+
+
+PALYAZATOK_ORG_KARUSSZEL = ".af-banner-carousel-1"
+
+
+def palyazatok_org_tetelek(html: str, base_url: str) -> dict[str, str]:
+    """palyazatok.org főoldal, „Friss pályázatok" karusszel.
+
+    A karusszel jobbra-balra lapozható, de kattintgatni NEM kell: a slick
+    slider mind a 10 diát beleírja a kiszolgált HTML-be (a látható 3 csak
+    CSS-kérdés), a `slick-cloned` másolatokat pedig a böngésző teszi hozzá,
+    a nyers HTML-ben nincsenek. Minden dia egy `.slick-item`: a kép egy üres
+    szövegű linkben, a cím pedig a `<h4>`-ben — ezért a linkek szövegéből
+    dolgozó általános gyűjtő itt üres címeket adna.
+
+    A főoldal második karusszelje (`.posts-slider`) referenciacikkeket
+    tartalmaz („Munkába állt a Bobcat…"), azt szándékosan nem nézzük."""
+    soup = BeautifulSoup(html, "html.parser")
+    karusszel = soup.select_one(PALYAZATOK_ORG_KARUSSZEL)
+    if karusszel is None:
+        print("  ! palyazatok.org: nincs meg a 'Friss pályázatok' karusszel",
+              file=sys.stderr)
+        return {}
+    talalatok: dict[str, str] = {}
+    for dia in karusszel.select(".slick-item"):
+        if "slick-cloned" in (dia.get("class") or []):
+            continue
+        a = dia.find("a", href=True)
+        if not a:
+            continue
+        fejlec = dia.find(["h4", "h3", "h2"])
+        cim = (fejlec.get_text(" ", strip=True) if fejlec else "").strip()
+        norm = normalizal(urljoin(base_url, a["href"]))
+        if not cim:                       # tartalék: a leghosszabb linkszöveg
+            cim = max((x.get_text(" ", strip=True) for x in dia.find_all("a")),
+                      key=len, default="")
+        if not cim:
+            cim = urlparse(norm).path.rstrip("/").rsplit("/", 1)[-1].replace("-", " ")
+        if any(x in norm.lower() or x in cim.lower() for x in KIZARAS):
+            continue
+        if munkaajanlat_cim(cim, norm):
+            continue
         talalatok.setdefault(norm, cim[:200])
     return talalatok
 
@@ -460,6 +732,18 @@ HONAPOK = {
 }
 HONAP_RE = "|".join(sorted(HONAPOK, key=len, reverse=True))
 
+ANGOL_HONAPOK = {
+    "jan": 1, "january": 1, "feb": 2, "february": 2, "mar": 3, "march": 3,
+    "apr": 4, "april": 4, "may": 5, "jun": 6, "june": 6, "jul": 7, "july": 7,
+    "aug": 8, "august": 8, "sep": 9, "sept": 9, "september": 9,
+    "oct": 10, "october": 10, "nov": 11, "november": 11, "dec": 12, "december": 12,
+}
+ANGOL_HONAP_RE = "|".join(sorted(ANGOL_HONAPOK, key=len, reverse=True))
+# Angol dátum, hónap elöl: „Oct 1, 2026", „October 1 2026" (visegradfund.org)
+DATUM_ANGOL = re.compile(
+    rf"\b({ANGOL_HONAP_RE})\.?\s+(\d{{1,2}})(?:st|nd|rd|th)?,?\s+(20\d{{2}})\b",
+    re.IGNORECASE)
+
 DATUM_TELJES = re.compile(rf"(20\d{{2}})\.?\s*({HONAP_RE})\s*(\d{{1,2}})\b", re.IGNORECASE)
 DATUM_SZAMOS = re.compile(r"\b(20\d{2})[.\-](?:\s*)(\d{1,2})[.\-](?:\s*)(\d{1,2})\b")
 DATUM_HONAPNAP = re.compile(rf"\b({HONAP_RE})\s*(\d{{1,2}})\b", re.IGNORECASE)
@@ -520,6 +804,10 @@ def _datum_jeloltek(ablak: str, megj: datetime.date | None) -> list[tuple[int, s
         d = _iso(int(m[1]), int(m[2]), int(m[3]))
         if d:
             ki.append((m.start(), d))
+    for m in DATUM_ANGOL.finditer(ablak):
+        d = _iso(int(m[3]), ANGOL_HONAPOK[m[1].lower()], int(m[2]))
+        if d:
+            ki.append((m.start(), d))
     if megj:  # év nélküli dátum ("október 22."): a megjelenés évéből következtetünk
         lefedve = {p for p, _ in ki}
         for m in DATUM_HONAPNAP.finditer(ablak):
@@ -551,6 +839,9 @@ def _elso_datum(szoveg: str) -> str | None:
     m = DATUM_SZAMOS.search(szoveg)
     if m:
         return _iso(int(m[1]), int(m[2]), int(m[3]))
+    m = DATUM_ANGOL.search(szoveg)
+    if m:
+        return _iso(int(m[3]), ANGOL_HONAPOK[m[1].lower()], int(m[2]))
     return None
 
 
@@ -578,17 +869,25 @@ def cimkezett_hatarido(soup: BeautifulSoup) -> str | None:
     return None
 
 
-def hatarido_kinyerese(szoveg: str, megjelent: str | None) -> str | None:
-    """Határidő: a kulcsszóhoz legközelebbi dátum a ±120 karakteres környezetben;
-    a megjelenésnél korábbi dátum nem lehet határidő."""
-    megj: datetime.date | None = None
-    if megjelent:
-        try:
-            megj = datetime.date.fromisoformat(megjelent)
-        except ValueError:
-            pass
+# Határidő-kulcsszavak SZINTEKBEN. Ahol egy oldal több dátumot sorol fel
+# (visegradfund.org „Timeline": Call opens / Draft submission deadline /
+# Final application deadline / Results announced), ott a puszta „legközelebbi
+# dátum" rossz sorra ülhet. Ezért előbb a legbeszédesebb megfogalmazást
+# keressük, és csak ha az nincs, lépünk az általánosabb szintre.
+HATARIDO_SZINT1 = re.compile(
+    r"(final application deadline|final deadline|"
+    r"beadási határidő|beadasi hatarido|benyújtási határidő|benyujtasi hatarido|"
+    r"benyújtás határideje|benyujtas hatarideje)", re.IGNORECASE)
+HATARIDO_SZINT2 = re.compile(
+    r"(application deadline|submission deadline|closing date|"
+    r"jelentkezési határidő|jelentkezesi hatarido|pályázati határidő|"
+    r"palyazati hatarido|beérkezési határidő|beerkezesi hatarido)", re.IGNORECASE)
+
+
+def _legkozelebbi_datum(szoveg: str, kulcs_re: re.Pattern,
+                        megj: datetime.date | None) -> str | None:
     legjobb: tuple[int, str] | None = None  # (távolság, ISO-dátum)
-    for km in HATARIDO_KULCS.finditer(szoveg):
+    for km in kulcs_re.finditer(szoveg):
         lo, hi = max(0, km.start() - 120), min(len(szoveg), km.end() + 120)
         kulcs_poz = km.start() - lo
         for poz, d in _datum_jeloltek(szoveg[lo:hi], megj):
@@ -598,6 +897,24 @@ def hatarido_kinyerese(szoveg: str, megjelent: str | None) -> str | None:
             if legjobb is None or tav < legjobb[0]:
                 legjobb = (tav, d)
     return legjobb[1] if legjobb else None
+
+
+def hatarido_kinyerese(szoveg: str, megjelent: str | None) -> str | None:
+    """Határidő: a kulcsszóhoz legközelebbi dátum a ±120 karakteres környezetben;
+    a megjelenésnél korábbi dátum nem lehet határidő. A kulcsszavakat három
+    szinten próbáljuk (a legkonkrétabbtól az általánosig) — így a „Final
+    application deadline" veri a „Call opens" és a „Results announced" sorát."""
+    megj: datetime.date | None = None
+    if megjelent:
+        try:
+            megj = datetime.date.fromisoformat(megjelent)
+        except ValueError:
+            pass
+    for szint in (HATARIDO_SZINT1, HATARIDO_SZINT2, HATARIDO_KULCS):
+        d = _legkozelebbi_datum(szoveg, szint, megj)
+        if d:
+            return d
+    return None
 
 
 # Jogosultság-felismerés: a "pályázók köre / pályázhat / jogosult" kontextus
@@ -658,6 +975,42 @@ def jogosultsag_kinyerese(szoveg: str) -> list[str]:
 # különben a bgazrt.hu menüjében lévő "Álláshirdetés" minden oldalt megfogna.
 MUNKA_PREFIX = "munkaajanlat:"      # allapot.json-beli tiltólista-kulcs előtag
 
+# Sablonos linkszövegek: ilyenkor a cím máshonnan (aria-label, title, alt) jön.
+GENERIKUS_LINKSZOVEG = re.compile(
+    r"^\s*\(?\s*(új ablakban nyílik meg|uj ablakban nyilik meg|tovább\w*|"
+    r"tovabb\w*|bővebben|bovebben|részletek|reszletek|további részletek|"
+    r"tovabbi reszletek|olvass tovább|read more|learn more|more|kattints\w*|"
+    r"ide kattintva|link|megnyitás|megnyitas)\s*»?\s*\)?\s*$", re.IGNORECASE)
+
+# „Tényleg pályázatról szól?" — olyan forrásoknál kell (budapest.hu/hirek),
+# ahol a hírfolyamban elvétve van csak kiírás, és a cím nem mindig árulkodó.
+# ERŐS jel: egy is elég. GYENGE jel: kettő kell.
+PALYAZAT_JEL_EROS = (
+    "pályázati felhívás", "palyazati felhivas", "pályázati kiírás",
+    "palyazati kiiras", "pályázók köre", "palyazok kore",
+    "benyújtási határidő", "benyujtasi hatarido", "beadási határidő",
+    "beadasi hatarido", "pályázati adatlap", "palyazati adatlap",
+    "pályázatot hirdet", "palyazatot hirdet", "pályázatot ír ki",
+    "palyazatot ir ki", "pályázati kategóri", "palyazati kategori",
+)
+PALYAZAT_JEL_GYENGE = (
+    "pályázhat", "palyazhat", "pályázni", "palyazni", "keretösszeg",
+    "keretosszeg", "támogatási kérelem", "tamogatasi kerelem",
+    "elnyerhető", "elnyerheto", "vissza nem térítendő", "vissza nem teritendo",
+    "pályázat benyújt", "palyazat benyujt", "felhívás", "felhivas",
+)
+NEM_PALYAZAT_PREFIX = "nem-palyazat:"   # tiltólista: megnéztük, nem kiírás
+
+
+def palyazat_e_szoveg(szoveg: str) -> bool:
+    """Tényleg pályázati kiírásról szól-e a cikk a (menü nélküli) szövege
+    alapján. Egy erős jel elég, gyengéből kettő kell — így a „a főváros
+    pályázatot nyújtott be" típusú hír nem minősül kiírásnak."""
+    kis = szoveg.lower()
+    if any(j in kis for j in PALYAZAT_JEL_EROS):
+        return True
+    return sum(1 for j in PALYAZAT_JEL_GYENGE if j in kis) >= 2
+
 MUNKA_CIM_RE = re.compile(
     r"\b(referens|ügyintéző|ugyintezo|asszisztens|munkatárs|munkatars|"
     r"osztályvezető|osztalyvezeto|főosztályvezető|foosztalyvezeto|"
@@ -695,6 +1048,63 @@ def munkaajanlat_szoveg(szoveg: str) -> bool:
     """Munkaajánlat-e a kiírás (menü nélküli) szövege alapján."""
     kis = szoveg.lower()
     return sum(1 for j in MUNKA_SZOVEG_JELEK if j in kis) >= MUNKA_JEL_KELL
+
+
+# ---------------------------------------------------------------------------
+# Kategóriák: a kiírás címéből + szövegéből
+# ---------------------------------------------------------------------------
+# Egy tétel több kategóriába is eshet (pl. queer színházi pályázat). Ha egyik
+# sem talál, az „Egyéb". A minták szándékosan szűkek ott, ahol egy tág szó
+# rengeteg téves találatot adna: a „meleg" (melegvíz, melegedő), a „trans"
+# (transzparens, transzformáció) és a „szivárvány" (Szivárvány Óvoda) ezért
+# NEM szerepel; helyettük egyértelmű kifejezések állnak.
+KATEGORIAK: dict[str, re.Pattern] = {
+    "LMBTQ": re.compile(
+        r"(lmbtq?i?a?\+?|leszbikus|\bqueer\b|\bgay\b|\bpride\b|transznem|"
+        r"transzszexu|biszexu|homoszexu|azonos nemű|azonos nemu|"
+        r"szexuális irányultság|szexualis iranyultsag|nemi identitás|"
+        r"nemi identitas|szivárványcsalád|szivarvanycsalad)", re.IGNORECASE),
+    "Női jogok": re.compile(
+        r"(\bnők\b|\bnok\b|\bnői\b|\bnoi\b|\bnőket\b|\bnoket\b|\bnőknek\b|"
+        r"\bnoknek\b|nőjog|nojog|feminis|\bgender\b|nemek közötti egyenlőség|"
+        r"nemek kozotti egyenloseg|nőszervezet|noszervezet|\blányok\b|"
+        r"\blanyok\b|anyaság|anyasag|bántalmazott nő|bantalmazott no)",
+        re.IGNORECASE),
+    "Színház": re.compile(
+        r"(színház|szinhaz|színpad|szinpad|\bdráma|\bdrama\b|dramatur|"
+        r"előadó-művészet|eloado-muveszet|előadóművészet|eloadomuveszet|"
+        r"\belőadás|\beloadas|báb(színház|szinhaz|művész|muvesz)|"
+        r"kortárs tánc|kortars tanc)", re.IGNORECASE),
+    "Zene": re.compile(
+        r"(\bzene|zenei|zenekar|zenész|zenesz|koncert|\bklub\b|klubtámogat|"
+        r"klubtamogat|fesztivál|fesztival|szórakoz|szorakoz|közösségi tér|"
+        r"kozossegi ter|könnyűzene|konnyuzene|\brock\b|\bjazz\b|\btechno\b|"
+        r"\bhouse\b|\bpopzene|hanglemez|hangfelvétel|hangfelvetel|\bdalszerz|"
+        r"élőzene|elozene|\bzenekari\b)", re.IGNORECASE),
+    "Vállalkozás": re.compile(
+        r"(vállalkoz|vallalkoz|\bkkv\b|kis- és középvállal|kis- es kozepvallal|"
+        r"mikrovállalkoz|mikrovallalkoz|\bhitel\b|hitelprogram|hitelkonstrukció|"
+        r"beruház|beruhaz|\bstartup\b|start-up|üzleti terv|uzleti terv|"
+        r"gazdaságfejleszt|gazdasagfejleszt|eszközbeszerz|eszkozbeszerz|"
+        r"cégfejleszt|cegfejleszt|\bcégek\b|\bcegek\b)", re.IGNORECASE),
+}
+KATEGORIA_EGYEB = "Egyéb"
+
+
+def kategoriak_kinyerese(szoveg: str) -> list[str]:
+    """A kiírásra illő kategóriák. Ha egyik minta sem talál: [„Egyéb"]."""
+    talalt = [nev for nev, minta in KATEGORIAK.items() if minta.search(szoveg)]
+    return talalt or [KATEGORIA_EGYEB]
+
+
+def oldal_szovege(html: str) -> str:
+    """A cikk szövege menü/fejléc/lábléc nélkül – ugyanaz a tisztítás, amit a
+    tetel_dusitas() használ (a sablonszöveg hamis találatot adna)."""
+    soup = BeautifulSoup(html, "html.parser")
+    for tag in soup(["script", "style", "noscript", "header", "footer", "nav",
+                     "aside", "form"]):
+        tag.decompose()
+    return soup.get_text(" ", strip=True)[:15000]
 
 
 def tetel_dusitas(html: str) -> tuple[str | None, str | None, list[str], bool]:
@@ -826,6 +1236,12 @@ def main() -> int:
     munkaajanlatok = {k[len(MUNKA_PREFIX):] for k in allapot
                       if k.startswith(MUNKA_PREFIX)}
     munka_szurve = 0
+    # Ugyanez a logika a „megnéztük, mégsem pályázat" tételekre (budapest.hu
+    # hírfolyam): egyszer eldöntjük, aztán nem töltjük le újra.
+    nem_palyazatok = {k[len(NEM_PALYAZAT_PREFIX):] for k in allapot
+                      if k.startswith(NEM_PALYAZAT_PREFIX)}
+    nem_palyazat_szurve = 0
+    ellenorzendo = {f["nev"] for f in FORRASOK if f.get("tartalom_ellenorzes")}
 
     jeloltek: list[dict] = []               # új tételek dúsítás/cutoff-döntés előtt
     alapozott: list[tuple[str, int]] = []   # (forrás, tételszám) – új forrás csendes alapfelvétele
@@ -844,24 +1260,31 @@ def main() -> int:
             sikeres = True
             spec = forras.get("special")
             if spec == "nka":
-                talalatok.update(nka_kollegiumok(html))
-            if spec == "rss":
+                talalatok.update(nka_tetelek(html, url))
+            elif spec == "rss":
                 talalatok.update(rss_tetelek(html))
             elif spec == "jozsefvaros":
                 talalatok.update(jozsefvaros_tetelek(html, url))
             elif spec == "kozlemeny":
                 talalatok.update(kozlemeny_tetelek(html))
+            elif spec == "palyazatok_org":
+                talalatok.update(palyazatok_org_tetelek(html, url))
+            elif spec == "budapest" and urlparse(url).netloc == EINFOSZAB_HOSZT:
+                talalatok.update(budapest_tetelek(html, url))
             else:
                 talalatok.update(linkek_kigyujtese(
                     html, url, lista_urlek,
                     utvonal_elotag=forras.get("utvonal_elotag"),
                     kulcsszo_kell=not forras.get("kulcsszo_nelkul", False),
+                    csak_gyoker=forras.get("csak_gyoker", False),
+                    csak_sajat_domain=forras.get("csak_sajat_domain", False),
                 ))
         if not sikeres:
             hibas_forrasok.append(forras["nev"])
             continue
         # Korábban felismert álláshirdetések kiejtése (se találat, se weboldal)
-        talalatok = {k: c for k, c in talalatok.items() if k not in munkaajanlatok}
+        talalatok = {k: c for k, c in talalatok.items()
+                     if k not in munkaajanlatok and k not in nem_palyazatok}
         osszes_latott += len(talalatok)
         # Új (még alapállapot nélküli) forrás első sikeres beolvasása CSENDES:
         # a tételek bekerülnek az állapotba, de nem jelennek meg találatként —
@@ -891,6 +1314,9 @@ def main() -> int:
                 t["cim"] = cim
             t["forras"] = forras["nev"]
             t["kinek"] = forras["kinek"]
+            # Kategória a CÍMBŐL – csak ha még nincs. A dúsítás később a
+            # teljes szövegből számolja újra, az a mérvadó.
+            t.setdefault("kategoriak", kategoriak_kinyerese(t.get("cim") or cim))
             t["elso"] = allapot.get(kulcs, MA)
             t["utolso"] = MA
             # Ha a listaoldal maga közölte a határidőt (Józsefváros), az a
@@ -913,6 +1339,8 @@ def main() -> int:
                         t["hatarido"] = hat
                     if pal:
                         t["palyazhat"] = pal
+                    t["kategoriak"] = kategoriak_kinyerese(
+                        f"{t.get('cim', '')} {oldal_szovege(LISTA_LEAD.get(kulcs, ''))}")
 
     # ---- dúsítás + "valódi újdonság" döntés (UJ_HATAR cutoff) ----
     ujak: list[dict] = []
@@ -922,6 +1350,7 @@ def main() -> int:
         kulcs = j["kulcs"]
         megjelent = hatarido = None
         palyazhat: list[str] = []
+        kategoriak: list[str] = []
         letoltes_ok = None                 # None: nem próbáltuk / nem URL
         elore = adatok["tetelek"].get(kulcs)
         if kulcs in LISTA_MEGJELENES and elore is not None:
@@ -940,6 +1369,7 @@ def main() -> int:
                 except Exception as e:      # noqa: BLE001
                     print(f"  ! Dúsítási hiba: {kulcs} ({e})", file=sys.stderr)
                 else:
+                    szoveg = oldal_szovege(html)
                     if munka:               # álláshirdetés, nem pályázat
                         allapot[MUNKA_PREFIX + kulcs] = MA
                         munkaajanlatok.add(kulcs)
@@ -947,11 +1377,24 @@ def main() -> int:
                         munka_szurve += 1
                         print(f"  – munkaajánlat kiszűrve: {j['cim'][:60]}")
                         continue
+                    # Hírfolyam-forrásoknál a cím nem árulkodó: a cikk
+                    # szövegéből döntjük el, tényleg kiírásról szól-e.
+                    if (j["forras"] in ellenorzendo
+                            and not palyazat_e_szoveg(szoveg)):
+                        allapot[NEM_PALYAZAT_PREFIX + kulcs] = MA
+                        nem_palyazatok.add(kulcs)
+                        adatok["tetelek"].pop(kulcs, None)
+                        nem_palyazat_szurve += 1
+                        print(f"  – nem pályázati hír: {j['cim'][:60]}")
+                        continue
+                    kategoriak = kategoriak_kinyerese(f"{j['cim']} {szoveg}")
         j["megjelent"], j["hatarido"], j["palyazhat"] = megjelent, hatarido, palyazhat
         t = adatok["tetelek"].get(kulcs)
         if t is not None:
             if letoltes_ok is not None:
                 t["dusitva"] = MA
+            if kategoriak:
+                t["kategoriak"] = kategoriak
             if megjelent:
                 t["megjelent"] = megjelent
             if hatarido:
@@ -1021,6 +1464,8 @@ def main() -> int:
             t["hatarido"] = hatarido
         if palyazhat:
             t["palyazhat"] = palyazhat
+        t["kategoriak"] = kategoriak_kinyerese(
+            f"{t.get('cim', '')} {oldal_szovege(html)}")
     if hatter_szam:
         hatra = max(0, len(varo) - hatter_szam)
         print(f"» Háttér-dúsítás: {hatter_szam} tétel feldolgozva, {hatra} van hátra")
@@ -1110,6 +1555,10 @@ def main() -> int:
         megjegyzesek.append(
             f"{munka_szurve} álláshirdetés kiszűrve (nem pályázat) — a weboldalra "
             "sem kerül fel, és többé nem foglalkozunk vele")
+    if nem_palyazat_szurve:
+        megjegyzesek.append(
+            f"{nem_palyazat_szurve} hír a cikk szövege alapján mégsem pályázati "
+            "kiírás — kiszűrve, többé nem nézzük")
     if megjegyzesek:
         sorok += ["", "## Megjegyzések", ""]
         sorok += [f"- {m}" for m in megjegyzesek]
