@@ -93,11 +93,6 @@
   <div class="panel">
     <input type="search" id="kereso" placeholder="Keresés címben és linkben…" autocomplete="off">
     <select id="forras"><option value="">Minden forrás</option></select>
-    <select id="kinek">
-      <option value="">Kinek: mind</option>
-      <option value="civil">Civil szervezet / egyesület pályázhat</option>
-      <option value="kft">Vállalkozás (kft) pályázhat</option>
-    </select>
     <select id="kategoria"><option value="">Kategória: mind</option></select>
     <label class="cb"><input type="checkbox" id="aktualis"> csak most listázott</label>
     <label class="cb"><input type="checkbox" id="csakuj"> csak új (7 nap)</label>
@@ -210,18 +205,6 @@
     });
   }
 
-  // Kinek-szűrő: ha a kiírás szövegéből kiolvastuk a jogosultakat (palyazhat),
-  // az számít; különben a forrás besorolása a fallback (vegyes címkék
-  // mindkét kategóriában).
-  function kinekOk(t, valasztott) {
-    if (!valasztott) return true;
-    if (t.palyazhat && t.palyazhat.length) {
-      return t.palyazhat.indexOf(valasztott === "kft" ? "vallalkozas" : "civil") !== -1;
-    }
-    if (valasztott === "kft") return /kft|klub/i.test(t.kinek);
-    return /egyes|civil|klub/i.test(t.kinek);   // "civil"
-  }
-
   var PALYAZHAT_CIMKE = { civil: "civil/egyesület", vallalkozas: "vállalkozás",
                           onkormanyzat: "önkormányzat", maganszemely: "magánszemély" };
 
@@ -234,7 +217,7 @@
 
   function szures() {
     var q = $("kereso").value.trim().toLowerCase(),
-        f = $("forras").value, k = $("kinek").value, kat = $("kategoria").value,
+        f = $("forras").value, kat = $("kategoria").value,
         aktualis = $("aktualis").checked, csakuj = $("csakuj").checked,
         hd = {
           ervenyes: $("hd-ervenyes").checked,
@@ -244,7 +227,6 @@
     szurve = mind.filter(function (t) {
       if (q && t.kereso.indexOf(q) === -1) return false;
       if (f && t.forras !== f) return false;
-      if (!kinekOk(t, k)) return false;
       if (kat && t.kategoriak.indexOf(kat) === -1) return false;
       if (!hd[hataridoAllapot(t)]) return false;
       if (aktualis && t.utolso !== frissitve) return false;
@@ -314,7 +296,7 @@
   $("kereso").addEventListener("input", function () {
     clearTimeout(ido); ido = setTimeout(szures, 150);
   });
-  ["forras", "kinek", "kategoria", "aktualis", "csakuj",
+  ["forras", "kategoria", "aktualis", "csakuj",
    "hd-ervenyes", "hd-nincs", "hd-lejart"].forEach(function (id) {
     $(id).addEventListener("change", szures);
   });
