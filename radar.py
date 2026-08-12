@@ -291,6 +291,8 @@ def linkek_kigyujtese(
             continue
         if any(x in norm.lower() or x in cim.lower() for x in KIZARAS):
             continue
+        if munkaajanlat_cim(cim, norm):    # álláshirdetés, nem pályázat
+            continue
         if len(cim) < 12:                  # üres/ikon/"Tovább" link → slug a cím helyett
             cim = p.path.rstrip("/").rsplit("/", 1)[-1].replace("-", " ").replace("_", " ")
         # az első (általában legbeszédesebb) címet tartjuk meg
@@ -431,6 +433,8 @@ def jozsefvaros_tetelek(html: str, base_url: str) -> dict[str, str]:
         if not cim:                                  # üres fejléc → slug a címből
             cim = (urlparse(norm).path.rstrip("/").rsplit("/", 1)[-1]
                    .replace("-", " ").replace("_", " "))
+        if munkaajanlat_cim(cim, norm):              # álláshirdetés, nem pályázat
+            continue
         if hatarido:
             LISTA_HATARIDOK[norm] = hatarido
         talalatok.setdefault(norm, cim[:200])
@@ -587,11 +591,67 @@ def jogosultsag_kinyerese(szoveg: str) -> list[str]:
     return sorted(talalt)
 
 
-def tetel_dusitas(html: str) -> tuple[str | None, str | None, list[str]]:
-    """(megjelent, hatarido, palyazhat) a cikkoldal HTML-jéből.
+# ---------------------------------------------------------------------------
+# Munkaajánlat-szűrés
+# ---------------------------------------------------------------------------
+# Az álláshirdetés nem pályázat, de sokszor "pályázat" néven fut (kivált a
+# közszférában: "pályázati felhívás ... munkakör betöltésére"), és a kiíró
+# oldalán ugyanabban a hírfolyamban jelenik meg — így simán átcsúszna.
+#
+# Két rétegben szűrünk:
+#   1. cím/URL: jellemző munkakör-megnevezés (szóhatárral, hogy a
+#      "kertészkedés"-féle összetételek ne akadjanak fenn);
+#   2. a kiírás SZÖVEGE: ha legalább MUNKA_JEL_KELL erős jel megvan.
+# A szöveges réteg a menü/lábléc nélküli tartalomra fut (lásd tetel_dusitas),
+# különben a bgazrt.hu menüjében lévő "Álláshirdetés" minden oldalt megfogna.
+MUNKA_PREFIX = "munkaajanlat:"      # allapot.json-beli tiltólista-kulcs előtag
+
+MUNKA_CIM_RE = re.compile(
+    r"\b(referens|ügyintéző|ugyintezo|asszisztens|munkatárs|munkatars|"
+    r"osztályvezető|osztalyvezeto|főosztályvezető|foosztalyvezeto|"
+    r"csoportvezető|csoportvezeto|irodavezető|irodavezeto|gyakornok|"
+    r"titkárnő|titkarno|recepciós|recepcios|takarító|takarito|sofőr|sofor|"
+    r"portás|portas|gondnok|karbantartó|karbantarto|szakmunkás|szakmunkas|"
+    r"lakatos|hegesztő|hegeszto|kőműves|komuves|villanyszerelő|villanyszerelo|"
+    r"könyvelő|konyvelo|jogász|jogasz|rendszergazda|raktáros|raktaros|"
+    r"szakács|szakacs|dajka|ápoló|apolo|biztonsági őr|biztonsagi or|"
+    r"parkolási ellenőr|parkolasi ellenor|álláshirdetés|allashirdetes|"
+    r"állásajánlat|allasajanlat|álláspályázat|allaspalyazat|"
+    r"munkakör betöltésére|munkakor betoltesere)\b", re.IGNORECASE)
+
+MUNKA_SZOVEG_JELEK = (
+    "önéletrajz", "oneletrajz", "munkavégzés helye", "munkavegzes helye",
+    "foglalkoztatás jellege", "foglalkoztatas jellege",
+    "amit kínálunk", "amit kinalunk", "próbaidő", "probaido",
+    "motivációs levél", "motivacios level", "teljes munkaidő", "teljes munkaido",
+    "munkatársat keres", "munkatarsat keres",
+    "munkatársunkat keres", "munkatarsunkat keres",
+    "milyen feladatok várnak", "milyen feladatok varnak",
+    "munkakör betöltésére", "munkakor betoltesere",
+    "álláspályázat", "allaspalyazat", "bérezés", "berezes",
+    "közalkalmazotti jogviszony", "kozalkalmazotti jogviszony",
+)
+MUNKA_JEL_KELL = 2                  # ennyi erős jel kell a szövegben
+
+
+def munkaajanlat_cim(cim: str, url: str = "") -> bool:
+    """Munkaajánlat-e pusztán a cím/URL alapján (olcsó előszűrés)."""
+    return bool(MUNKA_CIM_RE.search(f"{cim} {urlparse(url).path}"))
+
+
+def munkaajanlat_szoveg(szoveg: str) -> bool:
+    """Munkaajánlat-e a kiírás (menü nélküli) szövege alapján."""
+    kis = szoveg.lower()
+    return sum(1 for j in MUNKA_SZOVEG_JELEK if j in kis) >= MUNKA_JEL_KELL
+
+
+def tetel_dusitas(html: str) -> tuple[str | None, str | None, list[str], bool]:
+    """(megjelent, hatarido, palyazhat, munkaajanlat) a cikkoldal HTML-jéből.
 
     A menü/fejléc/lábléc kidobásra kerül, hogy az oldalsablon ismétlődő
-    szövege (pl. bgazrt.hu menüje) ne adjon hamis jogosultság-találatot."""
+    szövege (pl. bgazrt.hu menüje) ne adjon hamis jogosultság-találatot.
+    Ez a munkaajánlat-felismerésnél is kulcsfontosságú: a bgazrt.hu MINDEN
+    oldalának menüjében ott az „Álláshirdetés" szó."""
     soup = BeautifulSoup(html, "html.parser")
     megjelent = megjelenes_kinyerese(soup)   # meta tagek még a teljes DOM-ból
     if megjelent and megjelent > MA:
@@ -602,7 +662,7 @@ def tetel_dusitas(html: str) -> tuple[str | None, str | None, list[str]]:
     szoveg = soup.get_text(" ", strip=True)[:15000]
     hatarido = hatarido_kinyerese(szoveg, megjelent)
     palyazhat = jogosultsag_kinyerese(szoveg)
-    return megjelent, hatarido, palyazhat
+    return megjelent, hatarido, palyazhat, munkaajanlat_szoveg(szoveg)
 
 
 # ---------------------------------------------------------------------------
@@ -706,6 +766,12 @@ def main() -> int:
 
     lista_urlek = {normalizal(u) for f_ in FORRASOK for u in f_["urls"]}
 
+    # Munkaajánlat-tiltólista: egyszer felismertük, többé nem foglalkozunk vele
+    # (különben minden futáskor újra letöltenénk és újra kiszűrnénk).
+    munkaajanlatok = {k[len(MUNKA_PREFIX):] for k in allapot
+                      if k.startswith(MUNKA_PREFIX)}
+    munka_szurve = 0
+
     jeloltek: list[dict] = []               # új tételek dúsítás/cutoff-döntés előtt
     alapozott: list[tuple[str, int]] = []   # (forrás, tételszám) – új forrás csendes alapfelvétele
     tomeges: list[tuple[str, int]] = []     # (forrás, tételszám) – bulk-guard által elnyelve
@@ -739,6 +805,8 @@ def main() -> int:
         if not sikeres:
             hibas_forrasok.append(forras["nev"])
             continue
+        # Korábban felismert álláshirdetések kiejtése (se találat, se weboldal)
+        talalatok = {k: c for k, c in talalatok.items() if k not in munkaajanlatok}
         osszes_latott += len(talalatok)
         # Új (még alapállapot nélküli) forrás első sikeres beolvasása CSENDES:
         # a tételek bekerülnek az állapotba, de nem jelennek meg találatként —
@@ -782,7 +850,7 @@ def main() -> int:
                 if not t.get("dusitva"):
                     t["dusitva"] = MA
                     try:
-                        _m, hat, pal = tetel_dusitas(LISTA_LEAD.get(kulcs, ""))
+                        _m, hat, pal, _munka = tetel_dusitas(LISTA_LEAD.get(kulcs, ""))
                     except Exception as e:      # noqa: BLE001
                         print(f"  ! Lead-dúsítási hiba: {kulcs} ({e})", file=sys.stderr)
                         hat, pal = None, []
@@ -813,9 +881,17 @@ def main() -> int:
             letoltes_ok = html is not None
             if html:
                 try:
-                    megjelent, hatarido, palyazhat = tetel_dusitas(html)
+                    megjelent, hatarido, palyazhat, munka = tetel_dusitas(html)
                 except Exception as e:      # noqa: BLE001
                     print(f"  ! Dúsítási hiba: {kulcs} ({e})", file=sys.stderr)
+                else:
+                    if munka:               # álláshirdetés, nem pályázat
+                        allapot[MUNKA_PREFIX + kulcs] = MA
+                        munkaajanlatok.add(kulcs)
+                        adatok["tetelek"].pop(kulcs, None)
+                        munka_szurve += 1
+                        print(f"  – munkaajánlat kiszűrve: {j['cim'][:60]}")
+                        continue
         j["megjelent"], j["hatarido"], j["palyazhat"] = megjelent, hatarido, palyazhat
         t = adatok["tetelek"].get(kulcs)
         if t is not None:
@@ -873,9 +949,16 @@ def main() -> int:
             continue
         hatter_hiba = 0
         try:
-            megjelent, hatarido, palyazhat = tetel_dusitas(html)
+            megjelent, hatarido, palyazhat, munka = tetel_dusitas(html)
         except Exception as e:              # noqa: BLE001
             print(f"  ! Dúsítási hiba: {kulcs} ({e})", file=sys.stderr)
+            continue
+        if munka:                           # utólag felismert álláshirdetés
+            allapot[MUNKA_PREFIX + kulcs] = MA
+            munkaajanlatok.add(kulcs)
+            adatok["tetelek"].pop(kulcs, None)
+            munka_szurve += 1
+            print(f"  – munkaajánlat kiszűrve: {(t.get('cim') or kulcs)[:60]}")
             continue
         if megjelent and "megjelent" not in t:
             t["megjelent"] = megjelent
@@ -968,6 +1051,10 @@ def main() -> int:
         megjegyzesek.append(
             f"{regi_tartalom} tétel {UJ_HATAR} előtti megjelenésű vagy lejárt/dátum "
             "nélküli (régi tartalom) — csendben rögzítve, a weboldalon látható")
+    if munka_szurve:
+        megjegyzesek.append(
+            f"{munka_szurve} álláshirdetés kiszűrve (nem pályázat) — a weboldalra "
+            "sem kerül fel, és többé nem foglalkozunk vele")
     if megjegyzesek:
         sorok += ["", "## Megjegyzések", ""]
         sorok += [f"- {m}" for m in megjegyzesek]

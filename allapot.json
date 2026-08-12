@@ -412,12 +412,9 @@
   "https://pafi.hu/p/svajci-rezidenciaprogram-iroknak-es-muforditoknak": "2026-08-01",
   "https://pafi.hu/p/kortarstancmuveszeti-rezidenciaprogram-szkopjeben": "2026-08-01",
   "https://pafi.hu/p/professzionalis-weboldal-csak-69500-ft-10-munkanap-alatt-teljes-felszereltseggel-igeny-szerint-tobbnyelvu-es-webaruhazas-kialakitassal": "2026-08-01",
-  "https://bgazrt.hu/osztalyvezeto-helyettes-tamogataselszamolasi-terulet/": "2026-08-04",
-  "https://bgazrt.hu/palyazati-elszamolasi-referens/": "2026-08-04",
   "https://bgazrt.hu/felhivas-zrinyi-ilona-karpataljai-tamogatasi-program-2026/": "2026-08-04",
   "https://kultura.kreativeuropa.hu/palyazatok/megjelent_a_cultural_horizons_program_artistic_debuts_palyazati_/46555": "2026-08-05",
   "https://palyazatok.org/par-perc-kortars-rovidfilm-palyazat/": "2026-08-08",
-  "https://bgazrt.hu/tamogataskezelesi-szakmai-referens/": "2026-08-11",
   "https://palyazatok.org/alkotoi-palyazat-a-btm-es-a-labrisz-egyesulet-kozos-palyazata/": "2026-08-11",
   "https://palyazatok.org/palyazat-fiatalok-termeszettudomanyos-palyara-lepeset-osztonzo-meglevo-es-ujonnan-letrejovo-kezdemenyezesek-tamogatasara/": "2026-08-11",
   "https://pafi.hu/p/szellemi-alkotasok-hazai-es-nemzetkozi-szellemitulajdon-vedelmet-szolgalo-tevekenysegek-tamogatasa-az-alkotasok-hasznosulasanak-elomozditasa-erdekeben-2025-111-iparjog-1": "2026-08-11",
@@ -431,5 +428,8 @@
   "https://pafi.hu/p/crayola-kreativ-szunido-palyazat-2026": "2026-08-11",
   "https://pafi.hu/p/zrinyi-ilona-karpataljai-tamogatasi-program": "2026-08-11",
   "https://pafi.hu/p/lakaspalyazat": "2026-08-11",
-  "https://pafi.hu/p/fiatal-termeszettudomanyos-tanar-fitt-alkotoi-dij-palyazat": "2026-08-11"
+  "https://pafi.hu/p/fiatal-termeszettudomanyos-tanar-fitt-alkotoi-dij-palyazat": "2026-08-11",
+  "munkaajanlat:https://bgazrt.hu/osztalyvezeto-helyettes-tamogataselszamolasi-terulet/": "2026-08-12",
+  "munkaajanlat:https://bgazrt.hu/palyazati-elszamolasi-referens/": "2026-08-12",
+  "munkaajanlat:https://bgazrt.hu/tamogataskezelesi-szakmai-referens/": "2026-08-12"
 }

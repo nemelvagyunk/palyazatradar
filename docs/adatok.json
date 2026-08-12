@@ -3616,26 +3616,6 @@
    "dusitva": "2026-08-01",
    "hatarido": "2026-08-31"
   },
-  "https://bgazrt.hu/osztalyvezeto-helyettes-tamogataselszamolasi-terulet/": {
-   "cim": "osztalyvezeto helyettes tamogataselszamolasi terulet",
-   "forras": "NEA (Bethlen Gábor Alapkezelő)",
-   "kinek": "egyesület",
-   "elso": "2026-08-04",
-   "utolso": "2026-08-10",
-   "dusitva": "2026-08-04",
-   "megjelent": "2026-08-03",
-   "hatarido": "2026-08-03"
-  },
-  "https://bgazrt.hu/palyazati-elszamolasi-referens/": {
-   "cim": "palyazati elszamolasi referens",
-   "forras": "NEA (Bethlen Gábor Alapkezelő)",
-   "kinek": "egyesület",
-   "elso": "2026-08-04",
-   "utolso": "2026-08-10",
-   "dusitva": "2026-08-04",
-   "megjelent": "2026-08-03",
-   "hatarido": "2026-08-03"
-  },
   "https://bgazrt.hu/felhivas-zrinyi-ilona-karpataljai-tamogatasi-program-2026/": {
    "cim": "felhivas zrinyi ilona karpataljai tamogatasi program 2026",
    "forras": "NEA (Bethlen Gábor Alapkezelő)",
@@ -3669,15 +3649,6 @@
    "palyazhat": [
     "maganszemely"
    ]
-  },
-  "https://bgazrt.hu/tamogataskezelesi-szakmai-referens/": {
-   "cim": "tamogataskezelesi szakmai referens",
-   "forras": "NEA (Bethlen Gábor Alapkezelő)",
-   "kinek": "egyesület",
-   "elso": "2026-08-11",
-   "utolso": "2026-08-12",
-   "dusitva": "2026-08-11",
-   "megjelent": "2026-08-10"
   },
   "https://palyazatok.org/alkotoi-palyazat-a-btm-es-a-labrisz-egyesulet-kozos-palyazata/": {
    "cim": "Alkotói pályázat – a BTM és a Labrisz Egyesület közös pályázata",
