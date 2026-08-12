@@ -1,4 +1,2429 @@
 {
  "frissitve": "2026-08-12",
- "tetelek": {}
+ "tetelek": {
+  "https://eeagrants.org/hu/civil-society-fund-hungary/calls/action-and-quick-intervention-grants": {
+   "cim": "Akciópályázat",
+   "forras": "Norvég Civil Alap",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-04-30",
+   "palyazhat": [
+    "civil"
+   ]
+  },
+  "https://eeagrants.org/hu/civil-society-fund-hungary/news/itt-az-akciopalyazat": {
+   "cim": "Itt az akciópályázat!",
+   "forras": "Norvég Civil Alap",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12"
+  },
+  "https://eeagrants.org/hu/civil-society-fund-hungary/news/indulnak-felkeszito-muhelyek": {
+   "cim": "Indulnak a felkészítő műhelyek!",
+   "forras": "Norvég Civil Alap",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Zene"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-03-09",
+   "hatarido": "2026-03-10"
+  },
+  "https://eeagrants.org/hu/civil-society-fund-hungary/news/eea-norway-grants-civil-fund-opening-summary": {
+   "cim": "EGT & Norvég Civil Alap megnyitó - összefoglaló",
+   "forras": "Norvég Civil Alap",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "LMBTQ",
+    "Női jogok",
+    "Színház",
+    "Ifjúság / oktatás",
+    "Zöld / környezet",
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-05-05",
+   "hatarido": "2026-05-11",
+   "palyazhat": [
+    "civil",
+    "vallalkozas"
+   ]
+  },
+  "https://eeagrants.org/hu/civil-society-fund-hungary/news/2026-elejen-indul-norveg-civil-alap-uj-palyazati-ciklusa": {
+   "cim": "2026 elején indul a Norvég Civil Alap új pályázati ciklusa",
+   "forras": "Norvég Civil Alap",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "LMBTQ",
+    "Női jogok",
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-02-11"
+  },
+  "https://palyazat.norvegcivilalap.hu/akciopalyazat-felhivas": {
+   "cim": "Akciópályázat",
+   "forras": "Norvég Civil Alap",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12"
+  },
+  "https://hangfoglalo.hu/megjelenesek-koncertek/": {
+   "cim": "NKA Hangfoglaló támogatott előadóinak megjelenései, koncertjei",
+   "forras": "Hangfoglaló",
+   "kinek": "klubtámogatás",
+   "kategoriak": [
+    "Zene"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-04-08"
+  },
+  "https://hangfoglalo.hu/elerhetok-az-nka-hangfoglalo-uj-nyilt-palyazati-felhivasai/": {
+   "cim": "1209_HF_PALYAZATI_FELHIVASOK_ELERHETO_9_16.jpg",
+   "forras": "Hangfoglaló",
+   "kinek": "klubtámogatás",
+   "kategoriak": [
+    "Zene"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2025-12-11",
+   "hatarido": "2026-01-12"
+  },
+  "https://nka.hu/kiemelt-kategoriak/palyaztatas/kollegiumok-felhivasai/felhivas-konyvtaraknak-a-marai-program-xiii-fordulojaban-valo-reszvetelre/": {
+   "cim": "Anyanyelvi Kultúra Kollégiuma – Felhívás könyvtáraknak a Márai-Program XIII. fordulójában való részvételre",
+   "forras": "NKA kollégiumi felhívások",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Irodalom"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-05-18",
+   "hatarido": "2026-08-31"
+  },
+  "https://nka.hu/kiemelt-kategoriak/palyaztatas/kollegiumok-felhivasai/az-eloado-muveszetek-kollegiuma-zenemuveszet-szakterulet-nyilt-palyazati-felhivasa-3/": {
+   "cim": "Előadó-művészetek Kollégiuma – NYÍLT PÁLYÁZATI FELHÍVÁS",
+   "forras": "NKA kollégiumi felhívások",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Színház",
+    "Zene",
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-07-24",
+   "palyazhat": [
+    "maganszemely",
+    "vallalkozas"
+   ]
+  },
+  "https://bgazrt.hu/tajekoztatas-a-nemzeti-egyuttmukodesi-alap-2025-evi-forrasai-terhere-biztositott-tamogatasok-beszamoloinak-benyujtasanak-modjarol/": {
+   "cim": "tajekoztatas a nemzeti egyuttmukodesi alap 2025 evi forrasai terhere biztositott tamogatasok beszamoloinak benyujtasanak modjarol",
+   "forras": "Bethlen Gábor Alapkezelő (NEA, Városi Civil Alap)",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-04-14",
+   "hatarido": "2026-08-31",
+   "palyazhat": [
+    "vallalkozas"
+   ]
+  },
+  "https://bgazrt.hu/megjelentek-a-nemzeti-egyuttmukodesi-alap-2026-evi-osszevont-es-egyszerusitett-palyazati-kiirasai/": {
+   "cim": "megjelentek a nemzeti egyuttmukodesi alap 2026 evi osszevont es egyszerusitett palyazati kiirasai",
+   "forras": "Bethlen Gábor Alapkezelő (NEA, Városi Civil Alap)",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2025-09-01",
+   "hatarido": "2026-04-14"
+  },
+  "https://bgazrt.hu/tajekoztatas-a-nemzeti-egyuttmukodesi-alap-2024-evi-forrasai-terhere-biztositott-tamogatasok-beszamoloinak-benyujtasanak-modjarol/": {
+   "cim": "tajekoztatas a nemzeti egyuttmukodesi alap 2024 evi forrasai terhere biztositott tamogatasok beszamoloinak benyujtasanak modjarol",
+   "forras": "Bethlen Gábor Alapkezelő (NEA, Városi Civil Alap)",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Irodalom"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2025-03-27",
+   "hatarido": "2026-04-14",
+   "palyazhat": [
+    "civil",
+    "vallalkozas"
+   ]
+  },
+  "https://bgazrt.hu/modosult-a-nemzeti-egyuttmukodesi-alap-2025-evi-egyszerusitett-palyazati-felhivasa/": {
+   "cim": "modosult a nemzeti egyuttmukodesi alap 2025 evi egyszerusitett palyazati felhivasa",
+   "forras": "Bethlen Gábor Alapkezelő (NEA, Városi Civil Alap)",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2025-01-29",
+   "hatarido": "2026-04-14"
+  },
+  "https://bgazrt.hu/uj-felhivasok-a-nemzeti-egyuttmukodesi-alap-kereteben-2025/": {
+   "cim": "uj felhivasok a nemzeti egyuttmukodesi alap kereteben 2025",
+   "forras": "Bethlen Gábor Alapkezelő (NEA, Városi Civil Alap)",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2024-11-12",
+   "hatarido": "2026-04-14"
+  },
+  "https://bgazrt.hu/tajekoztatas-a-nemzeti-egyuttmukodesi-alap-2023-evi-forrasai-terhere-biztositott-tamogatasok-beszamoloinak-benyujtasanak-modjarol/": {
+   "cim": "tajekoztatas a nemzeti egyuttmukodesi alap 2023 evi forrasai terhere biztositott tamogatasok beszamoloinak benyujtasanak modjarol",
+   "forras": "Bethlen Gábor Alapkezelő (NEA, Városi Civil Alap)",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2024-04-30",
+   "hatarido": "2026-04-14",
+   "palyazhat": [
+    "vallalkozas"
+   ]
+  },
+  "https://bgazrt.hu/uj-felhivasok-a-nemzeti-egyuttmukodesi-alap-kereteben-2024/": {
+   "cim": "uj felhivasok a nemzeti egyuttmukodesi alap kereteben 2024",
+   "forras": "Bethlen Gábor Alapkezelő (NEA, Városi Civil Alap)",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2023-10-02",
+   "hatarido": "2026-04-14"
+  },
+  "https://bgazrt.hu/tajekoztatas-a-nemzeti-egyuttmukodesi-alap-2022-evi-forrasai-terhere-biztositott-tamogatasok-beszamoloinak-benyujtasaval-kapcsolatos-valtozasokrol/": {
+   "cim": "tajekoztatas a nemzeti egyuttmukodesi alap 2022 evi forrasai terhere biztositott tamogatasok beszamoloinak benyujtasaval kapcsolatos valtozasokrol",
+   "forras": "Bethlen Gábor Alapkezelő (NEA, Városi Civil Alap)",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://bgazrt.hu/uj-felhivasok-a-nemzeti-egyuttmukodesi-alap-kereteben-6/": {
+   "cim": "uj felhivasok a nemzeti egyuttmukodesi alap kereteben 6",
+   "forras": "Bethlen Gábor Alapkezelő (NEA, Városi Civil Alap)",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://bgazrt.hu/felhivasok-a-nemzeti-egyuttmukodesi-alap-kereteben-2022-normativ/": {
+   "cim": "felhivasok a nemzeti egyuttmukodesi alap kereteben 2022 normativ",
+   "forras": "Bethlen Gábor Alapkezelő (NEA, Városi Civil Alap)",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://bgazrt.hu/uj-felhivasok-a-nemzeti-egyuttmukodesi-alap-kereteben-5/": {
+   "cim": "uj felhivasok a nemzeti egyuttmukodesi alap kereteben 5",
+   "forras": "Bethlen Gábor Alapkezelő (NEA, Városi Civil Alap)",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://bgazrt.hu/felhivas-zrinyi-ilona-karpataljai-tamogatasi-program-2026/": {
+   "cim": "felhivas zrinyi ilona karpataljai tamogatasi program 2026",
+   "forras": "Bethlen Gábor Alapkezelő (NEA, Városi Civil Alap)",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://bgazrt.hu/dontes-a-helyi-nemzetisegi-onkormanyzatok-2026-evi-feladatalapu-tamogatasarol/": {
+   "cim": "dontes a helyi nemzetisegi onkormanyzatok 2026 evi feladatalapu tamogatasarol",
+   "forras": "Bethlen Gábor Alapkezelő (NEA, Városi Civil Alap)",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://bgazrt.hu/dontes-szuletett-a-nemzetisegi-kulturalis-kezdemenyezesek-2026-evi-tamogatasarol/": {
+   "cim": "dontes szuletett a nemzetisegi kulturalis kezdemenyezesek 2026 evi tamogatasarol",
+   "forras": "Bethlen Gábor Alapkezelő (NEA, Városi Civil Alap)",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://bgazrt.hu/szulofoldon-magyarul-2025-felhivas/": {
+   "cim": "szulofoldon magyarul 2025 felhivas",
+   "forras": "Bethlen Gábor Alapkezelő (NEA, Városi Civil Alap)",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://bgazrt.hu/megjelent-a-varosi-civil-alap-2026-evi-palyazati-kiirasa/": {
+   "cim": "Megjelent a Városi Civil Alap 2026. évi pályázati kiírása",
+   "forras": "Bethlen Gábor Alapkezelő (NEA, Városi Civil Alap)",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://bgazrt.hu/uj-felhivas-a-2025-evi-varosi-civil-alap-kereteben/": {
+   "cim": "uj felhivas a 2025 evi varosi civil alap kereteben",
+   "forras": "Bethlen Gábor Alapkezelő (NEA, Városi Civil Alap)",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://bgazrt.hu/uj-felhivasok-a-varosi-civil-alap-kereteben-2024/": {
+   "cim": "Új felhívások a Városi Civil Alap keretében",
+   "forras": "Bethlen Gábor Alapkezelő (NEA, Városi Civil Alap)",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://bgazrt.hu/uj-felhivasok-a-varosi-civil-alap-kereteben-2022/": {
+   "cim": "Új felhívások a Városi Civil Alap keretében",
+   "forras": "Bethlen Gábor Alapkezelő (NEA, Városi Civil Alap)",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://bgazrt.hu/uj-felhivasok-a-varosi-civil-alap-kereteben/": {
+   "cim": "Új felhívások a Városi Civil Alap keretében",
+   "forras": "Bethlen Gábor Alapkezelő (NEA, Városi Civil Alap)",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://www.visegradfund.org/grant-implement": {
+   "cim": "grant implement",
+   "forras": "Visegrádi Alap",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12"
+  },
+  "https://www.visegradfund.org/visegrad-grants-apply": {
+   "cim": "visegrad grants apply",
+   "forras": "Visegrádi Alap",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Film / fotó"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "hatarido": "2026-10-01"
+  },
+  "https://www.visegradfund.org/visegrad-plus-grants-apply": {
+   "cim": "visegrad plus grants apply",
+   "forras": "Visegrádi Alap",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Film / fotó"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "hatarido": "2026-10-01"
+  },
+  "https://www.visegradfund.org/strategic-grants-apply": {
+   "cim": "strategic grants apply",
+   "forras": "Visegrádi Alap",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "hatarido": "2026-10-01"
+  },
+  "https://app.powerbi.com/view?r=eyJrIjoiMzMwZDBlNTAtNDY4Yi00YmExLTlmODYtMDY5ZTk0M2E0NTJiIiwidCI6ImU5MWUzMjJhLWQ0ZDMtNGVjYy04YzJjLTIyOTZjZTZjYmY0YSIsImMiOjl9": {
+   "cim": "Grant Database Explore all funded projects in our database. BROWSE PROJECTS",
+   "forras": "Visegrádi Alap",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/megjelent_a_cultural_horizons_program_artistic_debuts_palyazati_/46555": {
+   "cim": "Megjelent a Cultural Horizons program Artistic Debuts pályázati felhívása",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Színház",
+    "Ifjúság / oktatás",
+    "Zöld / környezet",
+    "Képzőművészet",
+    "Irodalom",
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "hatarido": "2026-10-05",
+   "palyazhat": [
+    "vallalkozas"
+   ]
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/a_sichuan_fine_arts_institute_nemzetkozi_palyazata/46535": {
+   "cim": "A Sichuan Fine Arts Institute nemzetközi pályázata",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Színház",
+    "Zene",
+    "Ifjúság / oktatás",
+    "Film / fotó",
+    "Képzőművészet",
+    "Irodalom"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2025-09-01",
+   "hatarido": "2026-09-14"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/palyazat_az_eidolon_dijra/46520": {
+   "cim": "Pályázat az eidolon Díjra",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás",
+    "Film / fotó"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "hatarido": "2026-09-30"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/megjelent_a_cultural_horizons_program_rezidenciaprogramok_palyaz/46541": {
+   "cim": "Megjelent a Cultural Horizons program Rezidenciaprogramok pályázati felhívása",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "hatarido": "2026-09-30"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/megjelent_a_cultural_horizons_program_europai_helyi_kultura_paly/46506": {
+   "cim": "Megjelent a Cultural Horizons program Európai helyi kultúra pályázati felhívása",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás",
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "hatarido": "2026-09-04",
+   "palyazhat": [
+    "vallalkozas"
+   ]
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/szeptemberben_jon_az_effea_kovetkezo_felhivasa/46500": {
+   "cim": "Szeptemberben jön az EFFEA következő felhívása",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Zene",
+    "Ifjúság / oktatás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/zminaresilience_&_8211__tamogatas_ukran_es_europai_szervezetek_k/46494": {
+   "cim": "ZMINA:Resilience – Támogatás ukrán és európai szervezetek közös kulturális alkotásainak nemzetközi bemutatására",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "hatarido": "2026-09-14"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/mar_palyazhato_a_perform_europe_program_harmadik_egyben_zaro_for/46492": {
+   "cim": "Figyelem, előadóművészek! Indul a Perform Europe program harmadik, egyben záró fordulója",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Színház",
+    "Ifjúság / oktatás",
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "hatarido": "2026-10-22"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/mar_palyazhato_a_cultural_horizons_program_elso_innovativ_kultur/46491": {
+   "cim": "Már pályázható a Cultural Horizons program első, Innovatív kulturális alkotások című felhívása",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás",
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "hatarido": "2026-08-14"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/eit_culture_&_creativity_palyazatok_korforgasos_divat_es_keszseg/46479": {
+   "cim": "EIT Culture & Creativity pályázatok: körforgásos divat és készségfejlesztés a NEB Academy keretében",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás",
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "hatarido": "2026-08-31"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/palyazat_az_art_is_business_dijra/46477": {
+   "cim": "Pályázat az Art is Business Díjra",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás",
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "hatarido": "2026-09-15"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/junius_23-an_ter_vissza_a_perform_europe/46481": {
+   "cim": "Június 23-án tér vissza a Perform Europe",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/palyazati_felhivas_digitalis_szinhazi_egyuttmukodesek_tamogatasa/46427": {
+   "cim": "Pályázati felhívás digitális színházi együttműködések támogatására",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Színház"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/elindult_a_jelentkezes_az_europai_Örokseg_cim_2027-es_fordulojar/46391": {
+   "cim": "Elindult a jelentkezés az Európai Örökség Cím 2027-es fordulójára",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/velemenycikkek_irasara_hirdet_felhivast_az_europai_Öroksegkozpon/46347": {
+   "cim": "Véleménycikkek írására hirdet felhívást az Európai Örökségközpont",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/megjelent_az_europai_egyuttmukodesi_projektek_2026-os_palyazata/46326": {
+   "cim": "Megjelent az Európai együttműködési projektek 2026-os pályázata",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/palyazatertekeloket_keres_az_europai_bizottsag/46276": {
+   "cim": "Pályázatértékelőket keres az Európai Bizottság",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/kozvetlen_unios_programok_onero_tamogatasa_2026/46273": {
+   "cim": "Közvetlen uniós programok önerő támogatása 2026",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/fiatal_alkotok_a_fenntarthato_elelmiszerrendszerekert_&_8211__in/46188": {
+   "cim": "Fiatal alkotók a fenntartható élelmiszerrendszerekért – indul az Art Feeds program",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás",
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/a_kultura_ag_vezetoje_is_eload_a_magyar_zenei_tanacs_szakmai_nap/46033": {
+   "cim": "A Kultúra ág vezetője is előad a Magyar Zenei Tanács szakmai napján",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Zene"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/Öt_magyar_reszvetellel_megvalosulo_projektet_is_tamogattak_a_per/45437": {
+   "cim": "Öt magyar részvétellel megvalósuló projektet is támogattak a Perform Europe pályázatán",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/az_emee_friss_attekintese_a_magyar_zenei_szcenarol/45413": {
+   "cim": "Az EMEE friss áttekintése a magyar zenei szcénáról",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Zene"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/elindult_a_kreativ_europa_altal_tamogatott_2084_projekt/45212": {
+   "cim": "Elindult a Kreatív Európa által támogatott 2084 projekt",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/a_demart_tovabbjuto_projektjei/45180": {
+   "cim": "A DemArt továbbjutó projektjei",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/mar_palyazhato_a_culture_moves_europe_rezidenciaprogramok_harmad/45178": {
+   "cim": "Már pályázható a Culture Moves Europe Rezidenciaprogramok harmadik és egyben lerövidített köre",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/az_europa_kulturalis_fovarosa_cim_varomanyosai/44822": {
+   "cim": "Az Európa Kulturális Fővárosa cím várományosai",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/zenei_szakembereknek_epit_networking_adatbazist_a_hangveto/44469": {
+   "cim": "Zenei szakembereknek épít networking adatbázist a Hangvető",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Zene"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/rezidenciaprogramot_hirdet_a_szloven_muforditok_szovetsege/44164": {
+   "cim": "Rezidenciaprogramot hirdet a Szlovén Műfordítók Szövetsége",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Irodalom"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/csapattagokat_keres_a_bidf/43410": {
+   "cim": "Csapattagokat keres a BIDF",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/szakertoket_keresnek_az_eu_intezmenyei/43078": {
+   "cim": "Szakértőket keresnek az EU intézményei",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/szakertoi_felhivas_a_2021_es_2027_kozotti_idoszakra/42991": {
+   "cim": "Szakértői felhívás a 2021 és 2027 közötti időszakra",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://kultura.kreativeuropa.hu/palyazatok/csapattagokat_var_a_mindspace/40836": {
+   "cim": "Csapattagokat vár a Mindspace",
+   "forras": "Kreatív Európa Kultúra",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://palyazatok.org/palyazat-fiatalok-termeszettudomanyos-palyara-lepeset-osztonzo-meglevo-es-ujonnan-letrejovo-kezdemenyezesek-tamogatasara/": {
+   "cim": "Pályázat fiatalok természettudományos pályára lépését ösztönző, meglévő és újonnan létrejövő kezdeményezések támogatására",
+   "forras": "palyazatok.org",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás",
+    "Zöld / környezet",
+    "Film / fotó",
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-08-10",
+   "hatarido": "2026-08-17",
+   "palyazhat": [
+    "civil",
+    "vallalkozas"
+   ]
+  },
+  "https://palyazatok.org/varoszoldito-otletpalyazat/": {
+   "cim": "Városzöldítő ötletpályázat",
+   "forras": "palyazatok.org",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás",
+    "Zöld / környezet",
+    "Film / fotó",
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-07-28",
+   "hatarido": "2026-09-20"
+  },
+  "https://palyazatok.org/alkotoi-palyazat-multimedia-kiallitashoz/": {
+   "cim": "Alkotói pályázat multimédia-kiállításhoz",
+   "forras": "palyazatok.org",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás",
+    "Zöld / környezet",
+    "Film / fotó",
+    "Képzőművészet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-07-28",
+   "hatarido": "2026-08-24"
+  },
+  "https://palyazatok.org/palyazat-a-nemek-kozotti-egyenloseg-europai-mozgalmainak-erositesere/": {
+   "cim": "Pályázat a nemek közötti egyenlőség európai mozgalmainak erősítésére",
+   "forras": "palyazatok.org",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "LMBTQ",
+    "Női jogok",
+    "Ifjúság / oktatás",
+    "Zöld / környezet",
+    "Film / fotó",
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-07-27",
+   "hatarido": "2026-08-07",
+   "palyazhat": [
+    "civil",
+    "vallalkozas"
+   ]
+  },
+  "https://palyazatok.org/europai-helyi-kultura-palyazat-helyi-kulturalis-projektek-fejlesztesere/": {
+   "cim": "Európai Helyi Kultúra – pályázat helyi kulturális projektek fejlesztésére",
+   "forras": "palyazatok.org",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Női jogok",
+    "Színház",
+    "Ifjúság / oktatás",
+    "Zöld / környezet",
+    "Film / fotó",
+    "Képzőművészet",
+    "Irodalom",
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-07-26",
+   "hatarido": "2026-09-04",
+   "palyazhat": [
+    "vallalkozas"
+   ]
+  },
+  "https://palyazatok.org/a-munka-vilaga-fotopalyazat-2/": {
+   "cim": "A munka világa – fotópályázat",
+   "forras": "palyazatok.org",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás",
+    "Film / fotó",
+    "Képzőművészet",
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-07-24",
+   "hatarido": "2026-09-03"
+  },
+  "https://palyazatok.org/nyari-diakmunka-munkaeropiaci-palyazat/": {
+   "cim": "Nyári diákmunka – munkaerőpiaci pályázat",
+   "forras": "palyazatok.org",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás",
+    "Film / fotó",
+    "Irodalom",
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-06-26",
+   "hatarido": "2027-06-17",
+   "palyazhat": [
+    "maganszemely",
+    "onkormanyzat",
+    "vallalkozas"
+   ]
+  },
+  "https://www.palyazat.gov.hu/kozlemenyek/megjelent-az-okos-villamosenergia-fogyasztasmerok-beszerzesenek-es-telepitesenek-tamogatasa-cimu-rrf-gs-6-7-1-26-kodszamu-felhivashoz-kapcsolodo-tamogatasi-szerzodes-minta": {
+   "cim": "Megjelent „Az okos villamosenergia-fogyasztásmérők beszerzésének és telepítésének támogatása” CÍMŰ (RRF-GS-6.7.1-26 kódszámú) Felhíváshoz kapcsolódó Támogatási Szerződés minta",
+   "forras": "palyazat.gov.hu közlemények",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "megjelent": "2026-07-21",
+   "dusitva": "2026-08-12"
+  },
+  "https://www.palyazat.gov.hu/kozlemenyek/megjelent-a-rugalmas-es-biztonsagos-villamosenergia-halozat-biztositasa-az-idojarasfuggo-megujulo-energiaforrasok-integralasa-erdekeben-cimu-rrf-gs-6-6-1-26-kodszamu-felhivashoz-kapcsolodo-tamogatasi-szerzodes-minta": {
+   "cim": "Megjelent a „Rugalmas és biztonságos villamosenergia-hálózat biztosítása az időjárásfüggő megújuló energiaforrások integrálása érdekében” CÍMŰ (RRF–GS–6.6.1-26 kódszámú) Felhíváshoz kapcsolódó Támogat",
+   "forras": "palyazat.gov.hu közlemények",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "megjelent": "2026-07-21",
+   "dusitva": "2026-08-12"
+  },
+  "https://www.palyazat.gov.hu/kozlemenyek/megjelent-a-felhivas-vizikozmu-halozatok-atalakitasara-hatekonysagnovelo-fejlesztesere-cimu-kehop-plusz-2-1-31-kodszamu-felhivas": {
+   "cim": "Megjelent a „Felhívás víziközmű hálózatok átalakítására, hatékonyságnövelő fejlesztésére” című (KEHOP Plusz-2.1.31 kódszámú) felhívás",
+   "forras": "palyazat.gov.hu közlemények",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "megjelent": "2026-07-20",
+   "dusitva": "2026-08-12"
+  },
+  "https://www.palyazat.gov.hu/kozlemenyek/megjelent-a-kockazatelemzest-es-informaciotovabbitast-segito-eszkoz-es-szoftverfejlesztesek-cimu-have-plusz-1-1-2-26-kodszamu-felhivas": {
+   "cim": "Megjelent „A kockázatelemzést és információtovábbítást segítő eszköz- és szoftverfejlesztések” című (HAVE Plusz-1.1.2-26 kódszámú) felhívás",
+   "forras": "palyazat.gov.hu közlemények",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "megjelent": "2026-07-06",
+   "dusitva": "2026-08-12"
+  },
+  "https://www.palyazat.gov.hu/kozlemenyek/megjelent-az-rrf-gs-6-6-1-26-rugalmas-es-biztonsagos-villamosenergia-halozat-biztositasa-az-idojarasfuggo-megujulo-energiaforrasok-integralasa-erdekeben-cimu-felhivas-kitoltoprogramja": {
+   "cim": "Megjelent az „RRF-GS-6.6.1-26 Rugalmas és biztonságos villamosenergia-hálózat biztosítása az időjárásfüggő megújuló energiaforrások integrálása érdekében\" című felhívás kitöltőprogramja",
+   "forras": "palyazat.gov.hu közlemények",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "megjelent": "2026-07-02",
+   "dusitva": "2026-08-12"
+  },
+  "https://www.palyazat.gov.hu/kozlemenyek/megjelent-az-rrf-gs-6-7-1-26-az-okos-villamosenergia-fogyasztasmerok-beszerzesenek-es-telepitesenek-tamogatasa-cimu-felhivas-kitoltoprogramja": {
+   "cim": "Megjelent az „RRF-GS-6.7.1-26 Az okos villamosenergia-fogyasztásmérők beszerzésének és telepítésének támogatása\" című felhívás kitöltőprogramja",
+   "forras": "palyazat.gov.hu közlemények",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "megjelent": "2026-07-02",
+   "dusitva": "2026-08-12"
+  },
+  "https://www.palyazat.gov.hu/kozlemenyek/megjelentek-a-rugalmas-es-biztonsagos-villamosenergia-halozat-biztositasa-az-idojarasfuggo-megujulo-energiaforrasok-integralasa-erdekeben-cimu-rrf-gs-6-6-1-26-kodszamu-felhivashoz-kapcsolodo-szabalyzatok": {
+   "cim": "Megjelentek a „Rugalmas és biztonságos villamosenergia-hálózat biztosítása az időjárásfüggő megújuló energiaforrások integrálása érdekében” CÍMŰ (RRF–GS–6.6.1-26 kódszámú) Felhíváshoz kapcsolódó szabá",
+   "forras": "palyazat.gov.hu közlemények",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "megjelent": "2026-07-02",
+   "dusitva": "2026-08-12"
+  },
+  "https://www.palyazat.gov.hu/kozlemenyek/megjelentek-az-okos-villamosenergia-fogyasztasmerok-beszerzesenek-es-telepitesenek-tamogatasa-cimu-rrf-gs-6-7-1-26-kodszamu-felhivashoz-kapcsolodo-szabalyzatok": {
+   "cim": "Megjelentek „Az okos villamosenergia-fogyasztásmérők beszerzésének és telepítésének támogatása” CÍMŰ (RRF-GS-6.7.1-26 kódszámú) Felhíváshoz kapcsolódó szabályzatok",
+   "forras": "palyazat.gov.hu közlemények",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "megjelent": "2026-07-02",
+   "dusitva": "2026-08-12"
+  },
+  "https://www.palyazat.gov.hu/kozlemenyek/megjelent-az-okos-villamosenergia-fogyasztasmerok-beszerzesenek-es-telepitesenek-tamogatasa-cimu-rrf-gs-6-7-1-26-kodszamu-felhivas-dokumentacioja": {
+   "cim": "Megjelent „Az okos villamosenergia-fogyasztásmérők beszerzésének és telepítésének támogatása” CÍMŰ (RRF-GS-6.7.1-26 kódszámú) Felhívás dokumentációja",
+   "forras": "palyazat.gov.hu közlemények",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "megjelent": "2026-07-01",
+   "dusitva": "2026-08-12"
+  },
+  "https://www.palyazat.gov.hu/kozlemenyek/megjelent-a-rugalmas-es-biztonsagos-villamosenergia-halozat-biztositasa-az-idojarasfuggo-megujulo-energiaforrasok-integralasa-erdekeben-cimu-rrf-gs-6-6-1-26-kodszamu-felhivas-kapcsolodo-dokumentacioja": {
+   "cim": "Megjelent a „Rugalmas és biztonságos villamosenergia-hálózat biztosítása az időjárásfüggő megújuló energiaforrások integrálása érdekében” CÍMŰ (RRF–GS–6.6.1-26 kódszámú) Felhívás kapcsolódó dokumentác",
+   "forras": "palyazat.gov.hu közlemények",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "megjelent": "2026-07-01",
+   "dusitva": "2026-08-12"
+  },
+  "https://www.palyazat.gov.hu/kozlemenyek/megjelent-az-okos-villamosenergia-fogyasztasmerok-beszerzesenek-es-telepitesenek-tamogatasa-cimu-rrf-gs-6-7-1-26-kodszamu-felhivas": {
+   "cim": "Megjelent „Az okos villamosenergia-fogyasztásmérők beszerzésének és telepítésének támogatása” CÍMŰ (RRF-GS-6.7.1-26 kódszámú) Felhívás",
+   "forras": "palyazat.gov.hu közlemények",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "megjelent": "2026-06-24",
+   "dusitva": "2026-08-12"
+  },
+  "https://www.palyazat.gov.hu/kozlemenyek/megjelent-a-rugalmas-es-biztonsagos-villamosenergia-halozat-biztositasa-az-idojarasfuggo-megujulo-energiaforrasok-integralasa-erdekeben-cimu-rrf-gs-6-6-1-26-kodszamu-felhivas": {
+   "cim": "Megjelent a „Rugalmas és biztonságos villamosenergia-hálózat biztosítása az időjárásfüggő megújuló energiaforrások integrálása érdekében” CÍMŰ (RRF–GS–6.6.1-26 kódszámú) Felhívás",
+   "forras": "palyazat.gov.hu közlemények",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "megjelent": "2026-06-24",
+   "dusitva": "2026-08-12"
+  },
+  "https://www.palyazat.gov.hu/kozlemenyek/elerheto-a-kiberbiztonsagi-kompetenciakozossegi-tagsagra-vonatkozo-ssns-ncc-hu-komp-2026-kodszamu-felhivas-kitoltoprogramja": {
+   "cim": "Elérhető a kiberbiztonsági kompetenciaközösségi tagságra vonatkozó, SSNS-NCC-HU-KOMP-2026 kódszámú felhívás kitöltőprogramja.",
+   "forras": "palyazat.gov.hu közlemények",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "megjelent": "2026-06-16",
+   "dusitva": "2026-08-12",
+   "hatarido": "2026-06-16"
+  },
+  "https://www.palyazat.gov.hu/kozlemenyek/megjelent-az-esza-adatszolgaltatas-ertelmezesi-segedlet-a-top-plusz-esza-felhivasaihoz": {
+   "cim": "Megjelent az ESZA+ adatszolgáltatás értelmezési segédlet a TOP PLUSZ ESZA+ felhívásaihoz",
+   "forras": "palyazat.gov.hu közlemények",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "megjelent": "2026-06-15",
+   "dusitva": "2026-08-12"
+  },
+  "https://www.palyazat.gov.hu/kozlemenyek/megjelent-a-kiberbiztonsagi-kompetenciakozossegi-tagsagi-jogviszony-letesitesere-iranyulo-ssns-ncc-hu-komp-2026-kodszamu-felhivas": {
+   "cim": "Megjelent a kiberbiztonsági kompetenciaközösségi tagsági jogviszony létesítésére irányuló SSNS-NCC-HU-KOMP-2026 kódszámú felhívás.",
+   "forras": "palyazat.gov.hu közlemények",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "megjelent": "2026-05-18",
+   "dusitva": "2026-08-12"
+  },
+  "https://www.palyazat.gov.hu/kozlemenyek/megjelent-a-kehop-plusz-2-3-11-26-egyes-kiemelt-hulladekaramok-hasznositasanak-elosegitese-erfa-cimu-felhivas-kitoltoprogramja": {
+   "cim": "Megjelent a „KEHOP_PLUSZ-2.3.11-26 Egyes kiemelt hulladékáramok hasznosításának elősegítése (ERFA)\" című felhívás kitöltőprogramja",
+   "forras": "palyazat.gov.hu közlemények",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "megjelent": "2026-05-05",
+   "dusitva": "2026-08-12"
+  },
+  "https://www.palyazat.gov.hu/kozlemenyek/megjelent-a-kehop-plusz-2-3-22-26-vallalati-fenntarthatosagot-es-korforgasos-mukodest-elosegito-demonstracios-mintaprojektek-tamogatasa-cimu-felhivas-kitoltoprogramja": {
+   "cim": "Megjelent a „KEHOP_PLUSZ-2.3.22-26 Vállalati fenntarthatóságot és körforgásos működést elősegítő demonstrációs mintaprojektek támogatása” című felhívás kitöltőprogramja",
+   "forras": "palyazat.gov.hu közlemények",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "megjelent": "2026-04-17",
+   "dusitva": "2026-08-12"
+  },
+  "https://www.palyazat.gov.hu/kozlemenyek/megjelent-a-dimop-plusz-2-4-2-26-nemzeti-akkumulator-kataszter-rendszer-megvalositasa-cimu-felhivas-kitoltoprogramja": {
+   "cim": "Megjelent a „DIMOP_PLUSZ-2.4.2-26 Nemzeti Akkumulátor Kataszter Rendszer megvalósítása” című felhívás kitöltőprogramja",
+   "forras": "palyazat.gov.hu közlemények",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "megjelent": "2026-04-17",
+   "dusitva": "2026-08-12"
+  },
+  "https://www.palyazat.gov.hu/kozlemenyek/megjelent-a-ginop-plusz-1-1-6-25-minositett-klasztermenedzsment-szervezetek-tamogatasa-cimu-felhivas-kitoltoprogramja": {
+   "cim": "Megjelent a „GINOP_PLUSZ-1.1.6-25 Minősített klasztermenedzsment szervezetek támogatása\" című felhívás kitöltőprogramja",
+   "forras": "palyazat.gov.hu közlemények",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "megjelent": "2026-04-14",
+   "dusitva": "2026-08-12"
+  },
+  "https://einfoszab.budapest.hu/": {
+   "cim": "Átláthatóság",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12"
+  },
+  "https://budapest.hu/hirek/2026/07/23/uj-fejezet-nyilhat-a-budapesti-kozlekedesfejlesztesben": {
+   "cim": "Új fejezet nyílhat a budapesti közlekedésfejlesztésben  megnyitása új lapon",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Zöld / környezet",
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-07-23"
+  },
+  "https://budapest.hu/hirek/2026/08/10/a-pro-cultura-urbis-kozalapitvany-2026-evi-palyazati-felhivasa-a-fuggetlen-eloado-muveszeti-terulet-tamogatasara": {
+   "cim": "A Pro Cultura Urbis Közalapítvány 2026. évi pályázati felhívása a független előadó-művészeti terület támogatására megnyitása új lapon",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Színház",
+    "Ifjúság / oktatás",
+    "Zöld / környezet",
+    "Film / fotó",
+    "Képzőművészet",
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-08-10",
+   "hatarido": "2026-09-11",
+   "palyazhat": [
+    "civil"
+   ]
+  },
+  "https://budapest.hu/hirek/2026/06/29/julius-1-tol-keszpenzmentesse-valik-a-budapesti-parkolas-automatak-ezrei-tunnek-el-az-utcakrol": {
+   "cim": "Július 1-től készpénzmentessé válik a budapesti parkolás, automaták ezrei tűnnek el az utcákról megnyitása új lapon",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Zöld / környezet",
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-06-29"
+  },
+  "https://budapest.hu/hirek/2026/07/08/ujabb-hasznalaton-kivuli-iskolabol-lesz-berhaz-elindult-a-beruhazas-telepitesi-tanulmanytervenek-velemenyezese": {
+   "cim": "Újabb használaton kívüli iskolából lesz bérház – elindult a beruházás telepítési tanulmánytervének véleményezése megnyitása új lapon",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás",
+    "Zöld / környezet",
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-07-08"
+  },
+  "https://budapest.hu/hirek/2026/06/11/a-fopolgarmester-atadta-a-2026-os-raday-mihaly-dijakat": {
+   "cim": "A főpolgármester átadta a 2026-os Ráday Mihály-díjakat megnyitása új lapon",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás",
+    "Irodalom"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-06-11"
+  },
+  "https://budapest.hu/hirek/2026/06/01/szivesen-ennek-a-menzan-ha-lezarul-a-budapesti-schoolfood4change-projekt": {
+   "cim": "Szívesen ennék a menzán, ha… – lezárul a budapesti SchoolFood4Change projekt  megnyitása új lapon",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás",
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-06-01"
+  },
+  "https://budapest.hu/hirek/2026/05/26/megujul-ferencvaros-egyik-legfontosabb-kozterulete-elhetobbe-valik-a-mester-utca": {
+   "cim": "Megújul Ferencváros egyik legfontosabb közterülete: élhetőbbé válik a Mester utca megnyitása új lapon",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Zöld / környezet",
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-05-26"
+  },
+  "https://budapest.hu/hirek/2026/06/11/budapest-elkotelezett-a-varosi-logisztika-fejlesztese-mellett": {
+   "cim": "Budapest elkötelezett a városi logisztika fejlesztése mellett megnyitása új lapon",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-06-11"
+  },
+  "https://budapest.hu/hirek/2026/05/08/elkeszult-budapest-csapadekvizgazdalkodasi-strategiaja": {
+   "cim": "Elkészült Budapest csapadékvíz‑gazdálkodási stratégiája megnyitása új lapon",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-05-08"
+  },
+  "https://budapest.hu/hirek/2026/04/30/a-lekoszono-kormanyzat-altal-kiemelt-beruhazasokka-tett-helyszinek-budapesti-listaja": {
+   "cim": "A leköszönő kormányzat által Budapesten kiemelt beruházásokká tett helyszínek listája  megnyitása új lapon",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-04-30"
+  },
+  "https://enbudapestem.hu": {
+   "cim": "További enbudapestem.hu hírek",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Színház",
+    "Zene",
+    "Ifjúság / oktatás",
+    "Zöld / környezet",
+    "Film / fotó",
+    "Képzőművészet",
+    "Irodalom",
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12"
+  },
+  "https://enbudapestem.hu/2026/08/10/korlattal-vedett-ketiranyu-kerekparsavot-epitenek-a-rudas-furdonel": {
+   "cim": "Korláttal védett, kétirányú kerékpársávot építenek a Rudas fürdőnél, megnyitás új lapon",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-08-10"
+  },
+  "https://enbudapestem.hu/stilus": {
+   "cim": "STÍLUS kategória megnyitása új lapon",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Zene",
+    "Ifjúság / oktatás",
+    "Zöld / környezet",
+    "Film / fotó",
+    "Irodalom",
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-08-03"
+  },
+  "https://enbudapestem.hu/2026/08/09/a-helyszinen-mar-ne-kiabaljon-senki-egymassal": {
+   "cim": "A helyszínen már ne kiabáljon senki egymással! – Kik és hogyan szervezik a Szigetet?, megnyitás új lapon",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Színház",
+    "Zene",
+    "Ifjúság / oktatás",
+    "Film / fotó"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-08-09"
+  },
+  "https://enbudapestem.hu/arcok": {
+   "cim": "ARCOK kategória megnyitása új lapon",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Női jogok",
+    "Színház",
+    "Ifjúság / oktatás",
+    "Film / fotó",
+    "Képzőművészet",
+    "Irodalom"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12"
+  },
+  "https://enbudapestem.hu/2026/08/10/iskolakezdesre-ujraindulhat-a-forgalom-a-florian-ter-eszaki-feluljarojan-is": {
+   "cim": "Iskolakezdésre újraindulhat a forgalom a Flórián tér északi felüljáróján is, megnyitás új lapon",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás",
+    "Zöld / környezet",
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-08-10"
+  },
+  "https://enbudapestem.hu/friss": {
+   "cim": "FRISS kategória megnyitása új lapon",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Zene",
+    "Ifjúság / oktatás",
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-07-24",
+   "hatarido": "2026-08-04"
+  },
+  "https://enbudapestem.hu/2026/08/07/a-fovaros-tobb-energiatakarekossagi-intezkedest-fenntart": {
+   "cim": "A főváros több energiatakarékossági intézkedést fenntart, megnyitás új lapon",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-08-07"
+  },
+  "https://enbudapestem.hu/2026/08/06/extrem-korulmenyek-kozott-dolgoznak-a-varosert": {
+   "cim": "Extrém körülmények között dolgoznak a városért , megnyitás új lapon",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-08-06",
+   "hatarido": "2027-08-04"
+  },
+  "https://enbudapestem.hu/2026/08/04/katasztrofak-kellenek-ahhoz-hogy-elkezdjunk-maskeppen-gondolkodni": {
+   "cim": "Katasztrófák kellenek ahhoz, hogy elkezdjünk másképpen gondolkodni, megnyitás új lapon",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás",
+    "Zöld / környezet",
+    "Film / fotó",
+    "Irodalom",
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-08-04"
+  },
+  "https://enbudapestem.hu/2026/08/04/a-nagykorut-jovobeli-kialakitasat-teszteli-a-fovaros-a-jozsefvarosi-szakaszon": {
+   "cim": "A Nagykörút jövőbeli kialakítását teszteli a Főváros a józsefvárosi szakaszon, megnyitás új lapon",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Zöld / környezet",
+    "Képzőművészet",
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-08-04"
+  },
+  "https://enbudapestem.hu/2026/08/03/varosi-zoldhullam-elindult-a-megujult-mol-bubi": {
+   "cim": "Városi zöldhullám – elindult a megújult MOL Bubi , megnyitás új lapon",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://budapest.hu/hirek/2026/07/02/palyazati-felhivas-budapest-epiteszeti-nivodija-2026": {
+   "cim": "Hírek Pályázati felhívás: Budapest Építészeti Nívódíja 2026",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-07-02",
+   "hatarido": "2026-09-01"
+  },
+  "https://budapest.hu/hirek/2026/06/02/egymasra-lepni-tilos-alkotoi-palyazat-indult-a-diszkriminacio-megszunteteseert": {
+   "cim": "Hírek Egymásra lépni tilos - alkotói pályázat indult a diszkrimináció megszüntetéséért",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://budapest.hu/hirek/2026/05/26/2026-ban-is-indul-a-gyumolcsozo-kertvaros-palyazat": {
+   "cim": "Hírek 2026-ban is indul a „Gyümölcsöző kertváros” pályázat",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://budapest.hu/hirek/2026/04/21/palyazati-felhivas-allatterapias-programok-idosotthonokban": {
+   "cim": "Hírek Pályázati felhívás: Állatterápiás programok idősotthonokban",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://budapest.hu/hirek/2026/04/02/iden-is-budapest-roma-osztondijprogram-indult-felsooktatasi-intezmenyek-hallgatoi-reszere": {
+   "cim": "Hírek Idén is Budapest Roma Ösztöndíjprogram indult felsőoktatási intézmények hallgatói részére",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://budapest.hu/hirek/2025/10/03/lehetosegek-kozossegi-szolgalat-teljesitesere-kozepiskolasoknak": {
+   "cim": "Hírek Lehetőségek közösségi szolgálat teljesítésére középiskolásoknak",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://budapest.hu/hirek/2025/12/18/elindul-a-budapesti-zold-panelprogram": {
+   "cim": "Hírek Elindul a Budapesti Zöld Panelprogram",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://budapest.hu/hirek/2026/07/16/hirdetmeny-ulnokvalasztasrol": {
+   "cim": "Közlemények Hirdetmény ülnökválasztásról",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://budapest.hu/hirek/2026/07/13/lenovo-szerver-beszerzese-beszerzesi-eljaras-2026": {
+   "cim": "Közlemények „Lenovo szerver beszerzése” beszerzési eljárás",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://budapest.hu/hirek/2026/07/08/kozlemeny-megyeri-ut-45-szam-alatti-19-eve-hasznalaton-kivuli-iskolaepulet-magas-minosegu-tobblakasos-lakoepulette-valo-atalakitasa-beruhazas-telepitesi-tanulmanytervenek-velemenyezesi-lehetosegerol": {
+   "cim": "Közlemények Közlemény „Megyeri út 45. szám alatti 19 éve használaton kívüli iskolaépület magas minőségű többlakásos lakóépületté való átalakítása” beruházás telepítési tanulmánytervének véleményezési ",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás",
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://budapest.hu/hirek/2026/07/07/gepek-beszerzese-muhely-szamara-2026-evben-beszerzesi-eljaras": {
+   "cim": "Közlemények Gépek beszerzése műhely számára a  2026. évben - beszerzési eljárás",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://budapest.hu/hirek/2026/06/19/tarsadalmi-egyeztetesen-a-fovarosi-telepulesi-tamogatasrol-szolo-rendelettervezet": {
+   "cim": "Közlemények Társadalmi egyeztetésen az új  fővárosi reklámrendelet-tervezet",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://kozadat.hu": {
+   "cim": "Tovább a közadatkereső oldalára, új lapon nyílik meg",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12"
+  },
+  "https://einfoszab.budapest.hu/ApplicationForm/HistoryDetails/18748?key=palyazat-tamogatas-view&type=7": {
+   "cim": "Pályázati felhívás a fővárosi önkormányzati tulajdonú közterületeken megrendezésre kerülő I., II. és egyéb kategóriába sorolt futó sportesemények 2027. évi naptártervbe kerüléséről",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "hatarido": "2026-06-12",
+   "megjelent": "2026-06-01",
+   "dusitva": "2026-08-12"
+  },
+  "https://einfoszab.budapest.hu/ApplicationForm/HistoryDetails/18077?key=palyazat-tamogatas-view&type=7": {
+   "cim": "Égig Érő Fű Udvarzöldítési Program 2025",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "hatarido": "2026-03-04",
+   "megjelent": "2025-12-22",
+   "dusitva": "2026-08-12"
+  },
+  "https://einfoszab.budapest.hu/ApplicationForm/HistoryDetails/18073?key=palyazat-tamogatas-view&type=7": {
+   "cim": "Pályázati kiírás permakultúrás balkonkertészeti szemléletformáló képzésen való részvételre Budapest XIX. kerületében",
+   "forras": "Budapest Főváros",
+   "kinek": "egyesület",
+   "kategoriak": [
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "hatarido": "2026-01-30",
+   "megjelent": "2025-12-19",
+   "dusitva": "2026-08-12"
+  },
+  "https://jozsefvaros.hu/otthon/hirdetotabla/palyazat/tamogatas-iranti-kerelem-benyujtasa-eletveszely-elharitasa-erdekeben/": {
+   "cim": "Épületbiztonsági támogatás iránti kérelem benyújtása társasházaknak",
+   "forras": "Józsefváros",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-06-01"
+  },
+  "https://jozsefvaros.hu/otthon/hirdetotabla/palyazat/ajanlatteteli-felhivas-ujszulott-ajandekcsomagok-targyu-kozbeszerzesi-ertekhatart-el-nem-ero-beszerzesi-eljarasban-4/": {
+   "cim": "Ajánlattételi felhívás „újszülött ajándékcsomagok” tárgyú, közbeszerzési értékhatárt el nem érő beszerzési eljárásban",
+   "forras": "Józsefváros",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "hatarido": "2026-08-17",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-08-05"
+  },
+  "https://jozsefvaros.hu/otthon/hirdetotabla/palyazat/jozsefvarosi-roma-gyakornoki-program/": {
+   "cim": "Józsefvárosi Roma Gyakornoki Program",
+   "forras": "Józsefváros",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "hatarido": "2026-09-01",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-07-16"
+  },
+  "https://jozsefvaros.hu/otthon/hirdetotabla/palyazat/jo-tanulo-jo-sportolo-jutalom/": {
+   "cim": "Jó tanuló, jó sportoló jutalom",
+   "forras": "Józsefváros",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "hatarido": "2026-09-15",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-05-12"
+  },
+  "https://jozsefvaros.hu/otthon/hirdetotabla/palyazat/komposztladak-biztositasa-lakossag-reszere-palyazati-kiiras/": {
+   "cim": "„KOMPOSZTLÁDÁK BIZTOSÍTÁSA LAKOSSÁG RÉSZÉRE” pályázati kiírás",
+   "forras": "Józsefváros",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "hatarido": "2026-09-30",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-03-31"
+  },
+  "https://jozsefvaros.hu/otthon/hirdetotabla/palyazat/kozossegi-kert-fenntartasa-a-magdolna-utca-28-szam-alatti-telekingatlanon-2/": {
+   "cim": "Közösségi kert fenntartása a Magdolna utca 28. szám alatti telekingatlanon",
+   "forras": "Józsefváros",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "hatarido": "2026-08-07",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-06-30"
+  },
+  "https://jozsefvaros.hu/otthon/hirdetotabla/palyazat/pecsi-eszter-tarsashazi-tamogatasok-2026-palyazati-kiiras/": {
+   "cim": "„Pécsi Eszter Társasházi támogatások 2026” pályázati kiírás",
+   "forras": "Józsefváros",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "hatarido": "2026-06-30",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-03-25"
+  },
+  "https://jozsefvaros.hu/otthon/hirdetotabla/palyazat/budapest-fovaros-viii-kerulet-jozsefvarosi-onkormanyzat-palyazati-kiirasa-a-muzsikus-ciganyok-oroksegere-reflektalo-kozteri-mualkotas-elkeszitesere/": {
+   "cim": "BUDAPEST FŐVÁROS VIII. KERÜLET JÓZSEFVÁROSI ÖNKORMÁNYZAT pályázati kiírása a Muzsikus cigányok örökségére reflektáló köztéri műalkotás elkészítésére",
+   "forras": "Józsefváros",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Képzőművészet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "hatarido": "2026-06-25",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-03-10"
+  },
+  "https://jozsefvaros.hu/otthon/hirdetotabla/palyazat/jozsefvarosi-szocialis-sportosztondij-palyazat-2026/": {
+   "cim": "Józsefvárosi szociális sportösztöndíj pályázat 2026",
+   "forras": "Józsefváros",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "hatarido": "2026-06-15",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-05-12"
+  },
+  "https://jozsefvaros.hu/otthon/hirdetotabla/palyazat/palyazati-felhivas-kska-2026-3-suliban-maradni-program-iii/": {
+   "cim": "Pályázati felhívás – KSKA-2026/3. Suliban Maradni Program III.",
+   "forras": "Józsefváros",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "hatarido": "2026-06-15",
+   "dusitva": "2026-08-12",
+   "megjelent": "2026-05-14"
+  },
+  "https://jozsefvaros.hu/otthon/hirdetotabla/palyazat/palyazati-kiiras-fogadj-orokbe-egy-kozteruletet-2026-argyu-kozbeszerzesi-ertekhatart-el-nem-ero-beszerzesi-eljarasban/": {
+   "cim": "Pályázati kiírás „Fogadj örökbe egy közterületet! 2026” árgyú közbeszerzési értékhatárt el nem érő beszerzési eljárásban",
+   "forras": "Józsefváros",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "hatarido": "2026-06-15"
+  },
+  "https://jozsefvaros.hu/otthon/hirdetotabla/palyazat/palyazati-felhivas-kska-2026-2-jozsefvarosi-muveszeti-osztondijprogram-2026-2027-tanevre-balogh-lajos-emlekere/": {
+   "cim": "Pályázati felhívás- KSKA-2026/2. – Józsefvárosi Művészeti Ösztöndíjprogram 2026/2027. tanévre Balogh Lajos emlékére (Ösztöndíjprogram V.)",
+   "forras": "Józsefváros",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "hatarido": "2026-06-12"
+  },
+  "https://jozsefvaros.hu/otthon/hirdetotabla/palyazat/kerekparos-kozlekedes-tamogatasa-2026-palyazati-kiiras/": {
+   "cim": "„KERÉKPÁROS KÖZLEKEDÉS TÁMOGATÁSA 2026” pályázati kiírás",
+   "forras": "Józsefváros",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "hatarido": "2026-05-15"
+  },
+  "https://jozsefvaros.hu/otthon/hirdetotabla/palyazat/kozossegi-kert-fenntartasa-a-magdolna-utca-28-szam-alatti-telekingatlanon/": {
+   "cim": "Közösségi kert fenntartása a Magdolna utca 28. szám alatti telekingatlanon",
+   "forras": "Józsefváros",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "hatarido": "2026-05-15"
+  },
+  "https://pafi.hu/p/szellemi-alkotasok-hazai-es-nemzetkozi-szellemitulajdon-vedelmet-szolgalo-tevekenysegek-tamogatasa-az-alkotasok-hasznosulasanak-elomozditasa-erdekeben-2025-111-iparjog-1": {
+   "cim": "Szellemi alkotások hazai és nemzetközi szellemitulajdon-védelmét szolgáló tevékenységek támogatása az alkotások hasznosulásának előmozdítása érdekében / 2025-1.1.1-IPARJOG A Nemzeti Kutatási, Fejleszt",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás",
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "hatarido": "2026-08-28",
+   "palyazhat": [
+    "civil",
+    "maganszemely",
+    "vallalkozas"
+   ]
+  },
+  "https://pafi.hu/p/identitas-erositese-pest-varmegyeben-fotopalyazat-diakoknak-2026": {
+   "cim": "Identitás erősítése Pest vármegyében - Fotópályázat diákoknak 2026 Pest Vármegye Önkormányzata fotópályázat hirdet diákok részére 135 ezer forint értékű összdíjazással a TOP_PLUSZ-3.1.3-23-PT2-2024-00",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás",
+    "Zöld / környezet",
+    "Film / fotó",
+    "Képzőművészet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "hatarido": "2026-10-04"
+  },
+  "https://pafi.hu/p/magyar-zeneszerzok-egyesulete-palyazatai": {
+   "cim": "Magyar Zeneszerzők Egyesülete pályázatai A Magyar Zeneszerzők Egyesülete meghirdette három, negyven év alatti alkotóknak szóló díjpályázatát, amelyekre 2025-ben bemutatott művekkel lehet jelentkezni s",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Színház",
+    "Zene",
+    "Ifjúság / oktatás",
+    "Film / fotó",
+    "Irodalom"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "hatarido": "2026-09-30",
+   "palyazhat": [
+    "civil"
+   ]
+  },
+  "https://pafi.hu/p/mikor-megismertelek": {
+   "cim": "Mikor Megismertelek \"A szerelem mennyország, az elválás pokol, a továbblépés maga az élet.\" - vers és novella pályázat. Kiíró Zöldkalamáris Könyvkiadó Érvényes 2026. 09. 13. (egy hónap) Kategória Közm",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Zöld / környezet",
+    "Irodalom"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "hatarido": "2026-09-13"
+  },
+  "https://pafi.hu/p/az-ev-tartoszerkezete-dij": {
+   "cim": "Az Év Tartószerkezete-díj A díj létrehozásának fő célja olyan egyedi, kiemelkedő tartószerkezet tervezői megoldások elismerése, amely mérnöki szempontból nagy jelentőséggel bírnak. Kiíró Magyar Mérnök",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Zöld / környezet",
+    "Film / fotó",
+    "Képzőművészet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "megjelent": "2016-01-01",
+   "hatarido": "2026-09-06"
+  },
+  "https://pafi.hu/p/halloweeni-antologia-2026": {
+   "cim": "Halloweeni antológia 2026 A pályázat célja egy igényes, nyomtatott, magyar nyelvű halloweeni antológia létrehozása, amely a hazai szerzők halloween ihlette műveit mutatja be. Kiíró Halloweeni Mozaik K",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Irodalom"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "hatarido": "2026-09-06"
+  },
+  "https://pafi.hu/p/crayola-kreativ-szunido-palyazat-2026": {
+   "cim": "Crayola Kreatív Szünidő Pályázat 2026 A vakáció még korántsem ért véget, mi pedig szeretnénk együtt ünnepelni veletek a nyár legszebb pillanatait, ezért ismét kreatív pályázattal készülünk az augusztu",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás",
+    "Film / fotó",
+    "Képzőművészet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12",
+   "dusitva": "2026-08-12",
+   "hatarido": "2026-08-31"
+  },
+  "https://pafi.hu/p/lakaspalyazat": {
+   "cim": "Lakáspályázat Az MR Közösségi Lakásalap Közhasznú Nonprofit Korlátolt Felelősségű Társaság (a továbbiakban: MR Lakásalap Nkft. vagy Bérbeadó) pályázatot hirdet felújított, illetve jó műszaki állapotú ",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/fiatal-termeszettudomanyos-tanar-fitt-alkotoi-dij-palyazat": {
+   "cim": "Fiatal természettudományos tanár (FITT) alkotói díj pályázat Kiemelten fontosnak tartjuk az olyan fiatal tanárok támogatását, akik az oktatást a természettudományos tananyag magasszintű, innovatív, a ",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/kozlekedesi-innovacios-dij": {
+   "cim": "Közlekedési Innovációs Díj A közlekedéssel foglalkozó tehetséges fiatal szakemberek felkarolása, alkotásra ösztönzése, Magyarországon maradásuk elősegítése érdekében a Nemzeti Útdíjfizetési Szolgáltat",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/nyugdij-matching-fund-2026-313-mf": {
+   "cim": "Nyugdíj Matching Fund / 2026-3.1.3-MF A program célja a doktori képzésbe való belépés ösztönzése. A program keretében az NKFI Alap 50%-os kiegészítő támogatást nyújt azon felsőoktatási intézmények rés",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/budapest-fotografiai-osztondij-2027": {
+   "cim": "Budapest Fotográfiai Ösztöndíj 2027 A Robert Capa Kortárs Fotográfiai Központ - ráirányítva a figyelmet kiemelkedő művészeti műfajunkra, a fotográfiára és annak különleges dokumentáló értékére - újra ",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/eloado-muveszeti-rezidenciaprogram": {
+   "cim": "Előadó-művészeti rezidenciaprogram Olaszországba hirdet alkotóházi ösztöndíjat az IDRA Teatro 2027 januárjára és februárjára A változás rezidenciaprogramjai - A kreatív gyakorlat átalakító erejének ki",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Színház",
+    "Ifjúság / oktatás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/thalia-szinhaz-dramapalyazat": {
+   "cim": "Thália színház drámapályázat A teátrum célja, hogy ne csupán bemutassa, hanem aktívan formálja is a kortárs magyar drámairodalmat, és olyan előadások megszületését támogassa, amelyek szórakoztatnak, g",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Színház",
+    "Zene"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/svajci-rezidenciaprogram-iroknak-es-muforditoknak": {
+   "cim": "Svájci rezidenciaprogram íróknak és műfordítóknak Alkotóházi ösztöndíjat hirdet íróknak és műfordítóknak Svájcba a Fondation Jan Michalski. Kiíró Fondation Jan Michalski Érvényes 2026. 08. 31. (19 nap",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás",
+    "Irodalom"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/kortarstancmuveszeti-rezidenciaprogram-szkopjeben": {
+   "cim": "Kortárstáncművészeti rezidenciaprogram Szkopjében Az észak-macedóniai Skopje Dance Theater nemzetközi kortárstáncművészeti rezidenciaprogramot szervez 2027 tavaszán táncművészeknek. Kiíró Interart Cul",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/professzionalis-weboldal-csak-69500-ft-10-munkanap-alatt-teljes-felszereltseggel-igeny-szerint-tobbnyelvu-es-webaruhazas-kialakitassal": {
+   "cim": "Professzionális weboldal - csak 69.500 Ft - 10 munkanap alatt, teljes felszereltséggel, igény szerint többnyelvű és webáruházas kialakítással Modern, gyors és megbízható weboldalt készítünk minden meg",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/kanikula-program": {
+   "cim": "Kánikula Program A pályázat célja a nyári forró időjárási viszonyokra tekintettel „kánikula csomag\" nyújtása vissza nem térítendő költségvetési támogatás formájában, Magyarországon működő állatvédő sz",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/a-vilagunk-gyonyoru": {
+   "cim": "A világunk gyönyörű A CEWE Photo Award, a világ legnagyobb fotópályázata arról szól, hogy észrevedd és megmutasd a világ szépségét - úgy, ahogy te látod. Kiíró Cewe Color Magyarország Kft. Érvényes 20",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Film / fotó"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/szabadsag-a-litera-meghirdeti-idei-irodalmi-palyazatat": {
+   "cim": "SZABADSÁG - A Litera meghirdeti idei irodalmi pályázatát A Litera meghirdeti idei nyílt irodalmi pályázatát. A téma a szabadság. Olyan személyes tapasztalatokon nyugvó és/vagy fikciós történeteket vár",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Irodalom"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/loop": {
+   "cim": "LOOP A f|x|r és a Művészetek Háza Veszprém 2026-ban is meghirdeti a LOOP˛ videóművészeti fesztivált. Kiíró Művészetek Háza Veszprém f|x|r Galéria és Médialabor Érvényes 2026. 09. 15. (egy hónap) Kateg",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Zene",
+    "Film / fotó",
+    "Képzőművészet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/a-sichuan-fine-arts-institute-nemzetkozi-palyazata": {
+   "cim": "A Sichuan Fine Arts Institute nemzetközi pályázata Nemzetközi pályázatot hirdet angol vagy kínai nyelven író művészetkritikusok számára a Sichuan Fine Arts Institute. Kiíró Sichuan Fine Arts Institute",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Irodalom"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/a-munka-vilaga-xvii": {
+   "cim": "A munka világa XVII Az országban tevékenykedő kereskedők, ipari vállalkozások, szolgáltatók, kézművesek tevékenységének, termékeiknek művészi módon való megjelenítése.\nEz magában foglalja a cégek mind",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/europa-kollegium-ferohelyeire-vonatkozo-palyazat": {
+   "cim": "Európa Kollégium férőhelyeire vonatkozó pályázat PÁLYÁZATI FELHÍVÁST  AZ EURÓPA KOLLÉGIUMBAN VALÓ KOLLÉGIUMI ELHELYEZÉS ODAÍTÉLÉSÉRE A 2026–2027. ÉVBEN (ELSŐ KÖR). Kiíró Magyar Nemzeti Tanács Érvényes",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/budapest-epiteszeti-nivodija-2026": {
+   "cim": "Budapest Építészeti Nívódíja 2026 A pályázat célja, hogy elősegítse az új értékek teremtését, a hagyományos értékek megőrzését, valamint az építészeti és környezeti kultúra fejlődését. A pályázat kiem",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/hirek": {
+   "cim": "Hírek Mi újság? - üdvözöljük az ismerőseinket, mert az ember szereti újra és újra történetekbe rendezni az életet. Az információ átadása és fogadása világunk minden szegletében megjelenik, az evangéli",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/muforditas-palyazat-2026": {
+   "cim": "Műfordítás-pályázat 2026 Az Országos Idegennyelvű Könyvtár műfordítás-pályázatot hirdet önálló műfordításkötettel még nem rendelkező műfordítók számára. Kiíró Országos Idegennyelvű Könyvtár Érvényes 2",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Irodalom"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/franciaorszagi-rezidenciaprogram-muveszetkritikusoknak": {
+   "cim": "Franciaországi rezidenciaprogram művészetkritikusoknak A franciaországi AICA International és a Cité internationale des arts rezidenciaprogramot szervez művészetkritikusoknak 2027-re. Kiíró AICA Inter",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/az-ev-magyar-fotoja-ev-magyar-fotosa-2026": {
+   "cim": "Az Év Magyar Fotója - Év Magyar Fotósa 2026 A Magyar Fotóművészeti Alkotócsoportok Országos Szövetsége korábbi nagysikerű pályázatai nyomán 2026-ban újra meghirdeti, Az év 101 legjobb magyar fotója, a",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Film / fotó"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/repules-a-teljes-kep": {
+   "cim": "Repülés - A teljes kép A Magyar Természetvédők Szövetsége és a Fenntarthatóság Felé Egyesület „REPÜLÉS - A TELJES KÉP” címmel fotópályázatot hirdet, amelynek célja a magyarországi légiközlekedés körny",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Zöld / környezet",
+    "Film / fotó"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/perform-europe-oc-2026-2028": {
+   "cim": "Perform Europe - OC 2026-2028 Perform Europe is a funding scheme supporting international collaborations in the performing arts sector across 41 Creative Europe countries. It funds partnership-based p",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/eit-health-palyazatok": {
+   "cim": "EIT Health pályázatok Az EIT Health pályázatai az egészségügyi innováció teljes életciklusát lefedik, a fejlesztéstől és képzéstől a piacra lépésen át a széles körű bevezetésig. Elsősorban startupok, ",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/berki-viola-osztondij": {
+   "cim": "Berki Viola ösztöndíj A Berki Viola Közalapítvány Kuratóriuma pályázatot ír ki legalább a 60. életévét 2026-ben betöltő, Magyarországon élő képzőművész támogatására. Kiíró Berki Viola Közalapítvány Ér",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás",
+    "Képzőművészet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/neb-academy-skills-infrastructure": {
+   "cim": "NEB Academy - Skills Infrastructure This call supports the development of regional skills infrastructures and lifelong learning pathways aligned with New European Bauhaus (NEB) values. It focuses on a",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/eit-climate-kic-palyazatok": {
+   "cim": "EIT Climate-KIC pályázatok Az EIT Climate-KIC felhívásai a klímaadaptáció, a bioökonómia, a fenntartható mezőgazdaság és a közösségi klímareziliencia támogatására irányulnak. Elsősorban termelők, inno",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/eit-food-palyazatok": {
+   "cim": "EIT Food pályázatok Az EIT Food pályázatai az agrifood innováció, startupfejlesztés, élelmiszer-rendszer transzformáció és kutatás-piac átmenet támogatását célozzák. Elsősorban startupok, kutatóhelyek",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/mantra-2nd-open-call-for-manufacturing-smes": {
+   "cim": "MANTRA 2nd Open Call for Manufacturing SMEs The call aims to enhance competitiveness, resilience, and environmental performance through the uptake of advanced technologies. Kiíró MANTRA Érvényes 2026.",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/eidolon-dij": {
+   "cim": "Eidolon díj Fotósoknak, kutatóknak és kurátoroknak hirdet pályázatot az Eidolon Centre a 2026-os eidolon Díj odaítélésére. Kiíró Eidolon Centre Érvényes 2026. 09. 30. (2 hónap) Kategória Díj Média Műv",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Film / fotó"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/eit-urban-mobility-palyazatok": {
+   "cim": "EIT Urban Mobility pályázatok Az EIT Urban Mobility pályázatai a fenntartható városi mobilitás fejlesztését támogatják, az innovációtól és startup finanszírozástól kezdve az oktatási programokon át a ",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás",
+    "Zöld / környezet",
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/futureprooftextiles-1st-open-call-round": {
+   "cim": "FutureProofTextiles - 1st Open Call round The aim is to help textile SMEs overcome resource limitations, adopt advanced digital and sustainable technologies, reduce waste, improve efficiency and stren",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/duh-kaprazat-orszagos-vakremeny": {
+   "cim": "Düh, káprázat, országos vakremény A ferencvárosi József Attila Emlékhely esszépályázatot hirdet 2001. január 1-je után született alkotóknak az 1956-os forradalom 70. évfordulója alkalmából. Kiíró Józs",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/palocorszag-izei": {
+   "cim": "Palócország ízei A „Palócország ízei” program célja a palóc gasztronómiai örökség megőrzése és népszerűsítése, a helyi alapanyagok használatának ösztönzése, valamint azon vállalkozások és szolgáltatók",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/prefarenzen-epiteszeti-tervpalyazat-2026": {
+   "cim": "PREFARENZEN Építészeti tervpályázat 2026 A pályázat célja, hogy reflektorfénybe helyezze azokat az alkotásokat, amelyek túlmutatnak a megszokott megoldásokon, és új irányokat mutatnak az építészetben.",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/finta-diplomadij": {
+   "cim": "Finta Diplomadíj A pályázatra azon osztatlan egyetemi, illetve MSc/MA képzésben végzett hallgatók nyújthatják be jelentkezésüket, akik 2025-ben, vagy 2026-ban sikeresen megvédték diplomatervüket. A pá",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/csomay-kalman-epitoipari-nivodij-2026": {
+   "cim": "Csomay Kálmán Építőipari Nívódíj 2026 A Csomay Kálmán Építőipari Nívódíjat a Veszprém vármegye meghatározó és egyedülálló épített alkotásainak díjazására hozták létre. 2026-ban is javaslatokat lehet t",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/suno-tancdalfesztival": {
+   "cim": "Suno Táncdalfesztivál A Regénytár ezért meghirdeti az Első Suno Táncdalfesztivált, amelyen bárki elindulhat, ha úgy érzi, a magyar könnyűzene még nem szenvedett eleget. Kiíró Regénytár irodalmi portál",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Zene",
+    "Irodalom"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/iii-gyerekszemmel": {
+   "cim": "III. Gyerekszemmel A Fundamentum Egyesület fotópályázatot hirdet általános és középiskolás diákok számára, melynek célja, hogy a gyerekek és fiatalok a saját szemszögükből örökítsék meg a magyar kultu",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Ifjúság / oktatás",
+    "Film / fotó"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/palyazati-felhivas-szervezeteknek-food-for-free-alkalmazashoz": {
+   "cim": "Pályázati Felhívás szervezeteknek Food For Free alkalmazáshoz Az Élelmiszerbank a közelmúltban egy számítógépről és mobiltelefonról is elérhető online alkalmazást készített, ahol az ott regisztrált né",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/gyumolcsozo-sio-eckes-tamogatoi-program": {
+   "cim": "Gyümölcsöző Sió-Eckes támogatói program Célunk, hogy segítséget nyújtsunk olyan kezdeményezések számára, amelyek a természet megóvásáért, a fenntartható működésért és a kiegyensúlyozott táplálkozás bi",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Zöld / környezet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/legjobb-noi-munkahely-2025": {
+   "cim": "Legjobb Női Munkahely 2025 A Magyar Női Karrierfejlesztési Szövetség a Nemzetközi Nőnap tiszteletére 2026. március 8-án pályázat ír ki a „Legjobb Női Munkahely 2025” díj elnyerésére. Kiíró Magyar Női ",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Női jogok"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/perform-europe-online-tajekoztato-a-partnerkeresesrol": {
+   "cim": "Perform Europe online tájékoztató a partnerkeresésről 2026 júliusában online tájékoztatót szervez a Perform Europe a partnerkereső platformról és a partnerség kialakításának módjairól. Kiíró Perform E",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/palyazat-xiii-keruletben-bejelentett-lakohellyel-rendelkezo-amator-es-profi-szerzok-reszere": {
+   "cim": "Pályázat XIII. kerületben bejelentett lakóhellyel rendelkező amatőr és profi szerzők részére A pályázat célja a kerületben élő hivatásos írók és költők megbecsülése, támogatása, valamint a tehetséges ",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Irodalom"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/europai-helyi-kultura": {
+   "cim": "Európai helyi kultúra Elindult a Cultural Horizons új, Európai helyi kultúra elnevezésű pályázati felhívása, amely ukrán és európai szervezetek, illetve egyéni vállalkozók nemzetközi együttműködését t",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Vállalkozás"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/michelberger-mesterdij-2": {
+   "cim": "Michelberger mesterdíj Tudományos és a gyakorlat által alátámasztott jelentős mérnöki (műszaki, természettudományi) eredmény, alkotás, szabadalom elérésén és bemutatásán alapul. Kiíró Magyar Mérnöki K",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Egyéb"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  },
+  "https://pafi.hu/p/katona-es-civil-portrek": {
+   "cim": "Katona és civil portrék A Krajczáros Alapítvány - a pályázó partnereivel közösen - az I. Világháború 110. évfordulója jegyében, bővíteni szeretné a már meglévő festmény gyűjteményét. Kiíró Krajczáros ",
+   "forras": "PAFI (Pályázatfigyelő)",
+   "kinek": "kft + egyesület",
+   "kategoriak": [
+    "Képzőművészet"
+   ],
+   "elso": "2026-08-12",
+   "utolso": "2026-08-12"
+  }
+ }
 }
