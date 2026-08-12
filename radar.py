@@ -465,8 +465,15 @@ DATUM_SZAMOS = re.compile(r"\b(20\d{2})[.\-](?:\s*)(\d{1,2})[.\-](?:\s*)(\d{1,2}
 DATUM_HONAPNAP = re.compile(rf"\b({HONAP_RE})\s*(\d{{1,2}})\b", re.IGNORECASE)
 
 HATARIDO_KULCS = re.compile(
-    r"(határid|hatarid|pályázni|palyazni|benyújt|benyujt|beadás|beadas|"
-    r"jelentkez|éjfél|ejfel|leadás|leadas|deadline)", re.IGNORECASE)
+    # tő-alakok, hogy a ragozás ne számítson ("beadni", "beadási", "leadható")
+    r"(határid|hatarid|pályázni|palyazni|benyújt|benyujt|bead|"
+    r"jelentkez|éjfél|ejfel|leadás|leadas|leadni|leadhat|deadline|"
+    # A határidőt sokszor nem a "határidő" szó jelöli, hanem a mondat
+    # ragozása: "…2026. augusztus 25. kedd 13 óráig szíveskedjenek
+    # eljuttatni" (lásd a FITT-díj kiírását). Ezek a toldalékok/igék a
+    # dátum közvetlen szomszédjai, ezért pontosabbak, mint az ablak tágítása.
+    r"eljuttat|beérkez|beerkez|megküld|megkuld|"
+    r"óráig|oraig|napjáig|napjaig|óráig|hatarnap|határnap)", re.IGNORECASE)
 
 META_DATUM_SELECTOROK = (
     ("meta[property='article:published_time']", "content"),
@@ -524,6 +531,51 @@ def _datum_jeloltek(ablak: str, megj: datetime.date | None) -> list[tuple[int, s
             if d:
                 ki.append((m.start(), d))
     return ki
+
+
+# Címkézett határidő-mező: sok oldal külön adatsorban közli a határidőt
+# (pafi.hu: <dt>Határidő</dt><dd>2026. 08. 25. (13 nap)</dd>). Ez sokkal
+# megbízhatóbb, mint a folyószövegből találgatni — ELŐSZÖR ezt nézzük.
+HATARIDO_CIMKE = re.compile(
+    r"^\s*(érvényes|ervenyes|határidő|hatarido|deadline|"
+    r"(beadási|beadasi|benyújtási|benyujtasi|jelentkezési|jelentkezesi|"
+    r"pályázati|palyazati|leadási|leadasi|beérkezési|beerkezesi)\s+határidő\w*|"
+    r"benyújtás\s+határideje|benyujtas\s+hataridej\w*)\s*:?\s*$", re.IGNORECASE)
+
+
+def _elso_datum(szoveg: str) -> str | None:
+    """Az első értelmes dátum a szövegdarabban (ISO), vagy None."""
+    m = DATUM_TELJES.search(szoveg)
+    if m:
+        return _iso(int(m[1]), HONAPOK[m[2].lower()], int(m[3]))
+    m = DATUM_SZAMOS.search(szoveg)
+    if m:
+        return _iso(int(m[1]), int(m[2]), int(m[3]))
+    return None
+
+
+def cimkezett_hatarido(soup: BeautifulSoup) -> str | None:
+    """Határidő a címkézett adatmezőkből (dt/dd, th/td, „Határidő: …").
+
+    FONTOS: ezt a TELJES DOM-on kell futtatni, még a fejléc/lábléc kidobása
+    előtt — a pafi.hu épp a <header>-ben közli a határidőt, tehát a
+    tetel_dusitas() takarítása pont a legjobb adatot dobná ki."""
+    for cimke in soup.find_all(["dt", "th", "strong", "b", "span", "label", "div", "p"]):
+        szoveg = cimke.get_text(" ", strip=True)
+        if not szoveg or len(szoveg) > 40 or not HATARIDO_CIMKE.match(szoveg):
+            continue
+        kovetkezo = cimke.find_next_sibling()
+        if kovetkezo is not None:
+            d = _elso_datum(kovetkezo.get_text(" ", strip=True)[:120])
+            if d:
+                return d
+        szulo = cimke.parent
+        if szulo is not None:                    # „Határidő: 2026. 08. 25."
+            maradek = szulo.get_text(" ", strip=True).replace(szoveg, "", 1)
+            d = _elso_datum(maradek[:120])
+            if d:
+                return d
+    return None
 
 
 def hatarido_kinyerese(szoveg: str, megjelent: str | None) -> str | None:
@@ -656,11 +708,14 @@ def tetel_dusitas(html: str) -> tuple[str | None, str | None, list[str], bool]:
     megjelent = megjelenes_kinyerese(soup)   # meta tagek még a teljes DOM-ból
     if megjelent and megjelent > MA:
         megjelent = None  # jövőbeli "megjelenés" = félreértelmezett dátum
+    # A címkézett határidő-mező MÉG a takarítás előtt kell: a pafi.hu a
+    # <header>-ben közli, amit a decompose() különben kidobna.
+    cimkezett = cimkezett_hatarido(soup)
     for tag in soup(["script", "style", "noscript", "header", "footer", "nav",
                      "aside", "form"]):
         tag.decompose()
     szoveg = soup.get_text(" ", strip=True)[:15000]
-    hatarido = hatarido_kinyerese(szoveg, megjelent)
+    hatarido = cimkezett or hatarido_kinyerese(szoveg, megjelent)
     palyazhat = jogosultsag_kinyerese(szoveg)
     return megjelent, hatarido, palyazhat, munkaajanlat_szoveg(szoveg)
 
