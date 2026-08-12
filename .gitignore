@@ -2,3 +2,10 @@ __pycache__/
 *.pyc
 report.md
 .venv/
+
+# Claude által készített biztonsági másolatok (helyi, nem tartoznak a repóba)
+*.bak-*
+teszt_*.json
+teszt_*.md
+teszt_pages/
+_to_delete/

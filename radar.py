@@ -28,6 +28,16 @@ from bs4 import BeautifulSoup
 # Konfiguráció
 # ---------------------------------------------------------------------------
 
+# palyazat.gov.hu közlemények: a /kozlemenyek oldal Next.js-es (a lista nincs
+# benne a nyers HTML-ben), de mögötte nyílt JSON API van MÁSIK hoszton — ezért
+# van esély rá, hogy a palyazat.gov.hu-ra érvényes geo-blokk ezt nem érinti.
+KOZLEMENY_API = "https://ginapp-api.fair.gov.hu/api/announcements"
+KOZLEMENY_TIPUS = "megjelenes"      # csak új kiírás; a módosulás/karbantartás nem
+KOZLEMENY_HATAR = "2026-04-12"      # ennél régebbi közleményt nem veszünk be
+KOZLEMENY_OLDAL = 100               # tételszám laponként (limit)
+KOZLEMENY_MAX_OLDAL = 30            # biztonsági fék a lapozásra
+KOZLEMENY_LINK = "https://www.palyazat.gov.hu/kozlemenyek/"
+
 FORRASOK = [
     {
         "nev": "Norvég Civil Alap",
@@ -81,6 +91,17 @@ FORRASOK = [
         "nev": "KKV / energetika (palyazatok.org)",
         "urls": ["https://palyazatok.org/kkv-palyazatok/"],
         "kinek": "kft",
+    },
+    {
+        # A /kozlemenyek oldal Next.js-es (a lista nincs a nyers HTML-ben),
+        # de a mögötte lévő JSON API kulcs nélkül olvasható, és MÁSIK hoszton
+        # van, mint a geo-blokkolt palyazat.gov.hu. Saját parser + lapozás:
+        # lásd kozlemeny_tetelek(). Ha a runner mégsem éri el, a forrás a
+        # riport „Nem elérhető forrás(ok)" sorába kerül, egyéb kára nincs.
+        "nev": "palyazat.gov.hu közlemények",
+        "urls": [f"{KOZLEMENY_API}?limit={KOZLEMENY_OLDAL}&skip=0"],
+        "kinek": "kft + egyesület",
+        "special": "kozlemeny",
     },
     {
         "nev": "Budapest Főváros",
@@ -184,6 +205,9 @@ DUSITAS_SZUNET = float(os.environ.get("RADAR_SLEEP", "0.7"))
 JOZSEFVAROS_VISSZA_NAP = 90
 JOZSEFVAROS_UTVONAL = "/otthon/hirdetotabla/palyazat/"
 
+# palyazat.gov.hu közlemények: a /kozlemenyek oldal Next.js-es (a lista nincs
+# benne a nyers HTML-ben), de mögötte nyílt JSON API van MÁSIK hoszton — ezért
+# van esély rá, hogy a palyazat.gov.hu-ra érvényes geo-blokk ezt nem érinti.
 # Tömeges-álriasztás védelem: ha egy MÁR ALAPOZOTT forrásnál egyszerre ennél
 # több "új" jönne ÉS ez a forrás találatainak több mint 60%-a, az
 # oldalszerkezet-változás / archívum-előbukkanás → csendes rögzítés.
@@ -316,9 +340,59 @@ def rss_tetelek(xml_szoveg: str) -> dict[str, str]:
     return talalatok
 
 
-# A józsefvárosi hirdetőtábla listaoldaláról a címet ÉS a határidőt is
-# kiolvassuk; ide gyűjtjük, hogy a main() az adatok.json-ba írhassa.
-LISTA_HATARIDOK: dict[str, str] = {}
+# A listaoldalról/API-ból közvetlenül megkapott adatok — a main() innen írja
+# az adatok.json-ba, dúsítás (cikkoldal-letöltés) nélkül.
+LISTA_HATARIDOK: dict[str, str] = {}    # Józsefváros
+LISTA_MEGJELENES: dict[str, str] = {}   # közlemények: dateOfPublication
+LISTA_LEAD: dict[str, str] = {}         # közlemények: a szöveg (HTML) az API-ból
+
+
+def kozlemeny_tetelek(elso_oldal: str) -> dict[str, str]:
+    """palyazat.gov.hu közlemények a JSON API-ról: {cikk_url: cím}.
+
+    Csak a KOZLEMENY_TIPUS típusú (új kiírás megjelenése) és a
+    KOZLEMENY_HATAR utáni közlemények kellenek. Az API dátum szerint
+    csökkenő sorrendben ad vissza, ezért a lapozást leállítjuk, amint egy
+    oldal legrégebbi tétele már a határ alatt van.
+
+    A megjelenési dátumot és a közlemény szövegét (`lead`) is eltesszük:
+    így a dúsításhoz nem kell letölteni a cikkoldalt — ami külföldi IP-ről
+    amúgy sem menne (geo-blokk)."""
+    talalatok: dict[str, str] = {}
+    oldal = elso_oldal
+    for i in range(KOZLEMENY_MAX_OLDAL):
+        if oldal is None:
+            break
+        try:
+            adat = json.loads(oldal)
+        except json.JSONDecodeError as e:
+            print(f"  ! Közlemény-API: hibás JSON ({e})", file=sys.stderr)
+            break
+        tetelek = adat.get("result") or []
+        if not tetelek:
+            break
+        legregebbi = "9999"
+        for x in tetelek:
+            datum = (x.get("dateOfPublication") or "")[:10]
+            legregebbi = min(legregebbi, datum or "9999")
+            if x.get("announcementTypeCode") != KOZLEMENY_TIPUS:
+                continue
+            if not datum or datum < KOZLEMENY_HATAR:
+                continue
+            alias, cim = x.get("urlAlias"), (x.get("title") or "").strip()
+            if not alias or not cim:
+                continue
+            kulcs = normalizal(KOZLEMENY_LINK + alias.lstrip("/"))
+            LISTA_MEGJELENES[kulcs] = datum
+            if x.get("lead"):
+                LISTA_LEAD[kulcs] = x["lead"]
+            talalatok.setdefault(kulcs, cim[:200])
+        meta = adat.get("meta") or {}
+        kovetkezo = meta.get("skip", 0) + len(tetelek)
+        if legregebbi < KOZLEMENY_HATAR or kovetkezo >= meta.get("totalCount", 0):
+            break
+        oldal = fetch(f"{KOZLEMENY_API}?limit={KOZLEMENY_OLDAL}&skip={kovetkezo}")
+    return talalatok
 
 
 def jozsefvaros_tetelek(html: str, base_url: str) -> dict[str, str]:
@@ -654,6 +728,8 @@ def main() -> int:
                 talalatok.update(rss_tetelek(html))
             elif spec == "jozsefvaros":
                 talalatok.update(jozsefvaros_tetelek(html, url))
+            elif spec == "kozlemeny":
+                talalatok.update(kozlemeny_tetelek(html))
             else:
                 talalatok.update(linkek_kigyujtese(
                     html, url, lista_urlek,
@@ -698,6 +774,22 @@ def main() -> int:
             # mérvadó — pontosabb, mint amit a cikkoldalról kaparnánk össze.
             if kulcs in LISTA_HATARIDOK:
                 t["hatarido"] = LISTA_HATARIDOK[kulcs]
+            # Közlemények: a dátum és a szöveg az API-ból jön, a cikkoldalt
+            # nem töltjük le (geo-blokk) — ezért itt, azonnal dúsítunk, és
+            # `dusitva`-val megjelöljük, hogy a háttér-dúsítás se próbálkozzon.
+            if kulcs in LISTA_MEGJELENES:
+                t["megjelent"] = LISTA_MEGJELENES[kulcs]
+                if not t.get("dusitva"):
+                    t["dusitva"] = MA
+                    try:
+                        _m, hat, pal = tetel_dusitas(LISTA_LEAD.get(kulcs, ""))
+                    except Exception as e:      # noqa: BLE001
+                        print(f"  ! Lead-dúsítási hiba: {kulcs} ({e})", file=sys.stderr)
+                        hat, pal = None, []
+                    if hat:
+                        t["hatarido"] = hat
+                    if pal:
+                        t["palyazhat"] = pal
 
     # ---- dúsítás + "valódi újdonság" döntés (UJ_HATAR cutoff) ----
     ujak: list[dict] = []
@@ -708,7 +800,14 @@ def main() -> int:
         megjelent = hatarido = None
         palyazhat: list[str] = []
         letoltes_ok = None                 # None: nem próbáltuk / nem URL
-        if kulcs.startswith("http") and dusitas_szam < DUSITAS_LIMIT:
+        elore = adatok["tetelek"].get(kulcs)
+        if kulcs in LISTA_MEGJELENES and elore is not None:
+            # Közlemény: mindent tudunk az API-ból, nincs mit letölteni.
+            megjelent = elore.get("megjelent")
+            hatarido = elore.get("hatarido")
+            palyazhat = elore.get("palyazhat") or []
+            letoltes_ok = True
+        elif kulcs.startswith("http") and dusitas_szam < DUSITAS_LIMIT:
             dusitas_szam += 1
             html = fetch(kulcs)
             letoltes_ok = html is not None
